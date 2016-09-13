@@ -92,11 +92,15 @@ if (wp_is_mobile() ) {
 		}//if (!wp_is_mobile() )
     ?>
 
-<div id="banner-wrap">
+<!-- BANNER - początek -->
+
+<!-- USUN_KOMENTARZ <div id="banner-wrap">
 	<a href="http://www.kultura.olawa.pl/wydarzenia/letnie-party/">
-	<?php echo '<img src="'.get_stylesheet_directory_uri().'/letnieparty2016.gif" />'; ?>
+	<?php //USUN_KOMENTARZ echo '<img src="'.get_stylesheet_directory_uri().'/letnieparty2016.gif" />'; ?>
 	</a>
-</div>
+</div> -->
+
+<!-- BANNER - koniec -->
 
 <div id="header-wrap">
         	<header class="clearfix">

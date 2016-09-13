@@ -1,12 +1,14 @@
 @charset "utf-8";
 /*
-Theme Name: Centrum Sztuki 0.3.4
+Theme Name: Centrum Sztuki 0.3.5
 Author: Jurek Skowron
 Author URI: http://jurekskowron.pl
-Version: 0.3.4
+Version: 0.3.5
 Description: Motyw dla strony Centrum Sztuki kultura.olawa.pl na wordpressie. Wersja będąca scaleniem motywu 0.3.3 z jego motywami potomnymi
 
-W wersji 0.3.4 połączono 0.3.3 z 0.3.3.2
+W wersji 0.3.5 połączono 0.3.4 z 0.3.4.1
+
+Można odkomentarzować banner strony - działa importowanie projekcji.
 
 Zmiany w wersji 0.3.3.2:
 - dodanie skryptu js pozwalacjącego na modyfikację działania formularzy dodawania i edycji postów (functions.php, /admin_js/post_dodawanie_edycja.js)
