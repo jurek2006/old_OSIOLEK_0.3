@@ -183,12 +183,8 @@ get_header(); ?>
 <p>BILET OTWARTY obowiązuje także na premiery i pokazy przedpremierowe, nie obowiązuje natomiast na pokazy specjalne (kino zastrzega sobie prawo do zdefiniowania co jest wydarzenie specjalnym) oraz maratony filmowe. </p>
 <p>BILET OTWARTY nie podlega zwrotom.</p>
 </li>
-<li>Akceptujemy kupony <strong>CinemaProfit</strong> i <strong>QlturaProfit</strong> (dotyczy tylko oferty kinowej).</li>
                         </ul>
-                        
- <!--Loga CinemaProfit i QlturaProfit-->  
- <img src="<?php echo get_stylesheet_directory_uri() ?>/img/cinema_profit_logo_300.jpg" alt="CinemaProfit" />  
- <img src="<?php echo get_stylesheet_directory_uri() ?>/img/logo_Qltura_300.jpg" alt="QlturaProfit" />                
+                                      
 
 					<?php
 				}//if(!$blad)
