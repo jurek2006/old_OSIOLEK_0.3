@@ -47,11 +47,15 @@
 	add_action( 'wp_enqueue_scripts', 'add_jquery_ui' );
 	
 	//dodanie plików stylu jQueryUI z serwerów Google
-	wp_enqueue_style(	'plugin_name-admin-ui-css',
+	function jquery_ui_enqueue_style(){
+		wp_enqueue_style(	'plugin_name-admin-ui-css',
 						'https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/ui-lightness/jquery-ui.css',
 						false,
-						PLUGIN_VERSION,
+						'PLUGIN_VERSION',
 						false);
+	}
+	add_action( 'wp_enqueue_scripts', 'jquery_ui_enqueue_style' );
+
 	
 	//dołączenie skryptu visualticket_import.js jeśli uzytkownik ma uprawnienia na poziomie
 	//wystarczającym do wyświetlenia strony Import projekcji i jeśli jest na tej stronie
