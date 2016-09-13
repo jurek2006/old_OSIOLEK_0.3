@@ -271,7 +271,7 @@ get_header(); ?>
                                     }
                                     //jeśli wydarzenie nie ma przypisanej miniatury to jest wyświetlany standardowy obrazek pegaz_thumb.jpg
                                     else{
-                                        echo '<img src="'.get_stylesheet_directory_uri().'/pegaz_thumb.png" />';	
+                                        echo '<img src="'.get_template_directory_uri().'/pegaz_thumb.png" />';	
                                     }?>
                                  </div><!--termin-thumb-->
                                 

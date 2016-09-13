@@ -92,6 +92,12 @@ if (wp_is_mobile() ) {
 		}//if (!wp_is_mobile() )
     ?>
 
+<div id="banner-wrap">
+	<a href="http://www.kultura.olawa.pl/wydarzenia/letnie-party/">
+	<?php echo '<img src="'.get_stylesheet_directory_uri().'/letnieparty2016.gif" />'; ?>
+	</a>
+</div>
+
 <div id="header-wrap">
         	<header class="clearfix">
             	<a href="<?php echo home_url() ?>"><img src="<?php echo get_template_directory_uri() ?>/style/logo_pegaz_header.png" alt="Centrum Sztuki w Oławie" /></a> 
