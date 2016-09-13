@@ -1,0 +1,9 @@
+@charset "utf-8";
+/* Styl motywu Centrum-sztuki dla tabletów */
+
+@media only screen and (min-width: 641px) {
+	body{
+	
+	}
+} /*end of the media query*/
+

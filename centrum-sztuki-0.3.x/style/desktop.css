@@ -1,0 +1,143 @@
+@charset "utf-8";
+/* Styl motywu Centrum-sztuki dla desktopów */
+@media only screen and (min-width: 1141px) {
+	
+
+	
+	
+	div#main-container, div#header-wrap header, div#kategorie-container{
+		width: 1140px; /*RESPONSIVE-WIDTH*/
+	}
+	
+	/*----NAGŁÓWEK STRONY---*/
+	
+	div#header-wrap{
+		width: 100% /*RESPONSIVE*/
+	}
+	
+	div#header-wrap img{
+		height: 130px; /* RESPONSIVE */
+		margin-top: 0; /* RESPONSIVE */
+	}
+	
+	
+	/*----NAWIGACJA - menu główne --*/
+	div#header-wrap header nav{
+		padding: 2.2em; /* RESPONSIVE */
+	}
+	
+	nav ul#menu-glowne li a,
+	nav ul#menu-glowne-user li a{
+		font-size: 1.2em; /* RESPONSIVE */
+	}
+	
+	/*--- LISTA WYDARZEŃ - styl poszczególnego wpisu --*/
+	
+	div.wydarzenie-tresc{
+		width: 380px; /*RESPONSIVE-WIDTH*/
+	}
+	
+	div.projekcja-tresc{
+		width: 500px; /*RESPONSIVE*/
+	}
+	
+	/*----- STRONA POJEDYNCZEGO WYDARZENIA -----*/
+	
+	div.termin-single, div.film-projekcja{
+		width: 240px; /*RESPONSIVE-WIDTH*/
+	}
+	
+	div.termin-single div.termin-single-czas, div.termin-single div.termin-bilety, div.termin-single div.termin-lokalizacja{
+		width: 240px; /* RESPONSIVE */
+	}
+	
+	div.termin-single div.termin-lokalizacja img{
+		display: block;/* RESPONSIVE */
+	}
+	
+	
+	
+	/*----- STRONA POJEDYNCZEGO FILMU -----*/
+	div.film-info{
+		max-width: 560px;
+	}
+	
+	/*----- EDUKACJA -----*/
+	
+	/*----- STRONA POJEDYNCZEGO KURSU -----*/
+	div.edukacja-single{
+		display: block; /* RESPONSIVE */
+	}
+	
+	
+	/*----STOPKA --*/
+	
+	footer{
+		width: 1140px; /*RESPONSIVE-WIDTH*/
+		margin-left:auto;
+		margin-right:auto;
+	}
+	
+	/*----STOPKA - kontakt --*/
+	footer div#kontakt{
+		padding: 0 200px; /*RESPONSIVE-WIDTH*/
+		padding-bottom: 30px;
+	}
+	
+	/*----- ASIDE -----*/
+	aside{
+		display:block;/* RESPONSIVE */
+	}
+	
+	aside li{
+		width: 250px; /* RESPONSIVE */
+		float:left; /* RESPONSIVE */
+		margin-left: 0; /* RESPONSIVE */
+	}
+	
+	/*----- KOLUMNY -----*/
+	
+	/* RESPONSIVE : */
+	
+	.column-12{
+		width: 100%;
+	}
+	
+	.column-9{
+		width: 75%;
+	}
+	
+	.column-8{
+		width: 66.6666%;
+	}
+	
+	.column-6{
+		width: 50%;
+	}
+	
+	.column-5{
+		width: 41.6666%
+	}
+	
+	.column-4{
+		width: 33.3333%;
+	}
+	
+	.column-3{
+		width: 25%;
+	}
+	
+	.column-2{
+		width: 16.6666%;
+	}
+	
+	.column-3_column-12{
+		width: 100%;
+	}
+
+	
+	/*====================================================================================================*/
+	
+} /*end of media query*/
+
+

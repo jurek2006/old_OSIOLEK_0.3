@@ -1,0 +1,1732 @@
+@charset "utf-8";
+/* Styl motywu Centrum-sztuki dla telefonów - domyślny */
+
+/*Podstawowy pomarańczowy - FF9933 = rgba(255, 153, 51, 1)*/
+/*Ciemniejszy pomarańczowy - EE4724*/
+/*Ciemnoszary kolor nagłówka - #333333;*/
+/*Jaśniejszy szary - kolor tła podmenu głównego - #666;*/
+
+/*----------- apply a natural box layout model to all elements --------------*/
+* {box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;  }
+
+/*-----Prevents iPhone from resizing in landscape mode -----*/
+html {-webkit-text-size-adjust: none; }
+
+/*-------------------------------------------------------------------------------------*/
+body{
+	font-family: 'Magra', sans-serif;
+	font-weight:400;	/*also loaded 700 for bold*/
+	color: #333;
+}
+
+	a{
+		color: #EE4724;
+	}
+	
+	a:hover{
+		color: green; 
+	}
+	
+	p{
+		margin-bottom: 1em;
+		line-height: 1.3em;
+	}
+	
+	strong{
+		font-weight: 700;
+	}
+	
+	article li{
+		list-style-type:disc;
+		list-style-position:inside;
+		line-height: 1.3em;
+	}
+	
+	
+	
+	/*obrazek wklejany w edytorze wp przy wyśrodkowaniu*/
+	img.aligncenter{
+		/*margin-left:auto;
+		margin-right:auto;
+		text-align:center;*/
+		border: 1ps solid red;
+	}
+
+	/*----NAGŁÓWEK STRONY---*/
+	div#header-wrap{
+		background-color:#333333;
+		min-width: 768px; /*RESPONSIVE*/
+		z-index: 10;
+		border-top: 4px solid #FF9933;
+	}
+	
+	/*----NAWIGACJA---*/
+	div#nav-wrap{
+		background-color:#FF9933;
+		background: -webkit-linear-gradient(#FF9933, #CC3333); /* For Safari 5.1 to 6.0 */
+  		background: -o-linear-gradient(#FF9933, #CC3333); /* For Opera 11.1 to 12.0 */
+  		background: -moz-linear-gradient(#FF9933, #CC3333); /* For Firefox 3.6 to 15 */
+  		background: linear-gradient(#FF9933, #CC3333); /* Standard syntax */
+		width:100%;
+	}
+	
+	/*----STOPKA---*/
+	div#footer-wrap{
+		background-color:#B3B3B3;
+		color: #333333;
+		width:100%;
+		
+	}
+	
+	footer h1{
+		font-size: 300% !important;
+
+	}
+	
+	footer h2{
+		font-size: 210%;
+	}
+	
+	
+	/*----NAWIGACJA - menu dolne --*/
+	nav ul#menu-dolne li a{
+		text-decoration:none;
+		color: #333333;
+		display:block;
+	}
+	
+	nav ul#menu-dolne li:hover{
+		background-color: #FF9933;
+	}
+
+	/*----- LISTA WYDARZEŃ -----*/
+	article.wydarzenie h1 a{
+		text-decoration:none;
+		color: #333333;
+		font-weight: 700;
+		font-size: 110%;
+		display:block;
+	}
+
+
+
+table.tabela_kursow td{
+	background-color:#999;
+	border:thick;
+}
+
+/* ----- OTHER STUFF ----*/
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* ============ Z DESKTOP =================*/
+
+	
+	/*Styl nagłówka w liście wydarzeń/edukacji definiowane są osobno w częściach ich dotyczących*/
+	h1{
+		font-size: 180%;
+		font-weight: 700;
+		margin-bottom: 0.8em;
+	}
+	
+	h2,h3,h4,h5{
+		font-weight: 700;
+	}
+	
+	h2{
+		font-size: 140%;
+		margin-bottom:0.5em;
+	}
+	
+	h3{
+		font-size: 105%;
+	}
+	
+	section#content-container{
+		margin-top: 1em;
+	}
+	
+	section#content-container img{
+		max-width: 100%;
+	}
+	
+	div#main-container, div#header-wrap header, div#kategorie-container{
+		width: 768px; /*RESPONSIVE*/
+		margin-left:auto;
+		margin-right:auto;
+		
+		/*Rozwiązanie problemu "uciekania" listy wydarzeń na prawo - "wypychanej" przez pasek kategorii */
+		clear:both;
+	}
+	
+		div#header-wrap{
+		transition: all 0.4s ease;
+	}
+	
+
+	/*----NAGŁÓWEK STRONY---*/
+	div#header-wrap header a{
+
+	}
+	
+	div#header-wrap img{
+		height: 65px; /* RESPONSIVE */
+		margin-top: 10px; /* RESPONSIVE */
+		float:left;
+	}
+	
+	/*----NAWIGACJA - menu główne --*/
+	div#header-wrap header nav{
+		float:right;
+		padding: 1em; /* RESPONSIVE */
+		transition: all 0.4s ease;
+	}
+	
+	nav ul#menu-glowne{
+
+
+	}
+	
+	/*main menu items float side by side*/
+	nav ul#menu-glowne li, 
+	nav ul#menu-glowne-user li{
+		float:left;
+		z-index:99;
+	}
+	
+	nav ul#menu-glowne li a, 
+	nav ul#menu-glowne-user li a{
+		display:block;
+		text-decoration:none;
+		color:#FFF;
+		padding: 1em;
+		font-weight: 700;
+		font-size: 1.1em; /* RESPONSIVE */
+		border-left: solid 1px rgba(255, 255, 255, 0.3);
+	}
+	
+	nav ul.category-nav li a{
+		text-decoration:none;
+		color:#FFF;
+		display:block;
+	}
+	
+	nav ul#menu-glowne > li > a, 
+	nav ul#menu-glowne-user > li > a{
+		/*transition: all 0.4s ease;*/
+	}
+	
+	/*Znak > oznacza dziecko*/
+	/*Hover tylko dla głównego poziomu menu*/
+	nav ul#menu-glowne > li:hover, 
+	nav ul#menu-glowne-user > li > a:hover{
+		color: #FFF;
+		background-color: #666;
+		
+
+	}
+	
+	nav ul#menu-glowne li:first-child a, 
+	nav ul#menu-glowne-user li:first-child a{
+		border-left: none;
+	}
+	
+	/*wyróżnienie aktualnie wybranego elementu menu*/
+	nav ul#menu-glowne li.current-menu-item > a, nav ul#menu-glowne li.current-menu-ancestor a, nav ul.category-nav li.current-menu-item a,
+	nav ul#menu-glowne-user li.current-menu-item > a, nav ul#menu-glowne-user li.current-menu-ancestor a, nav ul.category-nav li.current-menu-item a{
+		color: #FF9933;	
+	}
+	
+	nav ul#menu-glowne li.current-menu-ancestor li > a,
+	nav ul#menu-glowne-user li.current-menu-ancestor li > a{
+		color:#FFF;
+	}
+	
+	nav ul#menu-glowne li.current-menu-item > a,
+	nav ul#menu-glowne-user li.current-menu-item > a{
+		color: #FF9933 !important;	
+	}
+	
+	nav ul#menu-glowne li.current-menu-item > a:hover, nav ul.category-nav li.current-menu-item a:hover,
+	nav ul#menu-glowne-user li.current-menu-item > a:hover{
+		color: #333 !important;	
+	}
+	
+
+	
+	/*rules for sub-menu items*/
+	nav ul#menu-glowne li ul, nav ul.category-nav ul,
+	nav ul#menu-glowne-user li ul{
+		display:none;
+		position:absolute;
+		background-color: #333333;
+		border-left: solid 1px rgba(255, 255, 255, 0.3);
+		z-index: 99;
+	}
+	
+	body.is_mobile nav ul#menu-glowne li ul,
+	body.is_mobile nav ul#menu-glowne-user li ul{
+		display:none;
+	}
+	
+	nav ul#menu-glowne li ul li,
+	nav ul#menu-glowne-user li ul li{
+		float:none;
+	}
+	
+	nav ul#menu-glowne li ul li a, nav ul.category-nav li ul li a,
+	nav ul#menu-glowne-user li ul li a{
+		font-weight: 400;
+		font-size:0.95em;
+		border-left: none;
+		padding: 0.5em 1em;
+	}
+	
+	nav ul#menu-glowne li:hover ul, nav ul.category-nav li:hover ul,
+	nav ul#menu-glowne-user li:hover ul{
+		display:block;
+		background-color: #666;
+	}
+	
+	nav ul#menu-glowne li ul li:hover, nav ul.category-nav li ul li:hover,
+	nav ul#menu-glowne-user li ul li:hover{
+		background-color:#FF9933;
+		
+	}
+	
+	nav ul#menu-glowne li ul li:hover a, nav ul.category-nav li ul li:hover a,
+	nav ul#menu-glowne-user li ul li:hover a{
+		color: #000;
+	}
+	
+	
+	/*Ukrycie drugiego poziomu podmenu głównego*/
+	/*Jest to potrzebne, żeby menu główne dobrze zaznaczało sekcję w jakiej użytkownik się znajduje*/
+	nav ul#menu-glowne li ul li ul li,
+	nav ul#menu-glowne-user li ul li ul li{
+		display: none;
+	}
+	
+	/*----NAGŁÓWEK STICKY---*/
+	
+	div#header-wrap.sticky{
+		position:sticky;
+		top:0;
+		height: 60px;
+	}
+	
+	div#header-wrap.sticky img{
+		height: 50px;
+	}
+	
+	div#header-wrap.sticky header nav{
+		float:right;
+		padding: 0.1em 2.2em;
+		font-size: 0.9em;
+	}
+	
+	/*----PASEK "Wybrana kategoria" --*/
+	
+	div#kategorie-wrap{
+		background-color: #FF9933;
+		min-width: 768px;
+		position: sticky;
+		top: 60px;
+		z-index:2;
+		padding: 5px 0;
+		height: auto;
+	}
+	
+	body.is_mobile div#kategorie-wrap{
+		top: 0;
+		position:relative;
+	}
+	
+	/*----PASEK "Wybrana kategoria" - menu zmiany nawigacji --*/
+	
+	div#kategorie-wrap p, div#kategorie-wrap nav{
+		float:left; /*zmienione w is_mobile*/
+		line-height:normal;
+		margin-top: -0.1em;
+	}
+	
+	div#kategorie-wrap p{
+		padding-left: 2%;
+	}
+	
+	div#kategorie-wrap nav{
+		margin-left: 0.3em;
+	}
+	
+	
+	nav ul.category-nav ul{
+		/*zdefiniowane razem z menu górnym*/
+	}
+	
+	nav ul.category-nav li:hover ul{
+		/*zdefiniowane razem z menu górnym*/
+	}
+	
+	/*----PASEK "Wybrana kategoria" - menu zmiany nawigacji WERSJA MOBILNA --*/
+	body.is_mobile div#kategorie-container{
+		height:auto;
+		clear: both;
+		display: table;
+		
+	}
+	
+	body.is_mobile div#kategorie-wrap p, body.is_mobile div#kategorie-wrap nav{
+		float:none;
+		margin-top: 0.1em;
+	}
+	
+	nav ul.category-nav-mobile{
+		line-height: 2em;
+	}
+	
+	nav ul.category-nav-mobile li{
+		float:left;
+	}
+	
+	nav ul.category-nav-mobile li a{
+		color: #333;
+		font-size: 1.6em;
+		/*border: 1px solid #333;*/
+		padding: 0.1em;
+		margin: 1em 0 0 0.1em;
+
+	}
+	
+	nav ul.category-nav-mobile ul.sub-menu li.current-menu-item a{
+		background-color: #333;
+		color:#FF9933;
+	}
+	
+	nav ul.category-nav-mobile > li > a{
+		/*ukrycie przycisku menu "Zmień" - podmenu nadal widoczne*/
+		display:none;
+	}
+	
+	/*----STOPKA --*/
+	
+	footer{
+		width: 768px; /*RESPONSIVE*/
+		margin-left:auto;
+		margin-right:auto;
+	}
+	
+		
+	/*----NAWIGACJA - menu dolne --*/
+	
+	
+	footer nav{
+		content: "";
+  		display: table;
+  		clear: both;
+		margin-left:auto;
+		margin-right:auto;
+		border-bottom: 1px solid #666;
+	}
+	
+	nav ul#menu-dolne li{
+		float:left;
+		margin: 0 10px;
+	}
+	
+	nav ul#menu-dolne li{
+		padding: 10px 0;
+	}
+	
+	/*----STOPKA - kontakt --*/
+	
+	footer p{
+		margin: 0;
+		padding: 0;
+	}
+	
+	div#footer-wrap{
+		margin-top: 40px;
+		min-width: 768px;
+	}
+	
+	footer div#kontakt{
+		width:100%;
+		padding: 0 20px; /*RESPONSIVE-WIDTH*/
+		padding-bottom: 30px;
+		
+	}
+	
+	footer div#kontakt h1{
+		font-weight: 700;
+		font-size: 110%;
+		text-align:center;
+		padding-top: 20px;
+	}
+	
+	footer div#kontakt h2{
+		font-weight: 700;
+		padding: 0;
+	}
+	
+	footer div#kontakt div{
+		width: 50%;
+		min-width: 300px;
+		float:left;
+		text-align:center;
+		margin-bottom: 1em;
+	}
+	
+	/*--- LISTA WYDARZEŃ i KINO --*/
+	
+	article.wydarzenie, article.projekcja{
+		background-color: #EEE;
+		padding: 0;
+		margin-bottom: 35px;
+		position:relative;
+	}
+	
+	
+	
+		
+	/*--- LISTA WYDARZEŃ i KINO - styl poszczególnego wpisu --*/
+	
+	/*Domyślny kolor tła części listy wydarzeń odp. za termin i lokalizację oraz paska bocznego w wydarzenia single - używany kiedy dla wydarzenia nie wybrano żadnej lokalizacji*/
+	
+	/*Kolor domyślny tła dla tego kontenera - nadpisywany w wydarzenie.php w zależnośli od lokalizacji wydarzenia*/
+	div.termin, div.termin-single{
+		
+		background-color:#86cb3d;
+		
+	}
+	
+	div.projekcja-termin{
+		background-color: #EE4724;
+		height: 150px;
+		width: 150px;
+	}
+	
+	div.termin p, div.termin-single p{
+		margin-bottom: 0;
+		line-height: 1em;
+	}
+	
+	div.termin{
+		height: 150px;
+		width: 240px; /*RESPONSIVE-WIDTH*/
+	}
+	
+	div.termin, div.projekcja-termin, div.termin-thumb, div.wydarzenie-tresc, div.projekcja-thumb, div.projekcja-tresc{
+		float:left;
+	}
+	
+	
+	/* Kolor napisów listy wydarzeń w części termin i lokalizacja */
+	
+	div.termin-opisowy, div.termin-od, div.termin-do, div.termin-jednodniowy, div.termin-dzien, div.termin-godz, div.termin-blad, div.termin-lokalizacja{
+		color: rgba(255,255,255,0.9);
+	}
+	
+	div.termin-opisowy, div.termin-od, div.termin-do, div.termin-jednodniowy, div.termin-dzien, div.termin-godz, div.termin-blad{
+		height:100px;
+		
+		float: left;
+	}
+	
+	
+	
+	div.termin-opisowy, div.termin-jednodniowy, div.termin-blad{
+		width:240px; /*RESPONSIVE-WIDTH*/
+	}
+	
+	div.termin-od, div.termin-do, div.termin-dzien, div.termin-godz{
+		width:120px;
+	}
+	
+	
+	
+	div.termin-thumb{
+		width:150px; /*RESPONSIVE-WIDTH ???*/
+		height:150px;
+	}
+	
+	div.projekcja-thumb{
+		width: 101px;
+		height:150px;
+	}
+	
+	div.termin-dzien, div.termin-godz, div.termin-dzien, div.termin-godz, div.termin-od, div.termin-do, div.termin-jednodniowy, div.termin-opisowy, div.termin-lokalizacja{
+		padding: 5px 10px;
+	}
+	
+	div.termin-dzien p, div.termin-godz p, div.termin-od p, div.termin-do p, div.termin-jednodniowy p, div.termin-opisowy p, div.termin-lokalizacja p{
+		font-size: 0.9em;
+	}
+	
+	div.termin-dzien p.dzien, div.termin-godz p.godzina, div.termin-od p.dzien, div.termin-do p.dzien, div.termin-jednodniowy p.dzien{
+		font-size: 2.5em;
+		margin-bottom: 0.1em;
+	}
+	
+	div.termin-godz p.godzina{
+	}
+	
+	div.termin-godz p.godzina span.minuty{
+		position:relative;
+		top: -0.4em;
+		left: -0.2em;
+		font-size: 0.6em;
+		
+	}
+	
+	div.wydarzenie-pasek div.termin-lokalizacja{
+	/*Styl dla termin-lokalizacja tylko na liście wydarzeń (nie w single) - na potrzeby ustawienia góra - dół wpisu lokalizacji
+		Nie może być użyty dla single, bo wtedy pasek jest za krótki na wysokość*/
+		position:relative;
+		height: 50px;
+		top: 7px;
+	}
+	
+	div.termin-lokalizacja{
+		text-align:center;
+	}
+	
+	
+	
+	
+	div.termin-lokalizacja a, div.termin-bilety h2 a{
+		display: block;
+		margin-bottom: 1em !important;
+		border-radius: 10px;
+		transition: all 0.4s ease;
+		clear:both;
+	}
+	
+	div.termin-lokalizacja a:hover, div.termin-bilety h2 a:hover{
+		background: rgba(0,0,0,0.2);
+		margin: 0 1em;
+	}
+	
+	/*Nazwa lokalizacji na pasku bocznym w single dla wydarzeń i edukacji*/
+	div.termin-lokalizacja p.nazwa_lokalizacji{
+		font-weight:700;
+		font-size: 110%;
+		margin-bottom: 0.5em;
+	}
+	
+	div.wydarzenie-tresc, div.projekcja-tresc{
+		padding: 5px 1em;
+		width: 280px; /*RESPONSIVE-WIDTH*/
+		color: #333333;
+	}
+	
+	h1.wydarzenie-tytul, h1.projekcja-tytul{
+		font-size: 120%;
+		font-weight: 700;
+		margin-bottom: 0.8em;
+	}
+	
+	div.wydarzenie-kategorie{
+		margin-bottom: 0.8em;
+	}
+	
+	div.wydarzenie-kategorie a{
+		background-color: red;
+		color: white;
+		padding: 3px;
+		border-radius: 3px;
+		text-decoration:none !important;
+		font-size:0.8em;
+	}
+	
+	div.wydarzenie-pasek:hover h1.wydarzenie-tytul, div.projekcja-pasek:hover h1.projekcja-tytul{
+		text-decoration:underline;
+	}
+	
+	
+	a.wydarzenie-czytajWiecej, a.projekcja-czytajWiecej{
+		position:absolute;
+		text-decoration: none;
+		display:block;
+		width: 100%;
+		height: 100%;
+		text-align:right;
+		color: #333333;
+		background-color:transparent;
+		-webkit-transition: background-color 0.5s, -webkit-transform 0.5s;
+    	transition: background-color 0.5s, transform 0.5s;
+	}
+	
+	
+	a.wydarzenie-czytajWiecej div, a.projekcja-czytajWiecej div{
+		padding: 5px;
+		position:relative;
+	}
+	
+	div.wydarzenie-bilety, div.projekcja-bilety{
+		position:absolute;
+		top:152px;
+		width: 100%;
+		text-align:right;
+	}
+	
+	div.wydarzenie-bilety span, div.projekcja-bilety span{
+		background-color: #EEE;
+		padding: 0 10px 5px 10px;
+		border-bottom-right-radius: 10px;
+		border-bottom-left-radius: 10px;
+		
+		-webkit-transition: background-color 0.5s, -webkit-transform 0.5s;
+    	transition: background-color 0.5s, transform 0.5s;
+	}
+	
+	div.wydarzenie-bilety span.kup-bilet, div.wydarzenie-bilety span.bilety-kasa, div.projekcja-bilety span.kup-bilet, div.projekcja-bilety span.bilety-kasa{
+		font-weight: 700;
+		background-color: #333333;
+
+	}
+	
+	div.wydarzenie-bilety span.kup-bilet a, div.wydarzenie-bilety span.bilety-kasa a, div.projekcja-bilety span.kup-bilet a, div.projekcja-bilety span.bilety-kasa a{
+		color: #FFF;
+		text-decoration:none;
+	}
+	
+	div.wydarzenie-bilety span.kup-bilet:hover a, 
+	div.wydarzenie-bilety span.bilety-kasa:hover a, 
+	div.projekcja-bilety span.kup-bilet:hover a, 
+	div.projekcja-bilety span.bilety-kasa:hover a{
+		text-decoration:underline;
+	}
+	
+	div.wydarzenie-bilety span.brak-biletow, div.projekcja-bilety span.brak-biletow{
+		color: red;
+		font-weight:700;
+	}
+	
+	
+	article a.wydarzenie-czytajWiecej, article a.projekcja-czytajWiecej, article div.wydarzenie-bilety span,article div.projekcja-bilety span{
+		border: none;
+		-webkit-transition: border 0.5s, -webkit-transform 0.25s;
+    	transition: border 0.5s, transform 0.25s;
+	}
+
+	article:hover a.wydarzenie-czytajWiecej, article:hover a.projekcja-czytajWiecej{
+		text-decoration:underline;
+		background: rgba(0, 0, 0, 0.03);
+		border: 1px solid  rgba(0, 0, 0, 0.2);
+	}
+	
+	article:hover div.wydarzenie-bilety span,article:hover div.projekcja-bilety span{
+		border: 1px solid red;
+		border-top: none;
+		border: 1px solid  rgba(0, 0, 0, 0.2);
+	}
+	
+	
+	/*terminy na liście kino*/
+	/*niektóre właściwości są ustawione wyżej razem z właściwościami listy wydarzeń*/
+	
+	p.projekcja-godzina, p.projekcja-dzien{
+		color: #FFF;
+		text-align:center;
+		margin: 0;
+	}
+	
+	p.projekcja-godzina{
+		font-size: 4em;
+		margin-top: 0.15em;
+	}
+	
+	p.projekcja-godzina span.minuty{
+		position:relative;
+		top: -0.5em;
+		left: -0.3em;
+		font-size: 0.6em;
+	}
+	
+	p.projekcja-dzien{
+		font-size: 1.1em;
+		margin-top: 0.8em;
+	}
+	
+	div.projekcja-tresc{
+		width: 420px; /*RESPONSIVE*/
+	}
+	
+	div.projekcja-tresc a{
+		text-decoration:none;
+	}
+	
+	/*----- STRONA KINO-ZARZĄDZANIE -----*/
+	a.nowy-termin{
+		width: 100%;
+		background-color: orange;
+		color: white;
+		display: block;
+		padding: 1em;
+		font-size: 1.5em;
+		margin-bottom: 1em;
+	}
+	
+	a.nowy-termin:hover{
+		background-color:#333;
+	}
+	
+	table.kino-zarzadzanie{
+		font-size: 1.1em;
+		width: 100%;
+		margin-bottom: 1em;
+	}
+	
+	table.kino-zarzadzanie-nieopublikowane{ 
+		background-color:#FF9;
+	}
+	
+	table.kino-zarzadzanie td, table.kino-zarzadzanie th{
+		border: 1px solid #CCC;
+		text-align:left;
+		vertical-align:middle;
+		padding: 0.2em;
+	}
+	
+	table.kino-zarzadzanie th{
+		background-color: #333;
+		color: #FFF;
+		font-size: 1.2em;
+	}
+	
+	table.kino-zarzadzanie th.width30proc{
+		width: 180px;
+	}
+	
+	table.kino-zarzadzanie td.bottom { vertical-align: bottom; }
+	table.kino-zarzadzanie td.img{
+		/*obrazek w tabeli*/
+		width: 101px;
+	}
+	table.kino-zarzadzanie td.status{
+		font-size: 0.8em;
+	}
+	
+	table.kino-zarzadzanie span.red{
+		font-weight: 700;
+		color: #F00;
+	}
+	
+	/*NARZĘDZIE DODAWANIA HURTOWEGO PROJEKCJI*/
+
+	table.dodajProjekcje th, table.dodajProjekcje td{
+		padding: 0.2em;
+		border: 1px solid rgba(0,0,0,0.4);
+	}
+	table.dodajProjekcje td input{
+		border: 1px solid rgba(0,0,0,0.4)
+	}
+	
+	table.dodajProjekcje tr.parzyste{
+		background-color: rgba(0,0,0,0.2);
+	}
+	
+	
+	table.dodajProjekcje tr input, table.dodajProjekcje tr select{
+		background-color:transparent;
+		
+	}
+	
+	p.komunikatBledu, p.komunikatSukcesu, p.komunikatOstrzezenia{
+		border: 1px solid;
+		padding: 0.3em;
+		margin: 0.3em 0; 
+	}
+	
+	p.komunikatBledu{
+		background-color:#FFAEAE;
+		color:#BF0000;
+		border-color: #BF0000;
+	}
+	
+	p.komunikatSukcesu{
+		background-color:#A8FFA8;
+		color:#060;
+		border-color: #060;
+	}
+	
+	p.komunikatOstrzezenia{
+		background-color:#FF9;
+		color:#F60;
+		border-color: #F30;
+	}
+	
+	td.warning{
+		background-color: #FF9;
+	}
+	
+	td.error{
+		background-color: #FFAEAE;
+	}
+	
+	div.sprawdzanaProjekcja{
+		margin-top: 1em;
+		margin-bottom: 1em;
+	}
+	
+	div.sprawdzanaProjekcja p{
+		margin-top:0.5em;
+	}
+	
+	div.sprawdzanaProjekcja span{
+		color:#09F;
+	}
+	
+	input[type=submit]{
+		padding: 0.5em;
+		margin-top: 0.5em;
+		margin-bottom: 0.5em;
+	}
+	
+	/*----- STRONA CENNIK -----*/
+	div.cennik h1{
+		margin-top: 0.5em;
+	}
+	
+	div.bilety2d, div.bilety3d{
+		float:left;
+		margin-left: 2%;
+		margin-right: 2%;
+		margin-top: 1em;
+		max-width: 50%;	
+	}
+	
+	div.bilety2d p, div.bilety3d p{
+		text-align:center;
+		font-weight:  bold;
+		font-size: 1.2em;
+		margin-top: 1em;
+		
+	}
+	
+	div.bilety2d col, div.bilety3d col{
+		width: 25%;
+	}
+	
+	
+	div.bilety2d table, div.bilety3d table{
+		font-size: 1.2em;
+		width: 100%;
+	}
+	
+	div.bilety2d td, div.bilety3d td{
+		font-weight:700;
+		font-size: 1.2em;
+	}
+	
+	
+	
+	div.bilety2d td, div.bilety3d td,
+	div.bilety2d th, div.bilety3d th{
+		padding: 0.3em;
+		text-align:center;
+		vertical-align:middle;
+		/*border: 1px solid #CCC;*/
+	}
+	
+	span.kwota-liczba{
+		font-size: 2em;
+	}
+	
+	ul.cennik{
+		list-style-type:disc;
+	}
+	ul.cennik li{
+		margin-bottom: .7em;
+	}
+	
+	/*obrazki na stronie cennik - Loga CinemaProfit i QlturaProfit */
+	body.page-template-cennik img{
+		margin-right: 2em;
+	}
+	
+	
+	
+	/*----- STRONA POJEDYNCZEGO WYDARZENIA -----*/
+	
+	article.wydarzenie-single, article.film-single{
+		color:#333;
+	}
+	
+	h1.wydarzenie-single-tytul, h1.projekcja-single-tytul{
+		font-size: 3em;
+		margin: 1em 0;
+	}
+	
+	/*Treść główna wydarzenia*/
+	article.wydarzenie-single div.wydarzenie-single-tresc{
+
+	}
+	
+	article.wydarzenie-single div.wydarzenie-single-tresc p{
+		margin-bottom: 1em;
+	}
+	
+	article.wydarzenie-single div.wydarzenie-single-tresc strong{
+		font-weight: 700;
+	}
+	
+	div.termin-single, div.film-projekcja{
+		float:right;
+		width: 100%; /*RESPONSIVE-WIDTH*/
+		margin-bottom: 1em;
+	}
+	
+	
+	
+	div.termin-single h2{
+		color: #FFF;
+		text-align:center;
+		padding: 10px 1em;
+		font-size: 110%;
+	}
+	
+	div.termin-single div.termin-lokalizacja{
+		padding: 0;
+	}
+	
+	div.termin-single img{
+		margin: 0;
+		padding: 0;
+	}
+	
+	div.termin-single a{
+		color:#FFF;
+		text-align:center;
+	}
+	
+	div.termin-single div{
+		/*border: 1px solid red;*/
+	}
+	
+	div.termin-single div.termin-single-czas, div.termin-single div.termin-bilety, div.termin-single div.termin-lokalizacja, div.termin-single div.termin-test{
+		width: 33%; /* RESPONSIVE */
+		float:left;
+	}
+	
+	div.termin-single div.termin-lokalizacja img{
+		display: none; /* RESPONSIVE */
+	}
+	
+	
+	/*----- Przycisk Kup bilet w szczegółach wydarzenia -----*/
+	div.termin-single a.kup-bilet{
+		display:block;
+		color: #FFF;
+		margin-top: 10px;
+		margin-bottom: 10px;
+		margin-right:auto;
+		margin-left:auto;
+		width: 200px; /*RESPONSIVE-WIDTH*/
+		text-align:center;
+		text-decoration:none;
+		background-color: #FF9933;
+		font-size: 2em;
+		border: 2px solid #FFF;
+		padding: 5px 0;
+		border-radius: 10px;
+		transition: all 0.4s ease;
+	}
+	
+	div.termin-single a.kup-bilet:hover{
+		color: #000;
+		background-color: #FFF;
+		border: 2px solid #FF9933;
+	}
+	
+	/*----- STRONA POJEDYCZNEGO FILMU -----*/
+	/*Częśc reguł znajduje się powyżej, z regułami dla pojedynczego wydarzenia*/
+	div.film-pasek{
+		margin-bottom: 1em;
+	}
+	
+	div.film-pasek img, div.film-info{
+		float:left;
+	}
+	
+	div.film-info{
+		max-width: 450px;
+		margin-left: 1em;
+	}
+	
+	div.film-info h1{
+		font-size: 3em;
+		margin: 0;
+		padding-left: 0;
+		padding-right: 0;
+	}
+	
+	div.film-info p{
+		margin: 0;
+		padding: 0;
+		font-size: 1.2em;
+	}
+	
+	div.film-info p.tytul-oryginalu{
+		font-size: 1.5em;
+		margin-bottom: 0.5em;
+	}
+	
+	div.film-info p.zapowiedz{
+		color: #EE4724;
+	}
+	
+	
+	
+	div.film-info p.z-przerwa{
+		margin-bottom: 0.5em;
+	}
+	
+	p.opis-filmu{
+		font-size: 1.4em;
+		margin: 0;
+		padding: 0;
+	}
+	
+	div.film-projekcje h2{
+		background-color:#EEE;
+		padding: 0.1em;
+		margin: 0;
+		font-size: 1.2em;
+	}
+	
+	div.film-projekcje p{
+		border-bottom: 1px solid #CCC;
+		margin: 0;
+		padding: 0.7em 0.2em;
+	}
+	
+	div.film-projekcje p{
+		line-height: 1.5em;
+	}
+	
+	div.film-projekcje p strong{
+		font-size: 1.2em;
+		margin-right: 0.2em;
+	}
+	
+	div.film-projekcje a.aktywny-przycisk, div.film-projekcje span.nieaktywny-przycisk{
+		padding: 3px;
+		border-radius: 3px;
+		margin-right: 0.4em;
+	}
+	
+	div.film-projekcje a.aktywny-przycisk{
+		color: #FFF;
+		background-color: #EE4724;
+		text-decoration:none;
+	}
+	
+	div.film-projekcje a.aktywny-przycisk:hover{
+		background-color: green;
+	}
+	
+	div.film-projekcje span.nieaktywny-przycisk{
+		color: #FFF;
+		background-color: #CCC;
+	}
+	
+	div.film-projekcje span.komentarz, div.film-projekcje a.komentarz{
+		color:#999;
+	}
+	
+	/*----- EDUKACJA -----*/
+	
+	/*----- Tabela kursów -----*/
+	table#tabelaKursow{
+		margin-top: -1em; /*Wyzerowanie położenia całej tabeli*/
+
+	}
+	
+	
+	
+	table#tabelaKursow td.tabelaKursow_naglowek h1{
+		font-size: 150%;
+		font-weight: 700;
+		margin-bottom: 0.8em;
+		color: #FF9933;
+		text-shadow: 1.5px 1.5px #333333;
+		margin-top: 0.8em;
+	}
+	
+	table#tabelaKursow td.tabelaKursow_naglowek h2{
+		font-size: 130%;
+		font-weight: 700;
+		color: #333333;
+		padding-bottom: 0.5em;
+		margin-right: 1em;
+		padding-top: 0.5em;
+		transition: all 0.4s ease;
+	}
+	
+	table#tabelaKursow td.tabelaKursow_naglowek h2:hover{
+		background-color: #333;
+		color: #FFF;
+		border-radius: 3px;
+	}
+	
+	table#tabelaKursow td.tabelaKursow_naglowek a{
+		display:inline-block;
+		color: #333333;
+		
+	}
+	
+	table#tabelaKursow a.kategoria{
+		background-color: #FF9933;
+		color: #000;
+		padding: 3px;
+		border-radius: 3px;
+		text-decoration:none !important;
+		font-size:0.8em;
+	}
+	
+	table#tabelaKursow a.kategoria:hover{
+		background-color: #333;
+		color: #FFF;
+		text-decoration:underline !important;
+	}
+	
+	
+	table#tabelaKursow td{
+		border: 1px solid rgba(0,0,0,0.2);
+		padding: 3px;
+	}
+	
+	table#tabelaKursow td a{
+		color:#333;
+	}
+	
+	table#tabelaKursow td a:hover{
+		color: #000;
+	}
+	
+	table#tabelaKursow td.tabelaKursow_naglowek, table#tabelaKursow td.tabelaKursow_przerwa{
+		border: none;
+		
+	}
+	
+	table#tabelaKursow tr.tabelaKursow_etykiety td{
+		font-weight: 700;
+	}
+	
+	/*--------Kolory tła tabeli - naprzemienne ---------*/
+	tr.kolor_tabeli_kursu0{
+		background-color: rgba(0,0,0,0.05);
+	}
+	
+	tr.kolor_tabeli_kursu1{
+		background-color: rgba(0,0,0,0.075);
+	}
+	
+	/*----- STRONA POJEDYNCZEGO KURSU -----*/
+	
+	/*Dla strony w rozmiarze 768 w widoku strony poszczgólnego kursu ukrywany jest pasek "Lokalizacja zajęć"
+	  w wyższych widokach jest on wyświetlany*/
+	div.edukacja-single{
+		display: none; /* RESPONSIVE */
+	}
+	
+	/*-----PODSTRONY OUTW i O CENTRUM -----*/
+	/*obie realizowane za pomocą page php - różnią się widżetem bocznym zawierającym menu*/
+	
+	/*Styl list OUTW Aktualności oraz Przetargi i zamówienia*/
+	
+	article.OUTW_aktualnosci, article.przetarg_zamowienie_ogloszenie{
+		margin-bottom: 2em;
+		padding-left: 1em;
+		/*taki sam styl border-left jak w kolumnach w kontakt*/ 
+		border-left: 1px solid #CCC;
+	}
+	
+	
+	/*Data opublikowania wpisu aktualności - ostylowana tak, jak napisy Filia nr 1 na stronie Kontakt*/
+	article.OUTW_aktualnosci span, article.przetarg_zamowienie_ogloszenie span{
+		color: #888;
+		font-size: 90%;
+		margin-bottom: 0.8em;
+		display:block;
+	}
+	
+	/*Sekcja strony /o-centrum/ogloszenia - wyświetlana tylko dla zalogowanych użytkowników - ogłoszenia do opublikowania*/
+	section#content-do-opublikowania{
+		background-color:#FF9;
+		padding-top: 1em;
+		padding-bottom: 1em;
+	}
+
+	
+		/*-----PASKI BOCZNE w OUTW i O CENTRUM -----*/
+	
+	/*tytuły widżetów bocznych dla OUTW i O Centrum*/
+	h3.o-centrum-widget-title, h3.outw-widget-title{
+		margin-bottom: 0.5em;
+	}
+	
+	/*oba tj. dla obu podstron menu boczne*/
+	ul#menu-outw li a, ul#menu-o-centrum li a{
+		display:block;
+		padding: 0.3em;
+	}
+	
+	ul#menu-outw ul.sub-menu, ul#menu-o-centrum ul.sub-menu{
+		list-style-type:circle;
+		margin-left: 1.2em;
+		color: #EE4724;
+	}
+	
+	ul#menu-outw ul.sub-menu ul.sub-menu a, ul#menu-o-centrum ul.sub-menu ul.sub-menu a{
+		color: green;
+		list-style-position:inside;
+	}
+	
+	/*Wyróżnienie zaznaczonego elementu menu bocznego*/
+	
+	ul#menu-outw li.current-menu-item > a, ul#menu-o-centrum li.current-menu-item > a{
+		background-color: #333333;
+		color: #FF9933;
+		display:block;
+
+	}
+	
+	ul#menu-outw li  a:hover, ul#menu-o-centrum li  a:hover{
+		background: #FF9933;
+		color: #000;
+	}
+	
+	ul#menu-outw li.current-menu-item > a:hover, ul#menu-o-centrum li.current-menu-item > a:hover{
+	}
+	
+	/*----- STRONA O o-centrum/wynajem-sal-i-uslugi-plakatowania -----*/
+	
+	/*styl tabeli z cennikami plakatowania */
+	article#post-372 table{
+		width:auto;
+		max-width: 100%;
+	}
+	
+	article#post-372 th{
+		font-weight: 700;
+		padding: 0.5em 1em;
+		border: 1px solid #FFF;
+		background-color: #CCC;
+	}
+	
+	article#post-372 td{
+		border: 1px solid #CCC;
+		padding: 0.2em 1em;
+	}
+	
+	/*----- STRONA O /o-centrum/reklama-na-ekranie-kina-odra/ -----*/
+	/*tabela - cennik emisji*/
+	article#post-1408 table td, article#post-1373 table td{
+		border: 1px solid #666;
+	}
+	
+	article#post-1408 td, article#post-1373 td{
+		padding: 0.25em;
+	}
+	
+	article#post-1408 table thead td, article#post-1373 table thead td{
+		font-weight: 700;
+	}
+	
+	article#post-1408 table td.right, article#post-1373 table td.right{
+		text-align:right;
+	}
+	
+	/*----- KONTAKT -----*/
+	
+	div.pasekKontaktPrawy, div.pasekKontaktSrodkowy, div.pasekKontaktLewy{
+		padding-top: 0;
+		padding-bottom: 0;
+	}
+	
+	/* taki sam styl jak na liście aktualności OUTW i przetargów */
+	div.pasekKontaktPrawy, div.pasekKontaktSrodkowy{
+		border-left: 1px solid #CCC;
+	}
+	
+	/*napis filia - ostylowany tak, jak data publikacji wpisu aktualności outw*/
+	section.kontakt div span{
+		color: #888;
+		font-size: 90%;
+		margin-bottom: 0.8em;
+		display:block;
+	}
+	
+	section.kontakt h3{
+		margin-top: 1em;
+		margin-bottom: 0.1em;
+	}
+	
+	/*----- Podstrona o-centrum/wspolpraca -----*/
+	article#post-357 img{
+		margin-left:10px;
+		margin-right:10px;
+		position:relative;
+	}
+	
+	/*Div z logiem i etykietami we współpracy*/
+	article#post-357 div{
+		border: 1px solid red;
+	}
+	
+	article#post-357 div p{
+		margin-left:10px;
+		margin-right:10px;
+		position:relative;
+	}
+	
+	article#post-357 img{
+		border: 1px solid green;
+	}
+	
+	/*----- STRONA DOMYŚLNA -----*/
+	
+	
+	body.page-template-default article li{
+	}
+	
+	/*----- ASIDE -----*/
+	aside{
+		/*display:none; /* RESPONSIVE */
+	}
+	
+	/*tytuły widżetów*/
+	aside h3{
+		/*background-color: #EEE;*/
+		padding: 0.1em;
+		padding-bottom: 0.4em;
+	}
+	
+	aside li{
+		/*width: 250px;*/ /* RESPONSIVE */
+		width: 740px; /*RESPONSIVE*/
+		float:left; /* RESPONSIVE */
+		margin-left: 2%; /* RESPONSIVE */
+	}
+	
+	/* WIDŻET ogloszenia-widget */
+	div.ogloszenia-widget{
+		margin-bottom: 1em;
+		
+
+	}
+	
+	div.ogloszenia-widget a{
+		font-weight:700;
+	}
+	
+	/*wpisy ogłoszeń na widżecie*/
+	div.ogloszenia-widget p{
+		border-bottom: 1px solid #DDD;
+		margin: 0; 
+		padding: 0.4em 0;
+	}
+	
+	div.ogloszenia-widget span{
+	color: #888;
+		font-size: 90%;
+		display:block;
+	}
+	
+	/* WIDŻET zapowiedzi-kinowe-widget */
+	div.zapowiedzi-kinowe-widget{
+		margin-bottom: 1em;
+	}
+	
+	div.zapowiedzi-kinowe-widget img{
+	}
+	
+	div.zapowiedzi-kinowe-widget div{
+		width: 125px;
+		height: 185px;
+		float:left;
+	}
+	
+	div.zapowiedzi-kinowe-widget a{
+		position:absolute;
+		display:block;
+		width: 125px;
+		height: 185px;
+		background-color:transparent;
+		-webkit-transition: background-color 0.5s, -webkit-transform 0.5s;
+    	transition: background-color 0.5s, transform 0.5s;
+	}
+	
+	div.zapowiedzi-kinowe-widget a:hover{
+		background-color: rgba(0,0,0,0.25);
+	}
+	
+	div.zapowiedzi-kinowe-widget a span{
+		display:none;
+	}
+	
+	/* WIDŻET zarzadzanie-zapowiedzi-kinowe-widget */
+	table.kino-zarzadzanie tr.kino-zarzadzanie-nieopublikowane{ 
+		background-color:#FF9;
+	}
+	
+	/* WIDŻET repertuar-kina-widget */
+	div.repertuar-kina-widget{
+		background-color:#333;
+		margin-bottom: 1em;
+		height: 246px;
+		width: 249px;
+	}
+	
+	div.repertuar-kina-widget img.repertuar-okladka{
+		margin: 0;
+		padding: 0;
+		width: 83px;
+		height: 123px;
+		margin-top: 123px;
+		float:left;
+	}
+	
+	
+	div.repertuar-kina-widget img.repertuar-wypelniacz{
+		margin: 0;
+		padding: 0;
+		width: 162px;
+		height: 123px;
+		margin-top: 123px;
+		float:left;
+	}
+	
+	div.repertuar-kina-widget a{
+		position:absolute;
+		display:block;
+		width: 249px;
+		height: 246px;
+		background-color: transparent;
+		-webkit-transition: background-color 0.5s, -webkit-transform 0.5s;
+    	transition: background-color 0.5s, transform 0.5s;
+	}
+	
+	div.repertuar-kina-widget a img{
+		-webkit-transition: background-color 0.5s, -webkit-transform 0.5s;
+    	transition: background-color 0.5s, transform 0.5s;
+	}
+	
+	div.repertuar-kina-widget a:hover{
+		background-color: #333;
+		width: 249px;
+		height: 246px;
+	}
+	
+	div.repertuar-kina-widget a:hover img{
+		transform: translateY(65px);
+	}
+
+	/* WIDŻET repertuar-miesieczny-widget */
+	div.repertuar-miesieczny-widget{
+		margin-bottom: 1em;
+	}
+	
+	div.repertuar-miesieczny-widget img{
+		width: 250px;
+		height:353px;
+	}
+	
+	div.repertuar-miesieczny-widget div{
+	}
+	
+	div.repertuar-miesieczny-widget div a{
+		position:absolute;
+		display:block;
+		background-color:transparent;
+		height:353px;
+		width: 250px;
+		-webkit-transition: background-color 0.5s, -webkit-transform 0.5s;
+    	transition: background-color 0.5s, transform 0.5s;
+	}
+	
+	div.repertuar-miesieczny-widget div a:hover{
+		background-color: rgba(0,0,0,0.25);
+	}
+	
+	div.repertuar-miesieczny-widget div a span{
+		display:none;
+	}
+
+/*Style scalone przy łączeniu 0.3.3 i 0.3.3.2 do 0.3.4*/
+/*-------------------------------------------------------------------------------------------------------------------------------*/
+/*jQuery UI - klasa ukrywająca przycisk zamykania okna*/
+.no-close .ui-dialog-titlebar-close {
+  display: none;
+}
+
+/*-------------Importowanie projekcji (import-projekcji.php)------------------*/
+/*styl oznaczający rubrykę tabeli w której znaleziono błąd*/
+
+/*klasy tabeli #filmy*/
+
+#filmy td.bladDanych{
+	background: rgba(168, 0, 0, 0.4);
+}
+
+#filmy tr.zablokowane{
+	background-color: #CCCCCC;
+}
+
+/*klasy tabeli #dodajProjekcje*/
+
+/*wiersz w tabeli, jeśli jest to projekcja zapisana już na www*/
+#dodajProjekcje th{
+	background-color: #999;
+	color: #FFF;
+}
+
+#dodajProjekcje tr.naglowekDnia{
+	background-color: #333;
+	color: #FFF;
+}
+
+/*wiersz w tabeli, jeśli jest to projekcja zapisana już na www*/
+#dodajProjekcje tr.zapisane{
+	background-color: rgba(0,0,0,0.05);
+	color: #777;
+}
+
+/*wiersz w tabeli, jeśli wpisano dane - poprzez przypisanie filmu*/
+#dodajProjekcje tr.wypelnione, span.wypelnione{
+	background-color: rgba(63,128,0,0.2);
+}
+
+/*wiersz w tabeli, jeśli zmieniono w niej status publikacji*/
+#dodajProjekcje tr.zmienionaProjekcja, span.zmienionaProjekcja{
+	background-color: rgba(160,0,255,0.2);
+}
+
+/*wiersz w tabeli, jeśli jest zaznaczony (za pomocą checkbox)*/
+#dodajProjekcje tr.zaznaczone{
+	background-color: rgba(255,255,0,0.2);
+}
+
+#dodajProjekcje input{
+	border: none;
+}
+/*-------------0.3.3.2------------------*/
+
+/*-------------Archiwum wydarzeń - wydarzenia-archiwum.php------------------*/
+
+div.termin-archiwum{
+	/*kolor paska terminu przy wydarzeniu archiwalnym*/
+	background-color: #666666 !important;
+}
+
+div.wydarzenie-kategorie a.kategoria-archiwum{
+/*połączyć z div.wydarzenie-kategorie a{*/
+	/*kolor etykiet kategorii przy wydarzeniu archiwalnym*/
+	background-color: #666666;
+}
+
+/*-------------Pasek boczny dla wydarzeń archiwalnych - wydarzenia_single.php------------------*/
+div.termin-single-archiwum{
+	background-color: #666666 !important;
+
+}
+
+h2.wydarzenie_archiwalne{
+/*na podstawie div.termin-single a.kup-bilet*/
+	display:block;
+		color: #FFF;
+		margin-top: 10px;
+		margin-bottom: 10px;
+		margin-right:auto;
+		margin-left:auto;
+		width: 200px; /*RESPONSIVE-WIDTH - nie zrobiona wersja responsive*/
+		text-align:center;
+		text-decoration:none;
+		background-color: #FF9933;
+		font-size: 2em;
+		border: 2px solid #FFF;
+		padding: 5px 0;
+		border-radius: 10px;
+
+}
+
+/*-------------Styl dla paginacji dodwanej w pods------------------*/
+span.pods-pagination-advanced{
+	display: block;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	padding-top: 2m;
+	padding-bottom: 2em;
+	font-size: 1.1em;
+
+}
+
+span.pods-pagination-advanced a{
+	padding: 0.3em;
+}
+
+/*-------------------------------------------------------------------------------------------------------------------------------*/
+
+	/*----- KOLUMNY -----*/
+	
+	/*W pełnej szerokości strony column-9 ma szerokość 75% natomiast z powodu oszczędzania miejsca
+	  w węższej wersji (768) stanowi już 100% szerokości*/
+	/*Wprowadzone columny skalowalne (scalable), które tak nie działają - są zawsze skalowane. Wtedy w kodzie strony można zadecydować stylem
+	  czy ma być skalowalna (jak np. szerokość treści i paska bocznego wydarzenia-single)*/
+	
+	.column-12, .column-9, .column-8, .column-6, .column-5, .column-4, .column-3, .column-2, .column-12-scalable, .column-9-scalable, .column-8-scalable, .column-6-scalable, .column-5-scalable, .column-4-scalable, .column-3-scalable, .column-2-scalable{
+		padding: 0em 2%; 
+		float:left;
+	}
+	
+
+	
+	/* RESPONSIVE : */
+	
+	.column-12{
+		width: 100%;
+	}
+	
+	.column-9{
+		width: 100%;
+	}
+	
+	.column-9-scalable{
+		width: 75%;
+	}
+	
+	.column-8{
+		width: 66.6666%;
+	}
+	
+	.column-6{
+		width: 50%;
+	}
+	
+	.column-5{
+		width: 41.6666%
+	}
+	
+	.column-4{
+		width: 33.3333%;
+	}
+	
+	.column-3{
+		width: 25%;
+	}
+	
+	.column-2{
+		width: 16.6666%;
+	}
+	
+	.column-3_column-12{
+		
+	}
+	
+

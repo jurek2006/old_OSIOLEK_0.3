@@ -1,0 +1,44 @@
+@charset "utf-8";
+/*
+Theme Name: Centrum Sztuki 0.3.4
+Author: Jurek Skowron
+Author URI: http://jurekskowron.pl
+Version: 0.3.4
+Description: Motyw dla strony Centrum Sztuki kultura.olawa.pl na wordpressie. Wersja będąca scaleniem motywu 0.3.3 z jego motywami potomnymi
+
+W wersji 0.3.4 połączono 0.3.3 z 0.3.3.2
+
+Zmiany w wersji 0.3.3.2:
+- dodanie skryptu js pozwalacjącego na modyfikację działania formularzy dodawania i edycji postów (functions.php, /admin_js/post_dodawanie_edycja.js)
+- dodanie za pomocą skryptu tego, że pole "Data i godzina wydarzenia" przy dodawaniu/edycji wydarzeń jest wymagane
+  jeśli nie zostana wypełniona jego wartość, nie można zapisać zmian i wyświetlany jest alert (post_dodawanie_edycja.js)
+- ukrycie bocznych box'ów 'adresy' i 'kategorie' przy dodwaniu i edycji postów  oraz zablokowanie możliwości ich włączenia w "opcje ekranu" (post_dodawanie_edycja.js)
+- naprawa pliku 404.php - wyświetlanego gdy nie ma danej strony, czy załączonegp pliku (skopiowano także do 0.3.3) (404.php);
+
+W wersji 0.3.3.1 wprowadzono:
+- narzędzie do importu projekcji filmowych z VT (wymaga pliku XMLGetter.php - jego położenie zdefiniowane w visualticket_import.js)
+
+W wersji 0.3.3:
+- scalono zmiany motywów potomnych od 0.3.2.1 do 0.3.2.3 do jednego motywu głównego
+
+W wersji 0.3.2.3 wprowadzono:
+- drobne poprawki
+- naprawiono dodawanie stałej treści nad stroną Edukacja
+
+W wersji 0.3.2.2 wprowadzono:
+- hurtowe dodawanie projekcji
+
+W wersji 0.3.2 wprowadzono:
+- obsługę zapowiedzi filmowych wraz z zarządzaniem nimi w kino/zarządzanie
+
+
+License: @Jurek Skowron  
+*/
+
+/*WSZYSTKIE STYLE WYGLĄDU ZNAJDUJĄ SIĘ W FOLDERZE MOTYWU/STYLE:
+- medium768.css - standardowy styl - ustawiony na szerokość 768px
+- desktop.css - nadpisuje domyślne szerokość ekranu większa od 1141px*/
+
+/*Style niezbędne do "scalenia" przy tworzeniu nowej wersji motywu nadrzędnego*/
+/*----------------------------------------------------------------------------*/
+

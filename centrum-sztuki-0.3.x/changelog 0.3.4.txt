@@ -1,0 +1,304 @@
+0.3.3.2 (potomny od 0.3.3)
+-------
+
+- dodanie skryptu js pozwalacjącego na modyfikację działania formularzy dodawania i edycji postów (functions.php, /admin_js/post_dodawanie_edycja.js)
+- dodanie za pomocą skryptu tego, że pole "Data i godzina wydarzenia" przy dodawaniu/edycji wydarzeń jest wymagane
+  jeśli nie zostana wypełniona jego wartość, nie można zapisać zmian i wyświetlany jest alert (post_dodawanie_edycja.js)
+- ukrycie bocznych box'ów 'adresy' i 'kategorie' przy dodwaniu i edycji postów  oraz zablokowanie możliwości ich włączenia w "opcje ekranu" (post_dodawanie_edycja.js)
+- naprawa pliku 404.php - wyświetlanego gdy nie ma danej strony, czy załączonegp pliku (skopiowano także do 0.3.3) (404.php)
+
+- dodanie archiwum 
+  ZMIANY W WP:
+  * dodanie strony Archiwum wydarzeń o szablonie Wydarzenia Archiwum (wydarzenia-archiwum.php)
+  * dodanie powyższej strony do menu głównego i głównego-user
+  - modyfikacja stylu (style.css - do połączenia w przypadku tworzenia motywu głównego)
+  - dodanie obsługi wydarzeń archwiwalnych do wydarzenia_single.php (wydarzenia_single.php)
+  (Wydarzenie jest archiwalne jeśli (data_i_godzina_wydarzenia.meta_value < NOW()) AND (dzien_zakonczenia.meta_value < NOW()) czyli minęła już data i godzina wydarzenia oraz data zakończenia)
+  - w pasku bocznym archiwum wyświetlają się automatycznie te same widżety co przy wydarzeniach i edukacji
+  - dodanie funkcji dodajPaginacje (functions.php) umożliwiającej dodanie paginacji do list wyświetlanych przez pods
+
+...............................................................................................................
+Do następnej wersji:
+
+
+
+
+- modyfikacja pliku archive.php (DOKOŃCZYĆ) - problem - po klikniêciu na link do nieistniej¹cego obrazu przenosi do strony archive gdzie jest tylko "Uwertura"
+- newsletter
+  ZMIANY W WP:
+  * dodanie wtyczki newsletter
+
+...............................................................................................................
+
+0.3.3.1 (potomny od 0.3.3)
+-------
+
+- dodanie stałych określających prawa do poszczególnych stron/menu - functions.php
+	- UPR_IMPORT_PROJEKCJI - uprawnienia do dostêpu do strony "import projekcji"
+	- UPR_KINO_ZARZADZANIE - uprawnienia do dostêpu do strony "kino-zarzadzanie" - kino-zarzadzanie.php
+	- UPR_MENU_USER - uprawnienia do dostêpu do menu top-user-navigation zamiast top-navigation - header.php
+
+- dodanie narzêdzia importu projekcji z systemu biletowego VisualTicket (folder visualticket_import)
+	ZMIANY W WP:
+	* dodanie strony Import projekcji (Rodzic: kino) o szablonie Kino - import projekcji (import-projekcji.php)
+	* dodanie powy¿szej strony do menu glowne-user
+
+- poprawne do³¹czenie jQuery i jQuery UI:
+	- usuniêcie do³¹czania jQuery z header.php (korzystamy z jQuery do³¹czonego do WP)
+	- w pliku skryptu dodajemy sobie $ [var $ = jQuery.noConflict();]
+	- dodanie poszczególnych elementów jQuery UI (nieu¿ywane s¹ zakomentowane )- functions.php
+	- dodanie pliku stylu jQuery UI z serwerów Google - functions.php
+
+
+
+0.3.3
+-----
+- scalenie motywu 0.3.2 i potomnych od 0.3.2.1 do 0.3.2.3
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+
+0.3.2.3 (potomny od 0.3.2)
+-------
+- naprawione dodawanie treœci nad stron¹ g³ówn¹ Edukacja za pomoc¹ pods Ustawienia edukacji - edukacja.php 2015-10-20
+- dodanie przecinków pomiêdzy gatunkami w repertuarze filmów - kino.php, filmy_single.php 2015-10-20
+- poprawiony ukoœnik na stronie filmy-single - w przypadku gdy nie wybrano wersji jêzykowej dla wyœwietlanych projekcji - filmy_single.php 2015-10-20
+
+0.3.2.2 (potomny od 0.3.2)
+-------
+
+- odnoœnik w kino-zarz¹dzanie "Dodaj nowe projekcje" prowadzi do nowego sposobu dodawania projekcji - kino-zarzadzanie.php 2015-10-10
+- dodanie mo¿liwoœci hurtowego dodawania projekcji
+	* Zmiany w WP:
+	- dodanie strony Dodaj projekcje o szablonie Kino - hurtowe projekcje (kino-hurtowe-projekcje.php)
+	- dodanie odnoœnika do powy¿szej strony do menu glowne-user
+- ostylowanie w potomnym style.css
+- dodanie zabezpieczenia przed przypadkowym wielokrotnym dodaniem tych samych projekcji przez odœwie¿enie strony kino-hurtowe-projekcje.php 2015-10-20
+
+0.3.2.1 (potomny od 0.3.2)
+-------
+- zmieniona œcie¿ka loga CS i favicon w header z get_stylesheet_directory_uri (szukane w motywie potomnym) na get_template_directory_uri(szukane w motywie podstawowym) - header.php
+- dodanie dodatkowych dni dla grup kursowych (w edukacji)
+	* Zmiany w PODS
+	- dodanie w pods grupy_kursowe pól: dzien_tygodnia_N, od_godziny_N, do_godziny_N, godziny_N_tekstowo (dla N od 3 do 7, 
+		jako kopii dotychczasowych dni)
+
+- dodanie mo¿liwoœci "przypiêcia" treœci w edukacji nad tabelami zajêæ we wszystkich kategoriach
+	- ustawiane jest to w Ustawienia Edukacji (pods ustawieñ)
+	* Zmiany w PODS:
+	- dodanie pods ustawienia-edukacji 
+
+
+0.3.2
+-----
+[NIEZBÊDNE WTYCZKI-WID¯ETY: 	Og³oszenia Widget JS 0.1, 
+				Zapowiedzi Kinowe Widget JS 0.1, 
+				Zarz¹dzanie - Zapowiedzi Kinowe Widget JS 0.1, 
+				Repertuar Kina Widget JS 0.1,
+				Repertuar Miesiêczny Kina Widget JS 0.1]
+
+- dodanie obs³ugi zapowiedzi filmowych
+	* ZMIANY W PODS
+	- w pods filmy dodane pola zapowiedz i niestandardowa_zapowiedz
+
+- dodanie nowego rozmiaru obrazów w wordpress film-zapowiedz na potrzeby paska zapowiedzi - functions.php 2015-08-19
+- naprawione dzia³anie czêœci aside (dla rozdzielczoœci desktop to prawy pasek) przy mniejszej rozdzielczoœci
+  - wówczas pojawia siê na dole na ca³¹ szerokoœæ strony - medium768.css, desktop.css 2015-08-19
+- dodanie obs³ugo (drobne zmiany w stylach) wid¿etów zapowiedzi-kinowe-widget-0.1 i zarzadzanie-zapowiedzi-kinowe-widget-0.1 2015-08-20
+- przycisk "SprawdŸ odnoœnik" w kino-zarz¹dzanie otwiera system biletowym w nowym oknie zamiast w tym samym - kino-zarzadzanie.php 2015-08-20
+- dodano styl dla wid¿etu repertuar-kina-widget - medium768.css
+- dodano odnoœnik do zarz¹dzania terminem w VisualTicket na stronie zarz¹dzania kinem - kino-zarzadzanie.php - 2015-08-26
+- zmieniono sposób do³¹czania stylów CSS na wykorzystuj¹cy metodê WordPressow¹ - functions.php, header.php - 2015-09-01
+- dopisano Kina Odra do stopki - footer.php - 2015-09-03
+- dodano styl dla wid¿etu repertuar-miesieczny-kina - medium768.css - 2015-09-03
+- dodano przestrzeñ na wid¿ety Kino - functions.php - 2015-09-03
+- usuniêto automatyczne wczytywanie wid¿etu g³ównego dla podstrony kino - teraz wczytywana jest przestrzeñ na wid¿ety kino
+  sidebar.php - 2015-09-03
+
+* ZMIANY W WP
+	- Zainstalowanie wtyczki Admin Menu Editor (https://wordpress.org/plugins/admin-menu-editor/)
+
+* ZMIANY W PODS
+	- Dodanie pods (settings) repertuar_miesiac
+
+
+0.3.1
+-----
+- dodanie zmiennej $ilosc_dni_repertuaru na pocz¹tku szablonu repertuaru (kinp.php) okreœlaj¹cej na ile dni wprz¹d wyœwietlany jest repertuar - kino.php - 2015-08-06
+- naprawiono wyœwietlanie ID sprzeda¿y online dla filmów o zaplanowanej publikacji odnoœnika - kino-zarzadzanie.php - 2015-08-06
+- naprawiono wyœwietlanie informacji o filmie w filmy-single - medium768.css, desktop.css - 2015-08-06
+- zmieniono w filmy single, ¿eby daty terminów wyœwietlane by³y bez roku i zmniejszono czcionkê, ¿eby mieœci³o siê w jednej linii - filmy_single.php, medium768.css - 2015-08-06
+- poprawienie wyœwietlania prostok¹ta terminu na liœciw wydarzeñ (problem "od poniedzia³ku - do poniedzia³ku") - medium768.css - 2015-08-07
+- naprawienie problemu opóŸnionej publikacji odnoœników do sprzeda¿y online filmów i wydarzeñ (z powodu ró¿nicy czasu serwera i faktycznego):
+	- dodano funkcjê pobierzDateTeraz() razem ze sta³¹ PRZESUNIECIE_CZASU, które s³u¿¹ do pobierania bie¿¹cej daty i czasu 
+  	(by³ problem z ró¿nic¹ godziny serwera a godzin¹ w³aœciw¹), zamiana zwyk³ego pobierania czasu na u¿ywanie funkcji pobierzDateTeraz() - functions.php, kino-zarzadzanie.php, kino.php, wydarzenia.php, wydarzenia-single.php - 2015-08-14
+
+* ZMIANY W WP - przeniesienie treœci o reklamach w kinie z og³oszeñ do O Centrum:
+	- dodanie strony Reklama na ekranie Kina Odra, dodanie jej do menu bocznego o-centrum, do menu g³ównego i g³ównego-user
+
+- dodanie stylu tabeli dla podstrony Reklama na ekranie Kina Odra (article#post-1373 table) - medium768.css - 2015-08-14
+- naprawienie wyœwietlania paska pocznego w wydarzenia-single - medium768.css - 2015-08-17
+	 
+
+
+0.3.0
+-----
+ 
+
+- dodanie obrazka pegaz_kino_thumb.png - domyœlengo dla filmów (miniatur w repertuarze)
+- dodanie rozmiaru obrazka WP 'projekcja-thumb' o wysokoœci 150, (który jest wyœwietlany na liœcie kino - repertuar)- functions.php - 2015-05-21
+- dodanie funkcji walidujDate, która sprawdza czy zadana zmienna jest dat¹ o odpowiednim formacie (domyœlnie YYYY-DD-MM) - functions.php - 2015-05-20
+- dodanie obrazka czytajWiecej.png (przy hoverze na liœcie wydarzeñ i repertuarze kina) - medium768.css - 2015-05-22
+- dostosowanie szablonów wydarzenia.php i wydarzenia-single.php do wyœwietlania informacji o biletach po zmianach w pods bilety - wydarzenia.php, wydarzenia-single.php - 2015-05-23
+- pozbycie siê problemu podkreœlania "Czytaj wiêcej" po najechaniu na "puste pole" poni¿ej ramki wydarzenia (article.wydarzenie:hover a) -  medium768.xss 2015-05-23
+- dodanie przyciemnienia po najechania na ramkê wydarzenia/projekcji [article:hover a.wydarzenie-czytajWiecej, article:hover a.projekcja-czytajWiecej] - medium768.xss 2015-05-23
+- dodanie alternatywego menu g³ównego dla zalogowanego u¿ytkownika
+  - dodanie obszaru menu top-user-navigation - functions.php
+  - dodanie wyœwietlania menu top-user-navigation zamiast top-navigation dla u¿ytkowników o uprawnieniach do publikacji postów - header.php
+  - dostosowanie szablonu do wyœwietlania menu (dodanie do regu³ zawieraj¹cych menu-glowne identycznych z menu-glowne-user) - medium768.css, desktop.css
+  * ZMIANY W WP:
+    - zainstalowanie wtyczki Duplicate Menu
+    - zduplikowanie menu-glowne jako menu-glowne-user i podpiêcie go pod 'Top user navigation'
+- dodanie strony kino-zarz¹dzanie (tylko dla zalogowanycy u¿ o prawach do publikacji postów) - kino-zarzadzanie.php, medium768.css
+
+
+- DODANIE PODSTRONY KINO
+  - dodanie szablonu kino.php 
+  - dodanie szablonu filmy_single.php
+  - zmniejszenie górnego logo w wersji 768, ¿eby nie rozwala³ siê pasek - medium768.css, desktop.css
+  - dopisanie podstronu kino do listy dla której wyœwietlany jest pasek-boczny-glowny - sidebar.php
+  * ZMIANY W WP:
+    - dodanie strony Kino o szablonie Kino
+    - dodanie strony Kino do menu g³ównego i dolnego
+  * ZMIANY W PODS
+    - dodanie pods gatunki_filmowe(taxonomy), filmy(post type) i projekcje(post type)
+    - dodanie pods page filmy/* o szablonie Filmy Single, powi¹zanej z pods filmy
+    - zmiany w pods wydarzenia - usuniêcie pól: wstep_wolny, sprzedaz_tylko_kasa, kup_bilet_uniwersalny. Dodanie pól: dzien_publikacji_odnosnika_do_biletow,
+      godzina_publikacji_odnosnika_do_biletow, opcje_sprzedazy z list¹:
+		wstep_wolny|Wstêp wolny
+		tylko_kasa|Sprzeda¿ tylko w kasie
+		brak_biletow|Brak dostêpnych biletów
+    - wy³¹czone Require dla pola data_i_godzina_wydarzenia w pods wydarzenia (kiedy siê zapomina³o wybraæ tê wartoœæ po komunikacie mo¿na by³o wróciæ do pustego formularza (bardzo niewygodne)
+
+- DODANIE PODSTRONY CENNIK
+  - dodanie szablonu cennik.php
+  * ZMIANY W PODS
+    - dodanie pods cennik
+  * ZMIANY W WP
+    - ustawienie szablonu cennik dla strony kino/cennik
+
+
+============================================================================================================================
+
+0.2.7
+-----
+- zmodyfikowanie wyœwietlania og³oszeñ na stronie o-centrum/og³oszenia o ogloszenia-single (razem z wyœwietlaniem wydarzeñ zaplanowanych 
+  do opublikowania dla zalogowanych u¿ytkowników (maj¹cych uprawnienia do edycji postów) - ogloszenia.php, medium768.css
+- ZMODYFIKOWANIE PODS OG£OSZENIA tak aby mo¿na by³o je wyœwietlaæ na wid¿ecie oraz dodanie automatycznej publikacji - 2015-05-18
+  - Dodanie do pods ogloszenia pola termin_opublikowania (Date / Time) - bêdzie to termin, kiedy og³oszenie bêdzie siê pojawiaæ na stronie
+    Przejmie te¿ funkcjê pola Data ostatniej aktualizacji (Wybrany termin_opublikowania bêdzie wyœwietlany - tylko data, bez godziny, przy og³oszeniu)
+  - Usuniêcie pola Data ostatniej aktualizacji
+  - Dodanie pola termin_widocznosci (Okreœla termin do którego og³oszenie ma byæ automatycznie wyœwietlane na wid¿ecie (str. g³ównej).<br>Jeœli nieustawione 
+    lub data wczeœniejsza ni¿ termin opublikowania - wówczas og³oszenie nie bêdzie w ogóle widoczne na wid¿ecie.)
+- dopasowanie stylów wyœwietlania wid¿etu bocznego facebook (ten pasek dla szerszych ni¿ 1140px ekranów jest po prawej
+  dla wê¿zych na dole) - medium767.css, desktop.css, sidebar.php - 2015-05-19
+- zmiana nazwy pola na wid¿ety facebook na pasek-boczny-glowny - sidebar.php, functions.php - 2015-05-19
+- pozbycie siê wpisu o wersji wordpressa <meta name="generator" content="WordPress 4.2.2" /> functions.php - 2015-05-19
+- zmiana czêœci adresu po którym rozpoznawana jest czêœæ strony (wydarzenia, edukacja, outw itd.) z $podstrona = pods_v(1,'url'); na $podstrona = pods_v(0,'url');
+  bo zmieni³ siê adres na kultura.olawa.pl (ma jeden poziom mniej) - sidebar.php - 2015-05-19
+- wprowadzenie automatycznego zmieniana, która czêœæ adresu jest brana jako podstrona do sidebar - sidebar.php - 2015-05-19 
+
+
+
+
+0.2.6
+-----
+- DODANIE SEKCJI OG£OSZEÑ - 2015-05-14
+  - szablon ogloszenia.php dla listy og³oszeñ
+  - szablon ogloszenia-single.php dla pojedynczego wydarzenia
+  *ZMIANY W PODS
+   - Duplikacja pods przetargi - zm. nazwy na ogloszenia
+   - Dodanie do pods ogloszenia pól: kategorie(text), krotki_opis(Plain Paragraph Text)
+  *ZMIANY WP
+   - Dodanie strony o centrum/og³oszenia o szablonie ogloszenia
+   - dodanie do menu g³ównego i o-centrum strony O Centrum/og³oszenia
+   - dodanie strony pods ogloszenia/* o szablonie ogloszenia-single i przypisanej do pods ogloszenia
+- styl dla tabeli na podstronie o-centrum/wynajem-sal-i-uslugi-plakatowania/ (na podstawie article#post-372) - medium768.php - 2015-05-14
+- dodano kolor standardowy dla wydarzeñ bez lokalizacji - medium768.php - 2015-05-18
+- zmiana stylu dla treœci wydarzenia-single - column-9 zamiast column-9-scalable [article class="wydarzenie-single column-9"]
+  dziêki temu w wersji 768px treœæ wydarzenia zajmuje ca³¹ szerokoœæ - wydarzenia-single.php - 2015-05-18
+- drobne poprawki w kontakt - kontakt.php - 2015-05-18
+
+
+0.2.5
+-----
+- modyfikacja paska górnego paska wyboru kategorii wydarzeñ (i edukacji) dla przegl¹darek z wp_is_mobile() 
+  W wersji mobilnej paski nie s¹ sticky.
+  [Jeœli jest to przegl¹darka mobilna to do klas elementu body dodawana jest klasa 'is_mobile'] - wydarzenia.php, edukacja.php medium768.css
+  Pasek kategorii i pasek górny nie jest sticky jeœli przegl¹darka wp_is_mobile()
+  [Skrypt dodawania klasy sticky jest wczytywany w header.php tylko jeœli !wp_is_mobile()] - header.php - 2015-05-12
+- Pozbycie siê hovera - rozwijanych podmenu w menu g³ównym dla wersji mobilnej (na podstawie body.is_mobile) - medium768.css - 2015-05-13
+
+
+
+0.2.4
+-----
+- dodanie stylu medium768 - medium768.css, desktop.css, header.php, wydarzenia.php, wydarzenia-single.php, page.php, outw_aktualnosci.php
+  przetargi.php, edukacja.php, edukacja-single.php - 2015-05-07
+- dodanie obs³ugi stron kategorii wydarzeñ (i edukacji), kiedy nie znaleziono niczego - wydarzenia.php, edukacja.php - 2015-05-07
+- dodanie koloru hovera odnoœników w treœci - medium768.css - 2015-05-07
+- dodanie automatycznego dopisku w wydarzenia-single jeœli jest sprzeda¿ to dopisywane jest "Bilety dostêpne w kasie (i online)
+  albo inny komunikat o biletach - wydarzenia-single.php - 2015-05-07
+- naprawa szerokoœci pasków górnych i stopki dla mniejszych rozdzielczoœci - nawigacji g³ównej i wyboru kategorii - medium768.css, desktop.css
+- DODANIE MO¯LIWOŒCI ABY ODNOŒNIK "KUP BILET" PROWADZI£ OGÓLNIE DO REPERTUARU W SPRZ. ONLINE ZAMIAST DO POSZCZEGÓLNEGO WYDARZENIA 
+  - wydarzenia.php, wydarzenia-single.php
+  *ZMIANY W PODS: Dodanie do pods Wydarzenia pola Bool kup_bilet_uniwersalny (def: Nie) - 2015-05-11
+- wyrzucony sidebar z szablonu adresy - adresy.php - 2015-05-12
+- dodanie skalowania do szerokoœci strony dla obrazków wklejanych w edytorze w wielkoœci size-full - medium768.css, functions.php - 2015-05-12
+
+
+
+0.2.3
+-----
+* przeniesienie stylów do desktop.css (krok w ty³) - tymczasowe odpuszczenie responsywnoœci - header.php, desktop.css - 2015-04-28
+- poprawione wyœwietlanie paska bocznego wydarzenia-single gdy nie wybrano ¿adnej lokalizacji (jest t³o)
+  i w takim przypadku nie jest dodawana czêœæ paska "lokalizacja" - wydarzenia-single.php, desktop.css - 2015-04-28
+- poprawki wygl¹du tekstu - np. p, h1, h2 itd. - desktop.css - 2015-05-04
+- poprawka w szablonie adresy - adresy.php - 2015-05-04
+- poprawki w wyœwietlaniu title - header.php - 2015-05-04
+- naprawione "uciekanie" listy wydarzeñ na prawo "wypychanej" przez pasek kategorii (poprzez dodanie clear:both dla div#main-wrap)
+  wydarzenia.php, desktop.css - 2015-05-05
+- dodane wczytywanie wid¿etu facebook dla stron wydarzenia i edukacja - sidebar.php - 2015-05-05
+- styl obrazków na podstronie o-centrum/wspolpraca (article#post-357 img) - desktop.css - 2015-05-05 
+
+0.2.2
+-----
+
+- drobne poprawki w title strony (dzia³a dobrze dla stron i podstron wydarzenia, edukacja, dla pozosta³ych tak¿e) - header.php - 2015-04-16
+- poprawione "opadniête" menu boczne w aktualnoœciaæ OUTW - page.php, przetargi.php, outw_aktualnosci - 2015-04-20
+- poprawiony brak domkniêcia > w wid¿etach w <li - functions.php - 2015-04-20
+- poprawione zaznaczanie aktywnej sekcji w menu g³ównym, gdy wybrana jest strona na drugim stopniu zagnie¿d¿enia 
+(jednoczeœnie bez pokazywania tego poziomu w menu g³ównym) - desktop.css - 2015-04-20
+- ostylowanie menu bocznych dla outw i o centrum - desktop.css - 2015-04-20
+- poprawienie (powiêkszenie) stylów h1 dla stron poza list¹ wydarzeñ i list¹ edukacji - desktop.css - 2015-04-27
+- ostylowanie listy wpisów OUTW aktualnoœci i przetargi - desktop.css, outw_aktualnosci.php, przetargi.php - 2015-04-27
+- naprawione dzia³anie klikniêcia w etykiety kategorii w Edukacja - functions.php  - 2015-04-27
+- dodany padding dolny do stopki, ¿eby nie urywa³a siê zaraz po treœci - desktop.css - 2015-04-28
+- dodane zaznaczenie wybranej kategorii w menu kategorii wydarzeñ i edukacji - desktop.css - 2015-04-28
+
+NIEZBÊDNE ZMIANY W WID¯ETACH:
+- dodanie nazw wid¿etów o centrum i outw
+- usuniêcie najwy¿szego poziomu menu outw i przesuniêcie ni¿ej najwy¿szego w menu o-centrum [WPROWADZONE]
+- dodanie drugiego poziomu podmenu w menu g³ównym - O Centrum: Wspó³praca i Dokumenty Centrum Sztuki [WPROWADZONE]
+  (¿eby dobrze dzia³a³o zaznaczanie aktywnej sekcji strony w menu g³ównym [WPROWADZONE]
+
+STANDARDOWE KOLORY DLA WYDARZEÑ (Definiowane w Pods - Adresy) oprócz koloru standardowego definiowanego w ustawieniach pods Adresy 
+i koloru wyœwietlanego, gdy nie wybrano lokalizacji - definiowanego w szablonie [w medium768.css div.termin, div.termin-single]
+- #86cb3d- zielony(Domyœlny dla adresów oraz standardowy, gdy nie wybrano lokalizacji)
+- #009ee2 - b³êkitny (Oœrodek Kultury)
+- #dd3333 - czerwony(OWE)
+
+------
+/*Podstawowy pomarañczowy - FF9933 = rgba(255, 153, 51, 1)*/
+/*Ciemniejszy pomarañczowy - EE4724*/
+/*Ciemnoszary kolor nag³ówka - #333333;*/
+/*Jaœniejszy szary - kolor t³a podmenu g³ównego - #666;*/
