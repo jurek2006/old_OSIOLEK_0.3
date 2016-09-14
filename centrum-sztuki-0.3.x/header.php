@@ -4,6 +4,7 @@
 	<meta charset="<?php bloginfo('charset'); ?>" />
     <title>
     <?php  
+    	$dopisek='';
 		//Tytuł - ustawiany na podstawie tego, co jest otwarte, tutaj dodawany jest początek do tytułu
 		if (96 == $post->post_parent) {
 		//jeśli jest to dowolna podstrona wydarzeń (a właściwie kategorii wydarzeń)
