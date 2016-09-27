@@ -95,11 +95,11 @@ if (wp_is_mobile() ) {
 
 <!-- BANNER - początek -->
 
-<!-- USUN_KOMENTARZ <div id="banner-wrap">
-	<a href="http://www.kultura.olawa.pl/wydarzenia/letnie-party/">
-	<?php //USUN_KOMENTARZ echo '<img src="'.get_stylesheet_directory_uri().'/letnieparty2016.gif" />'; ?>
+<div id="banner-wrap">
+	<a href="http://www.forumwokolkina.kultura.olawa.pl">
+	<?php echo '<img src="'.get_stylesheet_directory_uri().'/img/banner-fwk-kultura.jpg" />'; ?>
 	</a>
-</div> -->
+</div> 
 
 <!-- BANNER - koniec -->
 
