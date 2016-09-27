@@ -1676,13 +1676,28 @@ span.pods-pagination-advanced a{
 
 div#banner-wrap{
 	width: 100%;
-	background-color: #ffee00;
+	background-color: #fff;
 }
 
-div#banner-wrap img{
+div#banner-wrap a{
 	margin-left: auto;
 	margin-right: auto;
 	display: block;
+
+	/*Banner w wersji 0.3.5.1 42.FWK*/
+	height: 100px;
+	width: 1140px;
+	background: url(banner-fwk-kultura.jpg) no-repeat;
+	display:block;
+	overflow:hidden;
+}
+
+div#banner-wrap a img{
+	display: none;
+}
+
+div#banner-wrap a:hover{
+	background: url(banner-fwk-kultura.jpg) no-repeat 0 -100px;
 }
 
 /*-------------------------------------------------------------------------------------------------------------------------------*/
