@@ -33,7 +33,7 @@ get_header(); ?>
                 ?>
         <br />
 
-			<iframe src="http://www.systembiletowy.pl/cso/" width="1140" height="1550" style="margin-left:0px"> <a href="http://www.systembiletowy.pl/cso/" title="System biletowy">System biletowy</a> </iframe>
+			<iframe src="<?php echo ADRES_VISUALTICKET ?>" width="1140" height="1550" style="margin-left:0px"> <a href="<?php echo ADRES_VISUALTICKET ?>" title="System biletowy">System biletowy</a> </iframe>
 		</section><!-- #content-container -->
 	</div><!-- #main-container -->       
 </div><!--#main-wrap - koniec-->

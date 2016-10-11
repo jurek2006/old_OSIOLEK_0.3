@@ -261,7 +261,7 @@ get_header(); ?>
 											   if($id_w_sprzedazy_online > 0){
 												   //jeśli podano konkretny ID w sprzedaży
 											   		echo '<h2>Bilety: '.$cena.'</h2>';
-													echo '<a class="kup-bilet" href="http://www.systembiletowy.pl/cso/index.php/repertoire.html?id='.$id_w_sprzedazy_online.'">Kup bilety</a>';
+													echo '<a class="kup-bilet" href="'.ADRES_VISUALTICKET.'index.php/repertoire.html?id='.$id_w_sprzedazy_online.'">Kup bilety</a>';
 											   }
 											   else{
 												   //jeśli nie podano konkretnego ID w sprzedaży - link do całego repertuaru w sprzedaży

@@ -237,7 +237,7 @@ get_header(); ?>
 														   //jeśli minął już termin publikacji odnośnika lub nie wybrano dnia publikacji (równoznaczne
 														   //z opublikowaniem
 														   if($id_w_sprzedazy_online > 0){
-														   		echo "<p><a class=\"aktywny-przycisk\" href=\"http://www.systembiletowy.pl/cso/index.php/repertoire.html?id=$id_w_sprzedazy_online\">Kup bilety</a> <strong>$godzina</strong> [$czy2d3d";
+														   		echo "<p><a class=\"aktywny-przycisk\" href=\"".ADRES_VISUALTICKET."index.php/repertoire.html?id=$id_w_sprzedazy_online\">Kup bilety</a> <strong>$godzina</strong> [$czy2d3d";
 																if(!empty($wersja_jezykowa)){
 																	echo "/$wersja_jezykowa";
 																}

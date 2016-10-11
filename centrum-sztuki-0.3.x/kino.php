@@ -208,7 +208,7 @@ get_header(); ?>
 														   //jeśli minął już termin publikacji odnośnika lub nie wybrano dnia publikacji (równoznaczne
 														   //z opublikowaniem
 														   if($id_w_sprzedazy_online > 0){
-														   		echo '<span class="kup-bilet"><a href="http://www.systembiletowy.pl/cso/index.php/repertoire.html?id='.$id_w_sprzedazy_online.'">Kup bilety</a></span>';
+														   		echo '<span class="kup-bilet"><a href="'.ADRES_VISUALTICKET.'index.php/repertoire.html?id='.$id_w_sprzedazy_online.'">Kup bilety</a></span>';
 														   }
 														   else{
 															   echo '<span class="kup-bilet"><a href="'.home_url().'/bilety-online/">Kup bilety</a></span>';

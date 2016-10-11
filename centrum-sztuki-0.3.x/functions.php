@@ -6,7 +6,9 @@
 	//np. serwer ma czas 8:30 a jest rzeczywiście 10:30 więc stała ma wartość "+2 hour"
 	//(stała używana jest w funkcji pobierzDateTeraz() wywoływanej przy każdym pobieraniu aktualnego czasu
 	define("PRZESUNIECIE_CZASU", "+1 hour");
-	
+
+	// ADRES SYSTEMU BILETOWEGO VISUALTICKET DLA CSO
+	define("ADRES_VISUALTICKET", "http://s7.systembiletowy.pl/cso/");
 	
 	//koniec SETTINGS
 
