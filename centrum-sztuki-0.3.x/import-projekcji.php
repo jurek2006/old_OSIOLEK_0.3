@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /*
 Template Name: Kino - Import projekcji
 Description: Obsługuje stronę importowania projekcji z systemu biletowego.

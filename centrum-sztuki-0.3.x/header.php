@@ -1,4 +1,4 @@
-﻿<!DOCTYPE HTML>
+<!DOCTYPE HTML>
 <html <?php language_attributes(); ?>>
 <head>
 	<meta charset="<?php bloginfo('charset'); ?>" />
@@ -95,11 +95,11 @@ if (wp_is_mobile() ) {
 
 <!-- BANNER - początek -->
 
-<div id="banner-wrap">
+<!-- <div id="banner-wrap">
 	<a href="http://www.forumwokolkina.kultura.olawa.pl" target="_blank">
-	<?php echo '<img src="'.get_stylesheet_directory_uri().'/img/banner-fwk-kultura.jpg" />'; ?>
+	<?php //USUNĄĆ KOMMMENT echo '<img src="'.get_stylesheet_directory_uri().'/img/banner-fwk-kultura.jpg" />'; ?>
 	</a>
-</div> 
+</div>  -->
 
 <!-- BANNER - koniec -->
 
@@ -140,5 +140,3 @@ if (wp_is_mobile() ) {
 <!--DIVY przeniesione do plików szablonowych jak index.php, wydarzenia.php, wydarzenia-single.php, adresy.php-->          
 <!--<div id="main-wrap">
 	<div id="main-container" class="clearfix">-->
-
-
