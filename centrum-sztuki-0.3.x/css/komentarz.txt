@@ -1,0 +1,1 @@
+Folder zawieraj¹cy style (generowane za pomoc¹ sass) do "nowej czêœci" strony, czyli jak na razie funkcjonalnoœci ekranu kasowego.
