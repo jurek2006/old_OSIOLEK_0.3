@@ -7,9 +7,25 @@ Description: Obsługuje podstronę do wyświetlania tabeli z repertuarem na ekra
 
 get_header("ekran"); ?>
 
-<h1>Test ekranu</h1>
-
 <?php
+
+// $dzisiaj to data dzisiejsza (Może być jednak modyfikowana poniżej, w celach testowych za pomocą pods ekran_kasa)
+// na jej podstawie generowany i wyświetlany jest repertuar na ekran
+$dzisiaj = date("Y-m-d");
+
+// Pobieranie danych z pods ustawień ekran_kasa
+$params = array( 'limit' => -1);
+$pods = pods( 'ekran_kasa', $params );
+if(!empty($pods)){
+	$dzisiaj_testowe = $pods->display('dzisiaj_testowe');
+	$dzien_wygenerowany = $pods->display('dzien_wygenerowany');
+
+	if(!empty($dzisiaj_testowe)){
+	// Jeśli ustawiono wartość pola pods dzisiaj_testowe to ekran traktuje dalej ustawioną tam datę jako dzisiejszą
+		$dzisiaj = $dzisiaj_testowe;
+	}	
+}//if ($pods->exists())
+
 
 function wyswietlajRepertuarDnia($dzien = NULL){
 	//Funkcja wyświetlająca repertuar kina danego dnia - WERSJA NA EKRAN DO KASY
@@ -78,6 +94,8 @@ function wyswietlajRepertuarDnia($dzien = NULL){
 	echo "<hr>";
 	
 }//wyswietlajRepertuarDnia
+
+echo '<h1>Repertuar '.$dzisiaj.'</h1>';
 
 //TESTOWE
 
