@@ -54,13 +54,11 @@ function wyswietlajRepertuarDnia($dzien = NULL){
 
 
 	// POBIERANIE WYDARZEŃ W SALI WIDOWISKOWEJ OWE DANEGO DNIA
-// 	$termin_poczatek = date("Y-m-d");
-// $params = array( 	'limit' => -1,
-// 			'where' => 'DATE( termin_projekcji.meta_value ) = "'.$termin_poczatek.'"');
-	// $termin_poczatek = date("Y-m-d");
+
+	// Pobieranie tylko wydarzeń danego dnia odbywających się w lokalizacji o slug'u "sala-widowiskowa-owe-odra"
 
 	$params = array( 	'limit' => -1,
-		'where'   => 'DATE(data_i_godzina_wydarzenia.meta_value) = "'.$dzien_szukany.'"',
+		'where'   => 'DATE(data_i_godzina_wydarzenia.meta_value) = "'.$dzien_szukany.'" AND lokalizacje.slug LIKE "%sala-widowiskowa-owe-odra%"',
 		'orderby'  => 'data_i_godzina_wydarzenia.meta_value');
 
 	$pods = pods( 'wydarzenia', $params );
@@ -73,7 +71,7 @@ function wyswietlajRepertuarDnia($dzien = NULL){
 			$lokalizacje = $pods->field('lokalizacje.slug');
 			$lokalizacje = $lokalizacje[0];
 
-			echo pobieczCzescDaty('G',$data_i_godzina_wydarzenia).':'.pobieczCzescDaty('i',$data_i_godzina_wydarzenia).' - '.$title.' - '.$lokalizacje.'</br>';
+			echo pobieczCzescDaty('G',$data_i_godzina_wydarzenia).':'.pobieczCzescDaty('i',$data_i_godzina_wydarzenia).' - '.$title.'</br>';
 		}//while ( $pods->fetch() )
 	}//if ( $pods->total() > 0 )
 
