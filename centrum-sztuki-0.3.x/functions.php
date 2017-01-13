@@ -237,6 +237,11 @@
 	}//simpleblog_load_scripts
 	
 	//---------------funkcje testowe - do usunięcia
+
+	function consoleLog($tresc){
+	// funkcja wyświetlająca $tresc w konsoli JS
+		echo '<script>console.log("'.$tresc.'")</script>';
+	}
 	
 	function returnZawartoscTabeli($tabela, $separator=', '){
 		//zwraca string - zawartośc kolejnych elementów tablicy, jeśli element jest tablicą wyświetla zamiast niego 'Array'
