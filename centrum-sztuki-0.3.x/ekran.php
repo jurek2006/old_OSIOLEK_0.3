@@ -9,13 +9,13 @@ get_header("ekran"); ?>
 
 <?php
 
-// $dzisiaj to data dzisiejsza (Może być jednak modyfikowana poniżej, w celach testowych za pomocą pods ekran_kasa)
+// $dzisiaj to data dzisiejsza (Może być jednak modyfikowana poniżej, w celach testowych za pomocą pods ekran_kasa_ustawienia)
 // na jej podstawie generowany i wyświetlany jest repertuar na ekran
 $dzisiaj = date("Y-m-d");
 
-// Pobieranie danych z pods ustawień ekran_kasa
+// Pobieranie danych z pods ustawień ekran_kasa_ustawienia
 $params = array( 'limit' => -1);
-$pods = pods( 'ekran_kasa', $params );
+$pods = pods( 'ekran_kasa_ustawienia', $params );
 if(!empty($pods)){
 	$dzisiaj_testowe = $pods->display('dzisiaj_testowe');
 	$dzien_wygenerowany = $pods->display('dzien_wygenerowany');
@@ -24,8 +24,29 @@ if(!empty($pods)){
 	// Jeśli ustawiono wartość pola pods dzisiaj_testowe to ekran traktuje dalej ustawioną tam datę jako dzisiejszą
 		$dzisiaj = $dzisiaj_testowe;
 	}	
-}//if ($pods->exists())
 
+	// Sprawdzenie, czy należy wygenerować nową zawartość ekranu
+	// Jeśli data $dzisiaj jest różna od $dzien_wygenerowany to generuje się nową zawartość i ustawia w pods jako dzien_wygenerowany datę $dzisiaj
+	if($dzien_wygenerowany != $dzisiaj){
+		consoleLog("generowanie dla daty ".$dzisiaj);
+
+		// zapisanie $dzisiaj jako wartości pola dzien_wygenerowany 
+		$pods->save( 'dzien_wygenerowany', $dzisiaj );
+	}
+	else{
+		consoleLog("Dzień ".$dzisiaj." już był generowany");
+	}
+
+}//if ($pods->exists())
+else{
+	echo "<b>Błąd pobierania ustawień ekran_kasa_ustawienia</b>";
+}
+
+// WYŚWIETLANIE EKRANU --------------------------------------------------------------------------------------------------------------------------------
+echo '<h1>Repertuar '.$dzisiaj.'</h1>';
+
+wyswietlajRepertuaryTestowo(NULL,30);
+// ----------------------------------------------------------------------------------------------------------------------------------------------------
 
 function wyswietlajRepertuarDnia($dzien = NULL){
 	//Funkcja wyświetlająca repertuar kina danego dnia - WERSJA NA EKRAN DO KASY
@@ -95,30 +116,30 @@ function wyswietlajRepertuarDnia($dzien = NULL){
 	
 }//wyswietlajRepertuarDnia
 
-echo '<h1>Repertuar '.$dzisiaj.'</h1>';
+
 
 //TESTOWE
 
-	function wyswietlajRepertuaryTestowo($dzien_poczatku = NULL, $iloscDni = 0){
-	//funkcja testowo wyświetlająca repertuar na zadaną ilośc dni
-	//tak żeby można było sprawdzać działanie funkcji wyswietlajRepertuarDnia
+function wyswietlajRepertuaryTestowo($dzien_poczatku = NULL, $iloscDni = 0){
+//funkcja testowo wyświetlająca repertuar na zadaną ilośc dni
+//tak żeby można było sprawdzać działanie funkcji wyswietlajRepertuarDnia
 
-		if(is_null($dzien_poczatku) || !walidujDate($dzien_poczatku)){
-		//Jeśli parametr $dzien_poczatku jest NULL lub nie zawiera prawidłowej daty w formacie "Y-m-d" czyli YYYY-MM-DD
-		//to przypisywana jest mu data dzisiejsza
-		//korzysta z funkcji walidujDatę z functions.php
-			$dzien_poczatku = date("Y-m-d");
-		}
-		
-		for($i=0; $i<=$iloscDni; $i++){
-			$datetime = new DateTime($dzien_poczatku);
-			$datetime->modify('+'.$i.' day');
-			$dzien_szukany = $datetime->format('Y-m-d');
-			wyswietlajRepertuarDnia($dzien_szukany);
-		}
-	}//wyswietlajRepertuaryTestowo
+	if(is_null($dzien_poczatku) || !walidujDate($dzien_poczatku)){
+	//Jeśli parametr $dzien_poczatku jest NULL lub nie zawiera prawidłowej daty w formacie "Y-m-d" czyli YYYY-MM-DD
+	//to przypisywana jest mu data dzisiejsza
+	//korzysta z funkcji walidujDatę z functions.php
+		$dzien_poczatku = date("Y-m-d");
+	}
+	
+	for($i=0; $i<=$iloscDni; $i++){
+		$datetime = new DateTime($dzien_poczatku);
+		$datetime->modify('+'.$i.' day');
+		$dzien_szukany = $datetime->format('Y-m-d');
+		wyswietlajRepertuarDnia($dzien_szukany);
+	}
+}//wyswietlajRepertuaryTestowo
 
-wyswietlajRepertuaryTestowo(NULL,30);
+
 
 ///TESTOWE
 
