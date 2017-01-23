@@ -1,5 +1,8 @@
 <?php
-
+	// TESTOWE
+	// tryb testowy - jeśli ustawiony na true wyświetlane są dodatkowe komunikaty (używane za pomocą funkcji testoweConsoleLog)
+	define("TRYB_TESTOWY", true);
+	
 	//SETTINGS
 	
 	//PRZESUNIECIE_CZASU określa różnicę pomiędzy czasem serwera a czasem rzeczywistym
@@ -241,6 +244,13 @@
 	function consoleLog($tresc){
 	// funkcja wyświetlająca $tresc w konsoli JS
 		echo '<script>console.log("'.$tresc.'")</script>';
+	}
+
+	function testoweConsoleLog($tresc){
+	// funkcja wyświetla $tresc w konsoli JS ale TYLKO GDY W FUNCTIONS WŁĄCZONY JEST TRYB TESTOWY
+		if(TRYB_TESTOWY){
+			consoleLog($tresc);
+		}
 	}
 	
 	function returnZawartoscTabeli($tabela, $separator=', '){

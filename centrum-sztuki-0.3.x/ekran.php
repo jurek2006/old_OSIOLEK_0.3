@@ -30,8 +30,12 @@ if(!empty($pods)){
 	if($dzien_wygenerowany != $dzisiaj){
 		consoleLog("generowanie dla daty ".$dzisiaj);
 
+		// wygenerowanie nowej zawartości ekranu
+		generujDzien($dzisiaj);
+
 		// zapisanie $dzisiaj jako wartości pola dzien_wygenerowany 
 		$pods->save( 'dzien_wygenerowany', $dzisiaj );
+
 	}
 	else{
 		consoleLog("Dzień ".$dzisiaj." już był generowany");
@@ -47,6 +51,73 @@ echo '<h1>Repertuar '.$dzisiaj.'</h1>';
 
 wyswietlajRepertuaryTestowo(NULL,30);
 // ----------------------------------------------------------------------------------------------------------------------------------------------------
+
+function generujDzien($dzien = NULL){
+// Funkcja generująca wpisy repertuaru na ekran w kasie (czyli do pods ekran_kasa) na zadany dzień 
+// Standardowo jest to dzień dzisiejszy (w przypadku gdy nie podano $dzien tak jest generowane)	
+
+	if(is_null($dzien) || !walidujDate($dzien)){
+	//Jeśli parametr $dzien jest NULL lub nie zawiera prawidłowej daty w formacie "Y-m-d" czyli YYYY-MM-DD
+	//to przypisywana jest mu data dzisiejsza
+	//korzysta z funkcji walidujDatę z functions.php
+		$dzien = date("Y-m-d");
+	}
+
+	$datetime = new DateTime($dzien);
+	$dzien_szukany = $datetime->format('Y-m-d');
+
+	// Na początku funkcja pobiera projekcje danego dnia i wydarzenia z sali widowiskowej danego dnia i dodaje je do tablicy ekran_kasa
+
+	// POBIERANIE PROJEKCJI FILMOWYCH DANEGO DNIA
+						
+	$params = array( 	'limit' => -1,
+						'where' => 'DATE( termin_projekcji.meta_value ) = "'.$dzien_szukany.'"',
+						'orderby'  => 'termin_projekcji.meta_value');
+	
+
+	$pods = pods( 'projekcje', $params );
+	//loop through records
+	if ( $pods->total() > 0 ) {
+
+		while ( $pods->fetch() ) {
+
+			$tytul_filmu =  $pods->display('film');
+			$termin_projekcji = $pods->field('termin_projekcji' );
+			$q2d3d = $pods->field('2d3d');
+			$projekcja_wersja_jezykowa = $pods->display('wersja_jezykowa');
+
+			testoweConsoleLog('Pobieranie projekcji '.pobieczCzescDaty('G',$termin_projekcji).':'.pobieczCzescDaty('i',$termin_projekcji).' - '.$tytul_filmu);
+			$ekran_kasa[] = array('godzina' => pobieczCzescDaty('G',$termin_projekcji).':'.pobieczCzescDaty('i',$termin_projekcji), 'nazwa_wydarzenia' => $tytul_filmu);
+
+	    }//while ( $pods->fetch() )
+
+	}//if ( $pods->total() > 0 )
+
+
+	// POBIERANIE WYDARZEŃ W SALI WIDOWISKOWEJ OWE DANEGO DNIA
+
+	// Pobieranie tylko wydarzeń danego dnia odbywających się w lokalizacji o slug'u "sala-widowiskowa-owe-odra"
+
+	$params = array( 	'limit' => -1,
+		'where'   => 'DATE(data_i_godzina_wydarzenia.meta_value) = "'.$dzien_szukany.'" AND lokalizacje.slug LIKE "%sala-widowiskowa-owe-odra%"',
+		'orderby'  => 'data_i_godzina_wydarzenia.meta_value');
+
+	$pods = pods( 'wydarzenia', $params );
+	if ( $pods->total() > 0 ) {
+		//jeśli znaleziono wydarzenia spełniające określone kryteria - następuje wyświetlenie ich listy
+	    while ( $pods->fetch() ) {
+	        //Put field values into variables
+	        $title = $pods->display('name');
+			$data_i_godzina_wydarzenia = $pods->display('data_i_godzina_wydarzenia');
+			$lokalizacje = $pods->field('lokalizacje.slug');
+			$lokalizacje = $lokalizacje[0];
+
+			testoweConsoleLog('Pobieranie wydarzenia '.pobieczCzescDaty('G',$data_i_godzina_wydarzenia).':'.pobieczCzescDaty('i',$data_i_godzina_wydarzenia).' - '.$title);
+			$ekran_kasa[] = array('godzina' => pobieczCzescDaty('G',$data_i_godzina_wydarzenia).':'.pobieczCzescDaty('i',$data_i_godzina_wydarzenia), 'nazwa_wydarzenia' => $title);
+		}//while ( $pods->fetch() )
+	}//if ( $pods->total() > 0 )
+
+}//generujDzien
 
 function wyswietlajRepertuarDnia($dzien = NULL){
 	//Funkcja wyświetlająca repertuar kina danego dnia - WERSJA NA EKRAN DO KASY
