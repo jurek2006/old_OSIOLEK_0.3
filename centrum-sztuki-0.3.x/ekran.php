@@ -152,7 +152,7 @@ function generujDzien($dzien = NULL){
 	}
 
 	// DODAWANIE ELEMENTÓW Z TABLICY $ekran_kasa do pods ekran_kasa (bez żadnego sortowania w tej chwili) - to będę projekcje/wydarzenia do wyświetlenia na ekran
-	if(count(ekran_kasa)>0){
+	if(isset($ekran_kasa) && count($ekran_kasa)>0){
 	// jeśli jest cokolwiek znalezione na szukany dzień, to każda ze znalezionych projekcji/wydarzeń jest dodawana do pods ekran_kasa
 		foreach ($ekran_kasa as $element_ekran_kasa) {
 		    $new_id = pods('ekran_kasa')->add($element_ekran_kasa);
