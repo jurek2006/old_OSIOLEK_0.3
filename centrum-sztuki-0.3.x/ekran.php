@@ -50,7 +50,7 @@ else{
 // WYŚWIETLANIE EKRANU --------------------------------------------------------------------------------------------------------------------------------
 echo '<h1>Repertuar '.$dzisiaj.'</h1>';
 
-wyswietlajRepertuaryTestowo(NULL,30);
+wyswietlajRepertuaryConsole(NULL,30); //TESTOWE
 // ----------------------------------------------------------------------------------------------------------------------------------------------------
 
 function generujDzien($dzien = NULL){
@@ -103,7 +103,6 @@ function generujDzien($dzien = NULL){
             }
 
 			// Wypełnienie tablicy ekran_kasa projekcjami pobranymi dla danego dnia
-			testoweConsoleLog('Pobieranie projekcji '.pobieczCzescDaty('G',$termin_projekcji).':'.pobieczCzescDaty('i',$termin_projekcji).' - '.$tytul_filmu);
 			$ekran_kasa[] = array(	'title' => pobieczCzescDaty('G',$termin_projekcji).':'.pobieczCzescDaty('i',$termin_projekcji).' - '.$tytul_filmu,
 									'godzina' => pobieczCzescDaty('G',$termin_projekcji).':'.pobieczCzescDaty('i',$termin_projekcji), 
 									'nazwa_wydarzenia' => $tytul_filmu);
@@ -140,9 +139,6 @@ function generujDzien($dzien = NULL){
 		}//while ( $pods->fetch() )
 	}//if ( $pods->total() > 0 )
 
-
-	// print_r($ekran_kasa); //TESTOWE
-
 	// USUNIĘCIE wszystkich wygenerowanych wcześniej wpisów w pods ekran_kasa
 	$params = array( 'limit' => -1);
 	
@@ -163,96 +159,104 @@ function generujDzien($dzien = NULL){
 
 }//generujDzien
 
-function wyswietlajRepertuarDnia($dzien = NULL){
-	//Funkcja wyświetlająca repertuar kina danego dnia - WERSJA NA EKRAN DO KASY
+
+// TESTOWE
+
+function wyswietlajRepertuarDniaConsole($dzien = NULL){
+	//Funkcja wyświetlająca testowo repertuar kina danego dnia - WERSJA PRÓBNA - pobierająca "na żywo" z projekcji i wydarzeń
+	// DZIAŁA TYLKO JEŚLI W FUNCTIONS JEST WŁĄCZONY TRYB TESTOWY
 	//Jeśli $dzien zdefiniowany, to wyświetla dla tego dnia, a nie dzisiaj 
 
+	if(TRYB_TESTOWY){
+
 	
-	if(is_null($dzien) || !walidujDate($dzien)){
-	//Jeśli parametr $dzien jest NULL lub nie zawiera prawidłowej daty w formacie "Y-m-d" czyli YYYY-MM-DD
-	//to przypisywana jest mu data dzisiejsza
-	//korzysta z funkcji walidujDatę z functions.php
-		$dzien = date("Y-m-d");
-	}
+		if(is_null($dzien) || !walidujDate($dzien)){
+		//Jeśli parametr $dzien jest NULL lub nie zawiera prawidłowej daty w formacie "Y-m-d" czyli YYYY-MM-DD
+		//to przypisywana jest mu data dzisiejsza
+		//korzysta z funkcji walidujDatę z functions.php
+			$dzien = date("Y-m-d");
+		}
 
-	$datetime = new DateTime($dzien);
-	$dzien_szukany = $datetime->format('Y-m-d');
+		$datetime = new DateTime($dzien);
+		$dzien_szukany = $datetime->format('Y-m-d');
 
-	echo '<h2>Repertuar na dzień '.$dzien.'</h2>';
+		testoweConsoleLog('<h2>Repertuar na dzień '.$dzien.'</h2>');
 
-	// POBIERANIE PROJEKCJI FILMOWYCH DANEGO DNIA
-						
-	$params = array( 	'limit' => -1,
-						'where' => 'DATE( termin_projekcji.meta_value ) = "'.$dzien_szukany.'"',
-						'orderby'  => 'termin_projekcji.meta_value');
+		// POBIERANIE PROJEKCJI FILMOWYCH DANEGO DNIA
+							
+		$params = array( 	'limit' => -1,
+							'where' => 'DATE( termin_projekcji.meta_value ) = "'.$dzien_szukany.'"',
+							'orderby'  => 'termin_projekcji.meta_value');
+		
+
+		$pods = pods( 'projekcje', $params );
+		//loop through records
+		if ( $pods->total() > 0 ) {
+
+			while ( $pods->fetch() ) {
+
+				$tytul_filmu =  $pods->display('film');
+				$termin_projekcji = $pods->field('termin_projekcji' );
+				$q2d3d = $pods->field('2d3d');
+				$projekcja_wersja_jezykowa = $pods->display('wersja_jezykowa');
+
+				testoweConsoleLog(pobieczCzescDaty('G',$termin_projekcji).':'.pobieczCzescDaty('i',$termin_projekcji).' - '.$tytul_filmu);
+
+		    }//while ( $pods->fetch() )
+
+		}//if ( $pods->total() > 0 )
+
+
+		// POBIERANIE WYDARZEŃ W SALI WIDOWISKOWEJ OWE DANEGO DNIA
+
+		// Pobieranie tylko wydarzeń danego dnia odbywających się w lokalizacji o slug'u "sala-widowiskowa-owe-odra"
+
+		$params = array( 	'limit' => -1,
+			'where'   => 'DATE(data_i_godzina_wydarzenia.meta_value) = "'.$dzien_szukany.'" AND lokalizacje.slug LIKE "%sala-widowiskowa-owe-odra%"',
+			'orderby'  => 'data_i_godzina_wydarzenia.meta_value');
+
+		$pods = pods( 'wydarzenia', $params );
+		if ( $pods->total() > 0 ) {
+			//jeśli znaleziono wydarzenia spełniające określone kryteria - następuje wyświetlenie ich listy
+		    while ( $pods->fetch() ) {
+		        //Put field values into variables
+		        $title = $pods->display('name');
+				$data_i_godzina_wydarzenia = $pods->display('data_i_godzina_wydarzenia');
+				$lokalizacje = $pods->field('lokalizacje.slug');
+				$lokalizacje = $lokalizacje[0];
+
+				testoweConsoleLog(pobieczCzescDaty('G',$data_i_godzina_wydarzenia).':'.pobieczCzescDaty('i',$data_i_godzina_wydarzenia).' - '.$title);
+			}//while ( $pods->fetch() )
+		}//if ( $pods->total() > 0 )
+	}//if(TRYB_TESTOWY)
 	
-
-	$pods = pods( 'projekcje', $params );
-	//loop through records
-	if ( $pods->total() > 0 ) {
-
-		while ( $pods->fetch() ) {
-
-			$tytul_filmu =  $pods->display('film');
-			$termin_projekcji = $pods->field('termin_projekcji' );
-			$q2d3d = $pods->field('2d3d');
-			$projekcja_wersja_jezykowa = $pods->display('wersja_jezykowa');
-
-			echo pobieczCzescDaty('G',$termin_projekcji).':'.pobieczCzescDaty('i',$termin_projekcji).' - '.$tytul_filmu.'</br>';
-
-	    }//while ( $pods->fetch() )
-
-	}//if ( $pods->total() > 0 )
-
-
-	// POBIERANIE WYDARZEŃ W SALI WIDOWISKOWEJ OWE DANEGO DNIA
-
-	// Pobieranie tylko wydarzeń danego dnia odbywających się w lokalizacji o slug'u "sala-widowiskowa-owe-odra"
-
-	$params = array( 	'limit' => -1,
-		'where'   => 'DATE(data_i_godzina_wydarzenia.meta_value) = "'.$dzien_szukany.'" AND lokalizacje.slug LIKE "%sala-widowiskowa-owe-odra%"',
-		'orderby'  => 'data_i_godzina_wydarzenia.meta_value');
-
-	$pods = pods( 'wydarzenia', $params );
-	if ( $pods->total() > 0 ) {
-		//jeśli znaleziono wydarzenia spełniające określone kryteria - następuje wyświetlenie ich listy
-	    while ( $pods->fetch() ) {
-	        //Put field values into variables
-	        $title = $pods->display('name');
-			$data_i_godzina_wydarzenia = $pods->display('data_i_godzina_wydarzenia');
-			$lokalizacje = $pods->field('lokalizacje.slug');
-			$lokalizacje = $lokalizacje[0];
-
-			echo pobieczCzescDaty('G',$data_i_godzina_wydarzenia).':'.pobieczCzescDaty('i',$data_i_godzina_wydarzenia).' - '.$title.'</br>';
-		}//while ( $pods->fetch() )
-	}//if ( $pods->total() > 0 )
-
-	echo "<hr>";
-	
-}//wyswietlajRepertuarDnia
+}//wyswietlajRepertuarDniaConsole
 
 
 
 //TESTOWE
 
-function wyswietlajRepertuaryTestowo($dzien_poczatku = NULL, $iloscDni = 0){
+function wyswietlajRepertuaryConsole($dzien_poczatku = NULL, $iloscDni = 0){
+// DZIAŁA TYLKO JEŚLI W FUNCTIONS JEST WŁĄCZONY TRYB TESTOWY
 //funkcja testowo wyświetlająca repertuar na zadaną ilośc dni
 //tak żeby można było sprawdzać działanie funkcji wyswietlajRepertuarDnia
+	if(TRYB_TESTOWY){
 
-	if(is_null($dzien_poczatku) || !walidujDate($dzien_poczatku)){
-	//Jeśli parametr $dzien_poczatku jest NULL lub nie zawiera prawidłowej daty w formacie "Y-m-d" czyli YYYY-MM-DD
-	//to przypisywana jest mu data dzisiejsza
-	//korzysta z funkcji walidujDatę z functions.php
-		$dzien_poczatku = date("Y-m-d");
-	}
-	
-	for($i=0; $i<=$iloscDni; $i++){
-		$datetime = new DateTime($dzien_poczatku);
-		$datetime->modify('+'.$i.' day');
-		$dzien_szukany = $datetime->format('Y-m-d');
-		wyswietlajRepertuarDnia($dzien_szukany);
-	}
-}//wyswietlajRepertuaryTestowo
+		if(is_null($dzien_poczatku) || !walidujDate($dzien_poczatku)){
+		//Jeśli parametr $dzien_poczatku jest NULL lub nie zawiera prawidłowej daty w formacie "Y-m-d" czyli YYYY-MM-DD
+		//to przypisywana jest mu data dzisiejsza
+		//korzysta z funkcji walidujDatę z functions.php
+			$dzien_poczatku = date("Y-m-d");
+		}
+		
+		for($i=0; $i<=$iloscDni; $i++){
+			$datetime = new DateTime($dzien_poczatku);
+			$datetime->modify('+'.$i.' day');
+			$dzien_szukany = $datetime->format('Y-m-d');
+			wyswietlajRepertuarDniaConsole($dzien_szukany);
+		}
+	}//if(TRYB_TESTOWY)
+}//wyswietlajRepertuaryConsole
 
 
 
