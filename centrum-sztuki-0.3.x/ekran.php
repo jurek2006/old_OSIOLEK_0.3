@@ -42,15 +42,15 @@ if(!empty($pods)){
 		consoleLog("Dzień ".$dzisiaj." już był generowany");
 	}
 
-}//if ($pods->exists())
+}//if(!empty($pods))
 else{
 	echo "<b>Błąd pobierania ustawień ekran_kasa_ustawienia</b>";
 }
 
 // WYŚWIETLANIE EKRANU --------------------------------------------------------------------------------------------------------------------------------
-echo '<h1>Repertuar '.$dzisiaj.'</h1>';
 
 wyswietlajRepertuaryConsole(NULL,30); //TESTOWE
+wyswietlajRepertuarDnia();
 // ----------------------------------------------------------------------------------------------------------------------------------------------------
 
 function generujDzien($dzien = NULL){
@@ -152,13 +152,63 @@ function generujDzien($dzien = NULL){
 	}
 
 	// DODAWANIE ELEMENTÓW Z TABLICY $ekran_kasa do pods ekran_kasa (bez żadnego sortowania w tej chwili) - to będę projekcje/wydarzenia do wyświetlenia na ekran
-	foreach ($ekran_kasa as $element_ekran_kasa) {
-	    $new_id = pods('ekran_kasa')->add($element_ekran_kasa);
+	if(count(ekran_kasa)>0){
+	// jeśli jest cokolwiek znalezione na szukany dzień, to każda ze znalezionych projekcji/wydarzeń jest dodawana do pods ekran_kasa
+		foreach ($ekran_kasa as $element_ekran_kasa) {
+		    $new_id = pods('ekran_kasa')->add($element_ekran_kasa);
+		}
 	}
 
 
 }//generujDzien
 
+function wyswietlajRepertuarDnia(){
+// Funkcja wyświetlająca repertuar na ekran w kasie - na podstawie wygenerowanej zawartości danego dnia 
+
+	// Pobieranie z pods ustawień ekran_kasa_ustawienia dnia dla którego jest wygenerowana zawartośc ekranu
+	$params = array( 'limit' => -1);
+	$pods = pods( 'ekran_kasa_ustawienia', $params );
+	if(!empty($pods)){
+		$dzien_wygenerowany = $pods->display('dzien_wygenerowany');
+
+		if(empty($dzien_wygenerowany)){
+		// Jeśli nie ma wartości dnia wygenerowanego - nastąpił jakiś błąd
+			echo "<b>Błąd pobierania wartośco ustawień dnia wygenerowanego z ekran_kasa_ustawienia</b>";
+		}
+
+
+	}//if(!empty($pods))
+	else{
+		echo "<b>Błąd pobierania ustawień ekran_kasa_ustawienia</b>";
+	}
+
+
+	echo '<h1>Repertuar '.$dzien_wygenerowany.'</h1>';
+
+	// POBIERANIE WPISÓW WYGENEROWANYCH NA EKRAN (z pods ekran_kasa)
+							
+	$params = array( 	'limit' => -1,
+						'orderby'  => 'godzina.meta_value');
+	
+	$pods = pods( 'ekran_kasa', $params );
+
+	if ( $pods->total() > 0 ) {
+
+		while ( $pods->fetch() ) {
+
+			$nazwa_wydarzenia =  $pods->display('nazwa_wydarzenia');
+			$godzina = $pods->display('godzina' );
+
+			echo $godzina." - ".$nazwa_wydarzenia."<br>";
+
+	    }//while ( $pods->fetch() )
+
+	}//if ( $pods->total() > 0 )
+	else{
+		echo "Brak wydarzeń";
+	}
+
+}//wyswietlajRepertuarDnia
 
 // TESTOWE
 
