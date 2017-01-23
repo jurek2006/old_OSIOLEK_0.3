@@ -7,6 +7,7 @@ Description: Obsługuje podstronę do wyświetlania tabeli z repertuarem na ekra
 
 get_header("ekran"); ?>
 
+
 <?php
 
 // $dzisiaj to data dzisiejsza (Może być jednak modyfikowana poniżej, w celach testowych za pomocą pods ekran_kasa_ustawienia)
@@ -34,7 +35,7 @@ if(!empty($pods)){
 		generujDzien($dzisiaj);
 
 		// zapisanie $dzisiaj jako wartości pola dzien_wygenerowany 
-		$pods->save( 'dzien_wygenerowany', $dzisiaj );
+		$pods->save( 'dzien_wygenerowany', $dzisiaj ); 
 
 	}
 	else{
@@ -67,6 +68,7 @@ function generujDzien($dzien = NULL){
 	$dzien_szukany = $datetime->format('Y-m-d');
 
 	// Na początku funkcja pobiera projekcje danego dnia i wydarzenia z sali widowiskowej danego dnia i dodaje je do tablicy ekran_kasa
+	// Można by pominąć zapisywanie do tablicy i od razu dodawać do pods ekran_kasa, ale jeśli później będę chciał dodać np. sortowanie to taka tablica może się przydać
 
 	// POBIERANIE PROJEKCJI FILMOWYCH DANEGO DNIA
 						
@@ -85,9 +87,26 @@ function generujDzien($dzien = NULL){
 			$termin_projekcji = $pods->field('termin_projekcji' );
 			$q2d3d = $pods->field('2d3d');
 			$projekcja_wersja_jezykowa = $pods->display('wersja_jezykowa');
+			$standardowa_wersja_jezykowa = $pods->display('film.standardowa_wersja_jezykowa');
 
+
+			// Dodawanie "dodatków" związanych z wersją (3d, język) do tytułu filmu
+			if($q2d3d){ $tytul_filmu.=' 3D';	} //jeśli projekcja jest 3d (czyli TRUE) dodaje taki dopisek do tytułu
+            if(!empty($projekcja_wersja_jezykowa)){ 
+            //jeśli wybrano wersję językową dla projekcji to jest ona wyświetlana w tytule
+                $tytul_filmu.= " /$projekcja_wersja_jezykowa"; 
+            }
+            else if(!empty($standardowa_wersja_jezykowa)){
+                //jeśli wybrano wersję językową dla filmu (i nie jest ona nadpisana przez wersję projekcji
+                //to jest ona wyświetlana w tytule
+                $tytul_filmu.= " /$standardowa_wersja_jezykowa"; 
+            }
+
+			// Wypełnienie tablicy ekran_kasa projekcjami pobranymi dla danego dnia
 			testoweConsoleLog('Pobieranie projekcji '.pobieczCzescDaty('G',$termin_projekcji).':'.pobieczCzescDaty('i',$termin_projekcji).' - '.$tytul_filmu);
-			$ekran_kasa[] = array('godzina' => pobieczCzescDaty('G',$termin_projekcji).':'.pobieczCzescDaty('i',$termin_projekcji), 'nazwa_wydarzenia' => $tytul_filmu);
+			$ekran_kasa[] = array(	'title' => pobieczCzescDaty('G',$termin_projekcji).':'.pobieczCzescDaty('i',$termin_projekcji).' - '.$tytul_filmu,
+									'godzina' => pobieczCzescDaty('G',$termin_projekcji).':'.pobieczCzescDaty('i',$termin_projekcji), 
+									'nazwa_wydarzenia' => $tytul_filmu);
 
 	    }//while ( $pods->fetch() )
 
@@ -112,10 +131,35 @@ function generujDzien($dzien = NULL){
 			$lokalizacje = $pods->field('lokalizacje.slug');
 			$lokalizacje = $lokalizacje[0];
 
+			// Wypełnienie tablicy ekran_kasa wydarzeniami pobranymi dla danego dnia
 			testoweConsoleLog('Pobieranie wydarzenia '.pobieczCzescDaty('G',$data_i_godzina_wydarzenia).':'.pobieczCzescDaty('i',$data_i_godzina_wydarzenia).' - '.$title);
-			$ekran_kasa[] = array('godzina' => pobieczCzescDaty('G',$data_i_godzina_wydarzenia).':'.pobieczCzescDaty('i',$data_i_godzina_wydarzenia), 'nazwa_wydarzenia' => $title);
+			$ekran_kasa[] = array(	'title' => pobieczCzescDaty('G',$data_i_godzina_wydarzenia).':'.pobieczCzescDaty('i',$data_i_godzina_wydarzenia).' - '.$title,
+									'godzina' => pobieczCzescDaty('G',$data_i_godzina_wydarzenia).':'.pobieczCzescDaty('i',$data_i_godzina_wydarzenia), 
+									'nazwa_wydarzenia' => $title
+									);
 		}//while ( $pods->fetch() )
 	}//if ( $pods->total() > 0 )
+
+
+	// print_r($ekran_kasa); //TESTOWE
+
+	// USUNIĘCIE wszystkich wygenerowanych wcześniej wpisów w pods ekran_kasa
+	$params = array( 'limit' => -1);
+	
+	$pods = pods( 'ekran_kasa', $params );
+	//loop through records
+	if ( $pods->total() > 0 ) {
+
+		while ( $pods->fetch() ) {
+			$pods->delete(); 
+		}
+	}
+
+	// DODAWANIE ELEMENTÓW Z TABLICY $ekran_kasa do pods ekran_kasa (bez żadnego sortowania w tej chwili) - to będę projekcje/wydarzenia do wyświetlenia na ekran
+	foreach ($ekran_kasa as $element_ekran_kasa) {
+	    $new_id = pods('ekran_kasa')->add($element_ekran_kasa);
+	}
+
 
 }//generujDzien
 
@@ -211,8 +255,6 @@ function wyswietlajRepertuaryTestowo($dzien_poczatku = NULL, $iloscDni = 0){
 }//wyswietlajRepertuaryTestowo
 
 
-
-///TESTOWE
 
 ?>
 

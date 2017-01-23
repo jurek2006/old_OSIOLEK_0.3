@@ -1,2 +1,3 @@
 1. Dodanie podstrony Ekran o szablonie ekran (strona będzie wyświetlana na telewizorze w kasie).
 2. Dodanie pods - settings ekran_kasa_ustawienia (jak w laboratorium)
+3. Dodanie pods - ekran_kasa (jak w laboratorium)
