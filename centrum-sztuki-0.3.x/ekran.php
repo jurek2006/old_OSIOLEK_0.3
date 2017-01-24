@@ -56,6 +56,7 @@ wyswietlajRepertuarDnia();
 function generujDzien($dzien = NULL){
 // Funkcja generująca wpisy repertuaru na ekran w kasie (czyli do pods ekran_kasa) na zadany dzień 
 // Standardowo jest to dzień dzisiejszy (w przypadku gdy nie podano $dzien tak jest generowane)	
+// Pomijane są wydarzenia, które mają wybrane TRUE dla pola 'wylacz_z_ekran_kasa'
 
 	if(is_null($dzien) || !walidujDate($dzien)){
 	//Jeśli parametr $dzien jest NULL lub nie zawiera prawidłowej daty w formacie "Y-m-d" czyli YYYY-MM-DD
@@ -115,9 +116,10 @@ function generujDzien($dzien = NULL){
 	// POBIERANIE WYDARZEŃ W SALI WIDOWISKOWEJ OWE DANEGO DNIA
 
 	// Pobieranie tylko wydarzeń danego dnia odbywających się w lokalizacji o slug'u "sala-widowiskowa-owe-odra"
+	// I tylko wydarzeń, które nie mają zaznaczonego (czylu TRUE pola 'wylacz_z_ekran_kasa')
 
 	$params = array( 	'limit' => -1,
-		'where'   => 'DATE(data_i_godzina_wydarzenia.meta_value) = "'.$dzien_szukany.'" AND lokalizacje.slug LIKE "%sala-widowiskowa-owe-odra%"',
+		'where'   => 'DATE(data_i_godzina_wydarzenia.meta_value) = "'.$dzien_szukany.'" AND lokalizacje.slug LIKE "%sala-widowiskowa-owe-odra%" AND wylacz_z_ekran_kasa.meta_value = FALSE',
 		'orderby'  => 'data_i_godzina_wydarzenia.meta_value');
 
 	$pods = pods( 'wydarzenia', $params );
