@@ -49,7 +49,7 @@ else{
 
 // WYŚWIETLANIE EKRANU --------------------------------------------------------------------------------------------------------------------------------
 
-wyswietlajRepertuaryConsole(NULL,30); //TESTOWE
+wyswietlajRepertuaryConsole('2017-01-15',30); //TESTOWE
 wyswietlajRepertuarDnia();
 // ----------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -151,10 +151,20 @@ function generujDzien($dzien = NULL){
 		}
 	}
 
-	// DODAWANIE ELEMENTÓW Z TABLICY $ekran_kasa do pods ekran_kasa (bez żadnego sortowania w tej chwili) - to będę projekcje/wydarzenia do wyświetlenia na ekran
+	// DODAWANIE ELEMENTÓW Z TABLICY $ekran_kasa do pods ekran_kasa - to będę projekcje/wydarzenia do wyświetlenia na ekran
+
 	if(isset($ekran_kasa) && count($ekran_kasa)>0){
-	// jeśli jest cokolwiek znalezione na szukany dzień, to każda ze znalezionych projekcji/wydarzeń jest dodawana do pods ekran_kasa
+
+		// Przesortowanie tablicy $ekran_kasa względem godziny
+		usort($ekran_kasa, function($a, $b) {
+		    return $a['godzina'] <=> $b['godzina'];
+		});
+
+		// jeśli jest cokolwiek znalezione na szukany dzień, to każda ze znalezionych projekcji/wydarzeń jest dodawana do pods ekran_kasa
+		// Do każdego elementu dodawany jest licznik używany później przy sortowaniu wyświetlania
+		$licznik = 1;
 		foreach ($ekran_kasa as $element_ekran_kasa) {
+			$element_ekran_kasa['kolejnosc'] = $licznik++;
 		    $new_id = pods('ekran_kasa')->add($element_ekran_kasa);
 		}
 	}
@@ -164,6 +174,7 @@ function generujDzien($dzien = NULL){
 
 function wyswietlajRepertuarDnia(){
 // Funkcja wyświetlająca repertuar na ekran w kasie - na podstawie wygenerowanej zawartości danego dnia 
+// Sortowanie wyswtetlania wydarzeń odbywa się na podstawie wartości pola kolejnosc
 
 	// Pobieranie z pods ustawień ekran_kasa_ustawienia dnia dla którego jest wygenerowana zawartośc ekranu
 	$params = array( 'limit' => -1);
@@ -186,22 +197,33 @@ function wyswietlajRepertuarDnia(){
 	echo '<h1>Repertuar '.$dzien_wygenerowany.'</h1>';
 
 	// POBIERANIE WPISÓW WYGENEROWANYCH NA EKRAN (z pods ekran_kasa)
+	// Sortowanie odbywa się na podstawie wartośc pola kolejnosc!!!
 							
 	$params = array( 	'limit' => -1,
-						'orderby'  => 'godzina.meta_value');
+						'orderby'  => 'kolejnosc.meta_value');
 	
 	$pods = pods( 'ekran_kasa', $params );
 
 	if ( $pods->total() > 0 ) {
+
+		?>
+		<table>
+		<?php
 
 		while ( $pods->fetch() ) {
 
 			$nazwa_wydarzenia =  $pods->display('nazwa_wydarzenia');
 			$godzina = $pods->display('godzina' );
 
-			echo $godzina." - ".$nazwa_wydarzenia."<br>";
+			?>
+			<tr><td><?php echo $godzina?></td><td><?php echo $nazwa_wydarzenia?></td></tr>
+			<?php
 
 	    }//while ( $pods->fetch() )
+
+	    ?>
+		</table>
+		<?php
 
 	}//if ( $pods->total() > 0 )
 	else{
