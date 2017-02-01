@@ -197,6 +197,10 @@ function wyswietlajRepertuarDnia(){
 	?>
 		<p class="naglowekDnia"><?php echo zamienDzienTygodniaLiczbowyNaSlowny(pobieczCzescDaty('w',$dzien_wygenerowany)).', '.zamienDateNaTekst($dzien_wygenerowany, $bez_roku=FALSE);  ?></p>
 		<table><!-- początek tabeli repertuaru -->
+		<colgroup>
+		    <col class="godziny" />
+		    <col/>
+		</colgroup>
 		<!-- <tr><td colspan="2"></td></tr> --> 
 	<?php
 
@@ -217,7 +221,7 @@ function wyswietlajRepertuarDnia(){
 			$godzina = $pods->display('godzina' );
 
 			?>
-			<tr><td><?php echo $godzina?></td><td><?php echo $nazwa_wydarzenia?></td></tr>
+			<tr><td><?php echo $godzina.'&nbsp'?></td><td><?php echo $nazwa_wydarzenia?></td></tr>
 			<?php
 
 	    }//while ( $pods->fetch() )
