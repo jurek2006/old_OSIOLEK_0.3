@@ -1,6 +1,33 @@
-/* line 4, ../../sass/ekran.scss */
+/* Styl do szablonu wyswietlania repertuaru na ekran repertuaru w kasie*/
+/* line 8, ../../sass/ekran.scss */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* line 11, ../../sass/ekran.scss */
 body {
-  background-color: #222;
+  background-color: #000;
   color: #FFF;
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
+  font-weight: bold;
+}
+
+/* line 19, ../../sass/ekran.scss */
+table {
+  margin: 1%;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 500%;
+  line-height: 130%;
+}
+
+/* line 31, ../../sass/ekran.scss */
+p {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  border-bottom: 1px solid gray;
   font-size: 400%;
+  color: #EE4724;
 }

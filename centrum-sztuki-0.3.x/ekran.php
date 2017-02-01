@@ -7,7 +7,6 @@ Description: Obsługuje podstronę do wyświetlania tabeli z repertuarem na ekra
 
 get_header("ekran"); ?>
 
-
 <?php
 
 // $dzisiaj to data dzisiejsza (Może być jednak modyfikowana poniżej, w celach testowych za pomocą pods ekran_kasa_ustawienia)
@@ -195,8 +194,11 @@ function wyswietlajRepertuarDnia(){
 		echo "<b>Błąd pobierania ustawień ekran_kasa_ustawienia</b>";
 	}
 
-
-	echo '<h1>Repertuar '.$dzien_wygenerowany.'</h1>';
+	?>
+		<p class="naglowekDnia"><?php echo zamienDzienTygodniaLiczbowyNaSlowny(pobieczCzescDaty('w',$dzien_wygenerowany)).', '.zamienDateNaTekst($dzien_wygenerowany, $bez_roku=FALSE);  ?></p>
+		<table><!-- początek tabeli repertuaru -->
+		<!-- <tr><td colspan="2"></td></tr> --> 
+	<?php
 
 	// POBIERANIE WPISÓW WYGENEROWANYCH NA EKRAN (z pods ekran_kasa)
 	// Sortowanie odbywa się na podstawie wartośc pola kolejnosc!!!
@@ -208,9 +210,6 @@ function wyswietlajRepertuarDnia(){
 
 	if ( $pods->total() > 0 ) {
 
-		?>
-		<table>
-		<?php
 
 		while ( $pods->fetch() ) {
 
@@ -223,14 +222,18 @@ function wyswietlajRepertuarDnia(){
 
 	    }//while ( $pods->fetch() )
 
-	    ?>
-		</table>
-		<?php
+	    
 
 	}//if ( $pods->total() > 0 )
 	else{
-		echo "Brak wydarzeń";
+		?>
+		<tr><td colspan="2"><h1>Brak wydarzeń</td></tr>
+		<?php
 	}
+
+	?>
+		</table><!-- koniec tabeli repertuaru -->
+	<?php
 
 }//wyswietlajRepertuarDnia
 
