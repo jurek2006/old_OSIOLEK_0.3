@@ -1,5 +1,5 @@
 1. Dodanie podstrony Ekran o szablonie 'ekran' (strona będzie wyświetlana na telewizorze w kasie).
-2. Dodanie pods - settings 'ekran_kasa_ustawienia' (jak w laboratorium)
-3. Dodanie pods - 'ekran_kasa' (jak w laboratorium)
-4. Dodanie pola w pods 'wydarzenia' - dodanie pola 'wylacz_z_ekran_kasa' (to pole będzie używane do niewyświetlania na ekranie repertuaru w kasie, jeśli wydarzenie jest dublem projekcji)
-5. UWAGA! - po zmianie w 4. trzeba wszystkie aktualne wydarzenia w sali widowiskowej OWE otworzyć i zapisać ponownie, żeby miały ustawioną wartośc tego pola
+2. Dodanie pods - settings 'ekran_kasa_ustawienia' (jak w laboratorium) DODANE
+3. Dodanie pods - 'ekran_kasa' (jak w laboratorium) DODANE
+4. Dodanie pola w pods 'wydarzenia' - dodanie pola 'wylacz_z_ekran_kasa' (to pole będzie używane do niewyświetlania na ekranie repertuaru w kasie, jeśli wydarzenie jest dublem projekcji) DODANE
+5. UWAGA! - po zmianie w 4. trzeba wszystkie aktualne wydarzenia w sali widowiskowej OWE otworzyć i zapisać ponownie, żeby miały ustawioną wartośc tego pola ZROBIONE

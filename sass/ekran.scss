@@ -2,8 +2,10 @@
 
 $tlo: #000;
 $tekst: #FFF;
-$font-size-tabeli: 500%;
+$kolor-naglowka: #EE4724;
+$font-size-tabeli: 650%;
 $font-size-naglowka: 400%;
+$font-size-dopisku: 300%;
 
 *{margin: 0;
 padding: 0;}
@@ -13,6 +15,10 @@ body{
 	color: $tekst;
 	font-family: "Trebuchet MS", Helvetica, sans-serif;
 	font-weight: bold;
+}
+
+.naglowekDnia{
+	margin-top: 0.2em;
 }
 
 // Główna tabela wyświetlająca repertuar na ekran
@@ -30,7 +36,14 @@ p{
 	margin: 0;
 	padding: 0;
 	text-align: center;
-	border-bottom: 1px solid darken($tekst, 50%);
-	font-size: $font-size-naglowka;
-	color: #EE4724;
+	&.naglowekDnia{
+		border-bottom: 1px solid darken($tekst, 50%);
+		font-size: $font-size-naglowka;
+		color: $kolor-naglowka;
+	}
+
+	&.dopisek{
+		font-size: $font-size-dopisku;
+		color: darken($tekst, 20%);
+	}
 }

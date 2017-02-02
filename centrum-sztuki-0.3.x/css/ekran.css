@@ -1,11 +1,11 @@
 /* Styl do szablonu wyswietlania repertuaru na ekran repertuaru w kasie*/
-/* line 8, ../../sass/ekran.scss */
+/* line 10, ../../sass/ekran.scss */
 * {
   margin: 0;
   padding: 0;
 }
 
-/* line 11, ../../sass/ekran.scss */
+/* line 13, ../../sass/ekran.scss */
 body {
   background-color: #000;
   color: #FFF;
@@ -13,21 +13,34 @@ body {
   font-weight: bold;
 }
 
-/* line 19, ../../sass/ekran.scss */
+/* line 20, ../../sass/ekran.scss */
+.naglowekDnia {
+  margin-top: 0.2em;
+}
+
+/* line 25, ../../sass/ekran.scss */
 table {
   margin: 1%;
   margin-left: auto;
   margin-right: auto;
-  font-size: 500%;
+  font-size: 650%;
   line-height: 130%;
 }
 
-/* line 28, ../../sass/ekran.scss */
+/* line 34, ../../sass/ekran.scss */
 p {
   margin: 0;
   padding: 0;
   text-align: center;
+}
+/* line 39, ../../sass/ekran.scss */
+p.naglowekDnia {
   border-bottom: 1px solid gray;
   font-size: 400%;
   color: #EE4724;
+}
+/* line 45, ../../sass/ekran.scss */
+p.dopisek {
+  font-size: 300%;
+  color: #cccccc;
 }

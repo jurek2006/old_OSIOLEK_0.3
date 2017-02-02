@@ -221,7 +221,7 @@ function wyswietlajRepertuarDnia(){
 			$godzina = $pods->display('godzina' );
 
 			?>
-			<tr><td><?php echo $godzina.'&nbsp'?></td><td><?php echo $nazwa_wydarzenia?></td></tr>
+			<tr><td><?php echo $godzina.'&nbsp'?></td><td><?php echo strip_tags($nazwa_wydarzenia)?></td></tr>
 			<?php
 
 	    }//while ( $pods->fetch() )
@@ -237,7 +237,19 @@ function wyswietlajRepertuarDnia(){
 
 	?>
 		</table><!-- koniec tabeli repertuaru -->
+		
 	<?php
+		// POBIERANIE I WYŚWIETLANIE DOPISKU POD TABELĄ z pods
+		$params = array( 'limit' => -1);
+		$pods = pods( 'ekran_kasa_ustawienia', $params );
+		if(!empty($pods)){
+			$dopisek = $pods->display('dopisek');
+				if(!empty($dopisek)){
+				// Jeśli jest wpisana jakaś zawartość w dopisek, to jest on wyświetlany pod tabelą repertuaru
+					echo '<p class="dopisek">'.strip_tags($dopisek).'</p>';
+				}
+			
+		}//if(!empty($pods))
 
 }//wyswietlajRepertuarDnia
 
