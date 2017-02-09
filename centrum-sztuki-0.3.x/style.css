@@ -1,14 +1,16 @@
 @charset "utf-8";
 /*
-Theme Name: Centrum Sztuki 0.3.x
+Theme Name: Centrum Sztuki 0.3.6
 Author: Jurek Skowron
 Author URI: http://jurekskowron.pl
-Version: 0.3.x
+Version: 0.3.6
 
 
-Description: Motyw dla strony Centrum Sztuki kultura.olawa.pl na wordpressie. Wersja 0.3 rozwojowa. Z podstawową obsługą ekranu repertuaru w kasie. 
+Description: Motyw dla strony Centrum Sztuki kultura.olawa.pl na wordpressie. Wersja 0.3.6. Z podstawową obsługą ekranu repertuaru w kasie, mechanizmami antyspamowymi dla adresów email oraz linkowaniem https do VT
 
 Zmiany w wersji 0.3.x (rozwojowa)
+
+Zmiany w wersji 0.3.6:
 - POdstawowa obsługa ekranu repertuaru w kasie (wymaga odpowiednich zmian w pods i strukturze WP)
 - antyspamowa ochrona adresów email - należy je teraz podawać w formie <span class="mail">sekretariat(małpka)kultura.olawa.pl</span> - za pomocą skryptu jest to 
 zmienione na działający odnośnik mailto
