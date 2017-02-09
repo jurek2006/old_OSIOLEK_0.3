@@ -11,7 +11,7 @@
 	define("PRZESUNIECIE_CZASU", "+1 hour");
 
 	// ADRES SYSTEMU BILETOWEGO VISUALTICKET DLA CSO
-	define("ADRES_VISUALTICKET", "http://s7.systembiletowy.pl/cso/");
+	define("ADRES_VISUALTICKET", "https://s7.systembiletowy.pl/cso/");
 	
 	//koniec SETTINGS
 
