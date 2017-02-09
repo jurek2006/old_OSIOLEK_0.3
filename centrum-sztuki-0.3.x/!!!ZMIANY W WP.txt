@@ -1,4 +1,4 @@
-1. Dodanie podstrony Ekran o szablonie 'ekran' (strona będzie wyświetlana na telewizorze w kasie).
+1. Dodanie podstrony Ekran o szablonie 'ekran' (strona będzie wyświetlana na telewizorze w kasie). ZROBIONE
 2. Dodanie pods - settings 'ekran_kasa_ustawienia' (jak w laboratorium) DODANE
 3. Dodanie pods - 'ekran_kasa' (jak w laboratorium) DODANE
 4. Dodanie pola w pods 'wydarzenia' - dodanie pola 'wylacz_z_ekran_kasa' (to pole będzie używane do niewyświetlania na ekranie repertuaru w kasie, jeśli wydarzenie jest dublem projekcji) DODANE
