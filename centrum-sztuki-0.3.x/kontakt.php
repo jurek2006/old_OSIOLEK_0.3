@@ -17,7 +17,7 @@ get_header(); ?>
                 <h1>Sekretariat</h1>
                 <p><strong>ul. Młyńska 3, 55 - 200 Oława<br />
 				tel. 71 735 15 75<br />fax. 71 735 19 58</strong></p>
-                <p><strong><a href="mailto:sekretariat@kultura.olawa.pl">sekretariat@kultura.olawa.pl</a></strong></p>
+                <p><strong><span class="mail">sekretariat(małpka)kultura.olawa.pl</span></strong></p>
             </div><!--//div.pasekKontakt pasekKontaktLewy-->
             
             <div class="pasekKontaktSrodkowy column-4 ">
@@ -31,9 +31,9 @@ get_header(); ?>
                 <h3>Sekretariat Centrum Sztuki w Oławie</h3>
                 <p><span class="mail">sekretariat(małpka)kultura.olawa.pl</span></p>
                 <h3>Sprzedaż biletów</h3>
-                <p><a href="mailto:bilety@kultura.olawa.pl">bilety@kultura.olawa.pl</a></p>
+                <p><span class="mail">bilety(małpka)kultura.olawa.pl</span></p>
                 <h3>Organizacja imprez (oferty artystyczne, koncertowe)</h3>
-                <p><a href="mailto:imprezy@kultura.olawa.pl">imprezy@kultura.olawa.pl</a></p>
+                <p><span class="mail">imprezy(małpka)kultura.olawa.pl</span></p>
             </div><!--//div.pasekKontakt pasekKontaktLewy-->
             
             <div class="pasekKontaktPrawy column-4">
@@ -45,12 +45,12 @@ get_header(); ?>
                 <h3>Zastępca dyrektora ds. technicznych</h3>
                 <p>Magdalena Szymkowiak</p>
                 <h3>Wynajem sal i usługi plakatowania</h3>
-                <p><a href="mailto:ep@kultura.olawa.pl">ep@kultura.olawa.pl</a></p>
+                <p><span class="mail">ep(małpka)kultura.olawa.pl</span></p>
                 <h3>Edukacja (kursy i sekcje)</h3>
-                <p><a href="mailto:kursy@kultura.olawa.pl">kursy@kultura.olawa.pl</a></p>
+                <p><span class="mail">kursy(małpka)kultura.olawa.pl</span></p>
                 <h3>Oławski Uniwersytet Trzeciego Wieku</h3>
                 <p>tel. 605 472 065</p>
-                <p><a href="mailto:outw@kultura.olawa.pl">outw@kultura.olawa.pl</a></p>
+                <p><span class="mail">outw(małpka)kultura.olawa.pl</span></p>
             </div><!--//div.pasekKontakt pasekKontaktLewy-->
 
 		</section><!-- #content-container -->
