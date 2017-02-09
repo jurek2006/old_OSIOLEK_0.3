@@ -99,6 +99,11 @@ body{
 		background-color: #FF9933;
 	}
 
+	/*Link do strony antyspamowej*/
+	a.antyspam{
+		color: #CCC !important;
+	}
+
 	/*----- LISTA WYDARZEŃ -----*/
 	article.wydarzenie h1 a{
 		text-decoration:none;
@@ -416,6 +421,7 @@ table.tabela_kursow td{
 		width: 768px; /*RESPONSIVE*/
 		margin-left:auto;
 		margin-right:auto;
+		text-align: center;
 	}
 	
 		

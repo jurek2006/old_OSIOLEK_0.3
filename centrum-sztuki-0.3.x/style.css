@@ -12,6 +12,7 @@ Zmiany w wersji 0.3.x (rozwojowa)
 - POdstawowa obsługa ekranu repertuaru w kasie (wymaga odpowiednich zmian w pods i strukturze WP)
 - antyspamowa ochrona adresów email - należy je teraz podawać w formie <span class="mail">sekretariat(małpka)kultura.olawa.pl</span> - za pomocą skryptu jest to 
 zmienione na działający odnośnik mailto
+- dodany w stopce link do antyspamowej strony generującej fałszywe maile dla robotów
 
 Zmiany w wersji 0.3.5.3
 - Wersja ta (nie jest motywem potomnym) NIE ZAWIERA bannera 42.FWK (jest zakomentarzowany)

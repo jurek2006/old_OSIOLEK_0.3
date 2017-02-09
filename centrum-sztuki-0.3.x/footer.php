@@ -30,6 +30,7 @@
     
                 </div>
             </div><!--#kontakt-->
+            <a class="antyspam" href="http://nie-spamuj.eu/email.php">Antyspam</a>
         </footer>
     </div><!--#footer-wrap-->
     
