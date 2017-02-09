@@ -65,6 +65,7 @@
 	//dołączenie skryptu visualticket_import.js jeśli uzytkownik ma uprawnienia na poziomie
 	//wystarczającym do wyświetlenia strony Import projekcji i jeśli jest na tej stronie
 	//a więc szablon aktualnej strony to 
+	// dołączanie pliku ze skryptami (np. ze skryptem antyspamowym dla adresów email) - dla dowolnej strony i 
 	function add_my_script() {
 		//spolszczenie datepicker z jQueryUI
 		//wp_register_script('datepicker_pl', get_stylesheet_directory_uri().'/visualticket_import/datepicker-pl.js', array( 'jquery' ));
@@ -75,6 +76,11 @@
 			//wp_enqueue_script('datepicker_pl');
 			wp_enqueue_script('visualticket_import');
 		}
+
+		// dołączanie skryptu ze skryptami (js/skrypty.js) zawierającego m.in. skryptu antyspamowe dla adresów email
+		wp_register_script('skrypty', get_stylesheet_directory_uri().'/js/skrypty.js', array( 'jquery' ));
+		wp_enqueue_script('skrypty');
+
 	}  
 	add_action( 'wp_enqueue_scripts', 'add_my_script' );
 

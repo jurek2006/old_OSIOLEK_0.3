@@ -1700,6 +1700,15 @@ div#banner-wrap a:hover{
 	background: url(banner-fwk-kultura.jpg) no-repeat 0 -100px;
 }
 
+/*-------------e-mail-antyspam-----------------*/
+
+p span.mail{
+/*w zastosowaniu antyspamowym standardowo maile wyświetlana są jako p span.mail - nadanie koloru i wielkości czcionki takiej jak odnośniki*/
+/*dopiero skrypt js zamienia je na prawdziwe odnośniki*/
+		color: #EE4724 !important;
+		font-size: 1em !important;
+	}
+
 /*-------------------------------------------------------------------------------------------------------------------------------*/
 
 	/*----- KOLUMNY -----*/

@@ -29,7 +29,7 @@ get_header(); ?>
                 <h3>Dyrektor Centrum Sztuki w Oławie</h3>
                 <p>Anna Ślipko</p>
                 <h3>Sekretariat Centrum Sztuki w Oławie</h3>
-                <p><a href="mailto:sekretariat@kultura.olawa.pl">sekretariat@kultura.olawa.pl</a></p>
+                <p><span class="mail">sekretariat(małpka)kultura.olawa.pl</span></p>
                 <h3>Sprzedaż biletów</h3>
                 <p><a href="mailto:bilety@kultura.olawa.pl">bilety@kultura.olawa.pl</a></p>
                 <h3>Organizacja imprez (oferty artystyczne, koncertowe)</h3>
