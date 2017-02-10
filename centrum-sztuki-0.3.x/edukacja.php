@@ -198,7 +198,7 @@ get_header(); ?>
 
 <p>Jest to oferta, jakiej jeszcze w Centrum Sztuki nie było, a która będzie rozwijana przez kolejne lata. Dzieła uczestników zajęć będą eksponowane regularnie w Galeriach Ośrodka Kultury.</p>
 
-<p>Zapraszamy do zapisów (telefonicznie 71 313 28 29, wew. 20 lub mailowo – kursy@kultura.olawa.pl) , które prowadzi Ośrodek Kultury przez cały miesiąc wrzesień.</p>
+<p>Zapraszamy do zapisów (telefonicznie 71 313 28 29, wew. 20 lub mailowo – <span class="mail">kursy(małpka)kultura.olawa.pl</span>) , które prowadzi Ośrodek Kultury przez cały miesiąc wrzesień.</p>
 
 <p>FOTOGRAFIA:
 Spotkanie organizacyjne: 22.09 o godz. 18:00 Ośrodek Kultury ul. 11 Listopada 27/sala wykładowa</p>
