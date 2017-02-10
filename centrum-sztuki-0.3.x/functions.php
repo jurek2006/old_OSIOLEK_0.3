@@ -1,32 +1,14 @@
 <?php
-	// TESTOWE
-	// tryb testowy - jeśli ustawiony na true wyświetlane są dodatkowe komunikaty (używane za pomocą funkcji testoweConsoleLog)
-	define("TRYB_TESTOWY", true);
 	
-	//SETTINGS
-	
-	//PRZESUNIECIE_CZASU określa różnicę pomiędzy czasem serwera a czasem rzeczywistym
-	//np. serwer ma czas 8:30 a jest rzeczywiście 10:30 więc stała ma wartość "+2 hour"
-	//(stała używana jest w funkcji pobierzDateTeraz() wywoływanej przy każdym pobieraniu aktualnego czasu
-	define("PRZESUNIECIE_CZASU", "+1 hour");
 
-	// ADRES SYSTEMU BILETOWEGO VISUALTICKET DLA CSO
-	define("ADRES_VISUALTICKET", "https://s7.systembiletowy.pl/cso/");
-	
-	//koniec SETTINGS
+	//PLIKI WŁĄCZANE
+	require get_template_directory(). '/inc/function-settings.php';		//PLIK USTAWIEŃ (razem z uprawieniami)!!!!!!!!
+	require get_template_directory(). '/inc/function-admin-ekran.php';  //plik funkcji potrzebnych do obsłigi ekranu repertuaru kasowego
+	// koniec PLIKI WŁĄCZANE
 
 	//-----------FUNKCJE DODANE W 0.3.3.2
 
 	//---------------------------------------------------------------------------------------------------------
-	//stała określa, jakie uprawnienia musi mieć użytkownik do strony importu projekcji
-	//(używane przy wyświetlaniu treści strony w szablonie ale także do dołączania skryptu .js)
-	define("UPR_IMPORT_PROJEKCJI", "publish_posts");
-	
-	//stała określająca uprawnienia potrzebne do dostępu do strony kino-zarządzanie (kino-zarzadzanie.php)
-	define("UPR_KINO_ZARZADZANIE", "publish_posts"); 
-	
-	//uprawnienia potrzebne do wyświetlania menu top-user-navigation zamiast top-navigation
-	define("UPR_MENU_USER", "publish_posts"); 
 
 
 	$tlumaczenieStatusuPostow = Array("publish" => "Opublikowane", "draft" => "Szkic", "pending" => "Oczekuje na przeglad", "future" => "Zaplanowana publikacja");
