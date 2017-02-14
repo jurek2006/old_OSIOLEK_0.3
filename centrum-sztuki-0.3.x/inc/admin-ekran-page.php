@@ -102,6 +102,17 @@
 
 	}//if ( $pods->total() > 0 )
 
+	// POBIERANIE DOPISKU POD WPISAMI [aktualnie na ceny biletów] (z pods ekran_kasa_ustawienia) - później także ustawień "stylów" na ekran
+	$params = array( 'limit' => -1);
+	$pods = pods( 'ekran_kasa_ustawienia', $params );
+	if(!empty($pods)){
+		$dopisek = $pods->display('dopisek');
+		printf('<tr><td colspan="2">');
+		printf('<input type="text" name="dopisek" id="dopisek" value="%s">',esc_attr($dopisek));
+		printf('</td></tr>');
+	}//if(!empty($pods))
+
+
 ?>
 </table><!-- koniec tabeli repertuaru -->
 

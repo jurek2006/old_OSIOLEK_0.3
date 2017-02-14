@@ -3,3 +3,5 @@
 3. Dodanie pods - 'ekran_kasa' (jak w laboratorium) DODANE
 4. Dodanie pola w pods 'wydarzenia' - dodanie pola 'wylacz_z_ekran_kasa' (to pole będzie używane do niewyświetlania na ekranie repertuaru w kasie, jeśli wydarzenie jest dublem projekcji) DODANE
 5. UWAGA! - po zmianie w 4. trzeba wszystkie aktualne wydarzenia w sali widowiskowej OWE otworzyć i zapisać ponownie, żeby miały ustawioną wartośc tego pola ZROBIONE
+------
+6. Dodanie pól w pods ekran_kasa_ustawienia

@@ -3,9 +3,9 @@
 $tlo: #000;
 $tekst: #FFF;
 $kolor-naglowka: #EE4724;
-$font-size-tabeli: 500%;
+// $font-size-tabeli: 500%; definiowane w pods ekran_kasa_ustawienia
 $font-size-naglowka: 400%;
-$font-size-dopisku: 300%;
+// $font-size-dopisku: 300%; definiowane w pods ekran_kasa_ustawienia
 
 *{margin: 0;
 padding: 0;}
@@ -26,7 +26,7 @@ table{
 	margin: 1%;
 	margin-left: auto;
 	margin-right: auto;
-	font-size: $font-size-tabeli;
+	// font-size: $font-size-tabeli; definiowane w pods ekran_kasa_ustawienia
 	line-height: 130%;
 
 }
@@ -38,12 +38,12 @@ p{
 	text-align: center;
 	&.naglowekDnia{
 		border-bottom: 1px solid darken($tekst, 50%);
-		font-size: $font-size-naglowka;
+		font-size: $font-size-naglowka; 
 		color: $kolor-naglowka;
 	}
 
 	&.dopisek{
-		font-size: $font-size-dopisku;
+		// font-size: $font-size-dopisku; definiowane w pods ekran_kasa_ustawienia
 		color: darken($tekst, 20%);
 	}
 }

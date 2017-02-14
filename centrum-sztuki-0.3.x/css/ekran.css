@@ -23,7 +23,6 @@ table {
   margin: 1%;
   margin-left: auto;
   margin-right: auto;
-  font-size: 500%;
   line-height: 130%;
 }
 
@@ -41,6 +40,5 @@ p.naglowekDnia {
 }
 /* line 45, ../../sass/ekran.scss */
 p.dopisek {
-  font-size: 300%;
   color: #cccccc;
 }

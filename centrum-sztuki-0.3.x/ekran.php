@@ -177,15 +177,29 @@ function wyswietlajRepertuarDnia(){
 // Funkcja wyświetlająca repertuar na ekran w kasie - na podstawie wygenerowanej zawartości danego dnia 
 // Sortowanie wyswtetlania wydarzeń odbywa się na podstawie wartości pola kolejnosc
 
-	// Pobieranie z pods ustawień ekran_kasa_ustawienia dnia dla którego jest wygenerowana zawartośc ekranu
+	// Pobieranie z pods ustawień ekran_kasa_ustawienia dnia dla którego jest wygenerowana zawartośc ekranu 
+	// oraz pobieranie zdefiniowanych w tym samym pods wielkości czcione
 	$params = array( 'limit' => -1);
 	$pods = pods( 'ekran_kasa_ustawienia', $params );
 	if(!empty($pods)){
 		$dzien_wygenerowany = $pods->display('dzien_wygenerowany');
+		$filmy_font_size = $pods->display('filmy_font_size');
+		$dopisek_font_size = $pods->display('dopisek_font_size');
 
 		if(empty($dzien_wygenerowany)){
 		// Jeśli nie ma wartości dnia wygenerowanego - nastąpił jakiś błąd
 			echo "<b>Błąd pobierania wartośco ustawień dnia wygenerowanego z ekran_kasa_ustawienia</b>";
+		}
+
+		if(!empty($filmy_font_size)){
+		// Jeśli w pods ekran_kasa_ustawienia zdefiniowano wielkość czcionki (a jest to pole *require) to dodawany jest odpowiedni styl
+		// Wielkość czcionki jest w procentach
+			echo '	<style type="text/css">
+						table{font-size: '.$filmy_font_size.'%;}
+						p.dopisek{font-size: '.$dopisek_font_size.'%;}
+					</style>'; 
+			echo 'Font size:'.$filmy_font_size;
+
 		}
 
 
