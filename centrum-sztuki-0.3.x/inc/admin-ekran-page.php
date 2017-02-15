@@ -107,9 +107,15 @@
 	$pods = pods( 'ekran_kasa_ustawienia', $params );
 	if(!empty($pods)){
 		$dopisek = $pods->display('dopisek');
+		$filmy_font_size = $pods->display('filmy_font_size');
 		printf('<tr><td colspan="2">');
 		printf('<input type="text" name="dopisek" id="dopisek" value="%s">',esc_attr($dopisek));
 		printf('</td></tr>');
+
+		printf('<tr><td colspan="2">');
+		printf('<input type="text" value="%s">',esc_attr($filmy_font_size));
+		
+
 	}//if(!empty($pods))
 
 
@@ -144,3 +150,7 @@ if(!empty($pods)){
 
 <!-- Podgląd ekranu o odpowiadającej rozdzielczości -->
 <iframe src="http://www.kulturaolawa.nazwa.pl/testy_laboratorium/ekran/" width="1280" height="646" style="margin-left:0px"> <p>Podgląd ekranu</p> </iframe>
+<div id="slider"></div>
+	jQuery( function() {
+		jQuery( "#slider" ).slider();
+	} );
