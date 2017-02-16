@@ -36,5 +36,5 @@
 	define("UPR_MENU_USER", "publish_posts"); 
 
 	// uprawnienia potrzebne do wyświetlania w dashboard menu zarządzania ekranem repertuaru w kasie
-	define("UPR_DSH_MENU_KASA_EKRAN", 'manage_options');
+	define("UPR_DSH_MENU_KASA_EKRAN", 'edit_ekran_kasa_biletowa');
 ?>
