@@ -63,10 +63,22 @@
 
 		}//class ZmienioneDane
 
-		// pobranie danych z formularza do zmiennej $zmienioneDaneDoPods
+		// ------ WPISY FILMÓW -------
+		// pobranie danych (tabeli wpisów filmów) z formularza do zmiennej $zmienioneDaneDoPods
 		$zmienioneDaneDoPods = new ZmienioneDaneDoPods('ekran_kasa',$_POST["godzina"],$_POST["nazwa_wydarzenia"],$_POST["id"]);
-		// zapisanie danych w pods
+		// zapisanie (tabeli wpisów filmów) danych w pods
 		$zmienioneDaneDoPods->saveAllElementsToPods();
+
+		// ----- USTAWIENIA - czyli dopisek i wielkości czcionki
+
+
+		$params = array( 'limit' => -1);
+		$pods = pods( 'ekran_kasa_ustawienia', $params );
+		if(!empty($pods)){
+			$pods->save( 'dopisek', $_POST["dopisek"] );
+			$pods->save( 'filmy_font_size', $_POST["filmy_font_size"] );
+			$pods->save( 'dopisek_font_size', $_POST["dopisek_font_size"] );
+		}//if(!empty($pods))
 
 	}//if(isset( $_POST["zapisz"]))
 
@@ -90,7 +102,7 @@
 			?>
 			<tr>
 				<!-- pole godziny: -->
-				<td><?php printf('<input type="text" name="godzina[]" id="godzina" value="%s">',esc_attr($godzina))?></td>
+				<td><?php printf('<input type="text" name="godzina[]" id="godzina" size="5" value="%s">',esc_attr($godzina))?></td>
 				<!-- pole nazwy wydarzenia  -->
 				<td><?php printf('<input type="text" name="nazwa_wydarzenia[]" id="nazwa_wydarzenia" value="%s">',esc_attr($nazwa_wydarzenia))?>
 				<!-- ukryte pole id (niezbędne do zidentyfikowania, które elementy pods należy zapisać) -->
@@ -108,12 +120,33 @@
 	if(!empty($pods)){
 		$dopisek = $pods->display('dopisek');
 		$filmy_font_size = $pods->display('filmy_font_size');
-		printf('<tr><td colspan="2">');
-		printf('<input type="text" name="dopisek" id="dopisek" value="%s">',esc_attr($dopisek));
-		printf('</td></tr>');
+		$dopisek_font_size = $pods->display('dopisek_font_size'); 
 
 		printf('<tr><td colspan="2">');
-		printf('<input type="text" value="%s">',esc_attr($filmy_font_size));
+		printf('Dopisek: <input type="text" name="dopisek" id="dopisek" size="40" value="%s">',esc_attr($dopisek));
+		printf('</td></tr>');
+
+		// pole formularza odpowiadające za wielkość czcionki w tabeli filmów - z użyciem slidera jQueryUI (jego obsługa w skrypcie obslugaSlidera)
+		printf('<tr><td colspan="2">');
+		printf('Wielkość czcionki filmów: <input type="text" id="input_filmy_font_size" name="filmy_font_size" size="4" value="%s">',esc_attr($filmy_font_size)); 
+		printf('<div id="slider_filmy_font_size"></div>');
+		printf('</td></tr>');
+		?>
+			<script type="text/javascript">
+				obslugaSlidera("#slider_filmy_font_size", "#input_filmy_font_size", 100, 1000, 10);
+			</script>
+		<?php
+
+		// pole formularza odpowiadające za wielkość czcionki dopisku pod tabelą - z użyciem slidera jQueryUI (jego obsługa w skrypcie obslugaSlidera)
+		printf('<tr><td colspan="2">');
+		printf('Wielkość czcionki dopisku: <input type="text" id="input_dopisek_font_size" name="dopisek_font_size" size="4" value="%s">',esc_attr($dopisek_font_size)); 
+		printf('<div id="slider_dopisek_font_size"></div>');
+		printf('</td></tr>');
+		?>
+			<script type="text/javascript">
+				obslugaSlidera("#slider_dopisek_font_size", "#input_dopisek_font_size", 100, 1000, 10);
+			</script>
+		<?php
 		
 
 	}//if(!empty($pods))
@@ -149,8 +182,7 @@ if(!empty($pods)){
 </form>
 
 <!-- Podgląd ekranu o odpowiadającej rozdzielczości -->
-<iframe src="http://www.kulturaolawa.nazwa.pl/testy_laboratorium/ekran/" width="1280" height="646" style="margin-left:0px"> <p>Podgląd ekranu</p> </iframe>
-<div id="slider"></div>
-	jQuery( function() {
-		jQuery( "#slider" ).slider();
-	} );
+<iframe style="overflow:hidden" scrolling="no" src="http://www.kulturaolawa.nazwa.pl/testy_laboratorium/ekran/" width="1280" height="646" style="margin-left:0px"> <p>Podgląd ekranu</p> </iframe>
+
+
+

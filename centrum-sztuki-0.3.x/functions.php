@@ -20,7 +20,7 @@
 //		wp_enqueue_script( 'jquery-ui-mouse' );
 //		wp_enqueue_script( 'jquery-ui-accordion' );
 		wp_enqueue_script( 'jquery-ui-autocomplete' );
-//		wp_enqueue_script( 'jquery-ui-slider' );
+		wp_enqueue_script( 'jquery-ui-slider' );
 //		wp_enqueue_script( 'jquery-ui-tabs' );
 //		wp_enqueue_script( 'jquery-ui-sortable' );
 //		wp_enqueue_script( 'jquery-ui-draggable' );
@@ -32,6 +32,8 @@
 		wp_enqueue_script( 'jquery-ui-tooltip' );
 	}
 	add_action( 'wp_enqueue_scripts', 'add_jquery_ui' );
+	// dodanie  jQueryUI także do stron dashboardu
+	add_action( 'admin_enqueue_scripts', 'add_jquery_ui' );
 	
 	//dodanie plików stylu jQueryUI z serwerów Google
 	function jquery_ui_enqueue_style(){
@@ -42,6 +44,8 @@
 						false);
 	}
 	add_action( 'wp_enqueue_scripts', 'jquery_ui_enqueue_style' );
+	// dodanie  css jQueryUI także do stron dashboardu
+	add_action( 'admin_enqueue_scripts', 'jquery_ui_enqueue_style' );
 
 	
 	//dołączenie skryptu visualticket_import.js jeśli uzytkownik ma uprawnienia na poziomie
@@ -65,6 +69,15 @@
 
 	}  
 	add_action( 'wp_enqueue_scripts', 'add_my_script' );
+
+	function add_my_admin_script(){
+	// Dołączanie skryptu skrypty-admin.js dla stron z dashboardu (zapewnia to is_admin())
+		if(is_admin()){
+			wp_register_script('skrypty-admin', get_stylesheet_directory_uri().'/js/skrypty-admin.js', array( 'jquery', 'jquery-ui-core', 'jquery-ui-slider'));
+			wp_enqueue_script('skrypty-admin');
+		}
+	}
+	add_action( 'admin_enqueue_scripts', 'add_my_admin_script' );
 
 	function my_enqueue($hook) {
 	// dodanie skryptu w menu admin, jeśli jest to strona post-new.php lub post.php (czyli strona dodawania noweg lub edycji dowolnego typu postu)
