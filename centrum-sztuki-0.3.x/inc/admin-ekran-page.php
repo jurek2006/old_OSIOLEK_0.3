@@ -155,34 +155,11 @@
 ?>
 </table><!-- koniec tabeli repertuaru -->
 
-<!-- $params = array( 'limit' => -1);
-$pods = pods( 'ekran_kasa_ustawienia', $params );
-if(!empty($pods)){
-	$dzisiaj_testowe = $pods->display('dzisiaj_testowe');
-	$dzien_wygenerowany = $pods->display('dzien_wygenerowany');
-
-	if(!empty($dzisiaj_testowe)){
-	// Jeśli ustawiono wartość pola pods dzisiaj_testowe to ekran traktuje dalej ustawioną tam datę jako dzisiejszą
-		$dzisiaj = $dzisiaj_testowe;
-	}	
-
-	// Sprawdzenie, czy należy wygenerować nową zawartość ekranu
-	// Jeśli data $dzisiaj jest różna od $dzien_wygenerowany to generuje się nową zawartość i ustawia w pods jako dzien_wygenerowany datę $dzisiaj
-	if($dzien_wygenerowany != $dzisiaj){
-		consoleLog("generowanie dla daty ".$dzisiaj);
-
-		// wygenerowanie nowej zawartości ekranu
-		generujDzien($dzisiaj);
-
-		// zapisanie $dzisiaj jako wartości pola dzien_wygenerowany 
-		$pods->save( 'dzien_wygenerowany', $dzisiaj );  -->
-
-
     <input type="submit" name="zapisz" value="Zapisz" id="zapiszButton" title="" />
 </form>
 
 <!-- Podgląd ekranu o odpowiadającej rozdzielczości -->
-<iframe style="overflow:hidden" scrolling="no" src="http://www.kulturaolawa.nazwa.pl/testy_laboratorium/ekran/" width="1280" height="646" style="margin-left:0px"> <p>Podgląd ekranu</p> </iframe>
+<iframe style="overflow:hidden" scrolling="no" src="<?php echo home_url()?>/ekran/" width="1280" height="646" style="margin-left:0px"> <p>Podgląd ekranu</p> </iframe>
 
 
 
