@@ -8,6 +8,8 @@ Description: Obsługuje podstronę do wyświetlania tabeli z repertuarem na ekra
 get_header("ekran"); ?>
 
 <?php
+// ukrycie paska admina
+show_admin_bar( false );
 
 // $dzisiaj to data dzisiejsza (Może być jednak modyfikowana poniżej, w celach testowych za pomocą pods ekran_kasa_ustawienia)
 // na jej podstawie generowany i wyświetlany jest repertuar na ekran
@@ -198,7 +200,6 @@ function wyswietlajRepertuarDnia(){
 						table{font-size: '.$filmy_font_size.'%;}
 						p.dopisek{font-size: '.$dopisek_font_size.'%;}
 					</style>'; 
-			echo 'Font size:'.$filmy_font_size;
 
 		}
 
