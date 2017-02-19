@@ -10,6 +10,7 @@ Description: Motyw dla strony Centrum Sztuki kultura.olawa.pl na wordpressie. We
 
 Zmiany w wersji 0.3.x (rozwojowa)
 - dodanie strony zarządzania ekranem repertuaru w kasie 
+- przerobienie szablonu cennik, który teraz korzysta z pods cennik_ceny
 
 Zmiany w wersji 0.3.6:
 - POdstawowa obsługa ekranu repertuaru w kasie (wymaga odpowiednich zmian w pods i strukturze WP)

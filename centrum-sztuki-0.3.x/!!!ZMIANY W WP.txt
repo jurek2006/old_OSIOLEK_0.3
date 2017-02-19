@@ -8,3 +8,6 @@
 7. Dodanie w użytkownikach Roles "Kasa_biletowa" i capability "edit_ekran_kasa_biletowa" (przypisanie jej do roli "Kasa biletowa" i "Administrator"), zostawienie tej roli jeszcze tylko ustawień read ZROBIONE
 8. Dodanie nowego użytkownika Kasa o roli "Kasa_biletowa" ZROBIONE
 ------
+9. Dodać pods "cennik_ceny" (jak w laboratorium)
+10. Wypełnienie "cennik_ceny" cenami
+11. Usunięcie starego pods "cennik"
