@@ -85,7 +85,7 @@
 	        return;
 	    }
 
-	    wp_enqueue_script( 'my_custom_script', get_stylesheet_directory_uri(). '/admin_js/post_dodawanie_edycja.js' );
+	    wp_enqueue_script( 'my_custom_script', get_stylesheet_directory_uri(). '/js/admin_post_dodawanie_edycja.js' );
 	}
 	add_action( 'admin_enqueue_scripts', 'my_enqueue' );
 
@@ -544,7 +544,7 @@ function zamienDateNaTekst($data, $bez_roku=FALSE){
  
  function pobieczCzescDaty($czescDaty,$dataGodz)
  //konwertuje string w formacie daty na datę i pobiera jej część
- //część do pobrania definiuje $czescDaty (zgodnie z formatem DateType funkcji date
+ //część do pobrania definiuje $czescDaty (zgodnie z formatem DateTime funkcji date)
  {
 	 if (gettype($dataGodz)=='string')
 	 //jeśli $dataGodz jest stringiem dokonuje konwersji i pobrania

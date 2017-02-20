@@ -50,7 +50,7 @@ else{
 
 // WYŚWIETLANIE EKRANU --------------------------------------------------------------------------------------------------------------------------------
 
-wyswietlajRepertuaryConsole('2017-01-15',30); //TESTOWE
+// wyswietlajRepertuaryConsole('2017-01-15',30); //TESTOWE
 wyswietlajRepertuarDnia();
 // ----------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -82,6 +82,7 @@ function generujDzien($dzien = NULL){
 	$pods = pods( 'projekcje', $params );
 	//loop through records
 	if ( $pods->total() > 0 ) {
+	// jeżeli znaleziono jakieś projekcje danego dnia
 
 		while ( $pods->fetch() ) {
 
@@ -112,6 +113,10 @@ function generujDzien($dzien = NULL){
 	    }//while ( $pods->fetch() )
 
 	}//if ( $pods->total() > 0 )
+	else{
+	// jeśli nie znaleziono żadnych projekcji kinowych danego dnia
+		$brak_projekcji = true;
+	}
 
 
 	// POBIERANIE WYDARZEŃ W SALI WIDOWISKOWEJ OWE DANEGO DNIA
@@ -172,6 +177,36 @@ function generujDzien($dzien = NULL){
 		}
 	}
 
+	// GENEROWANIE DOPISKU POD TABELĄ REPERTUARU - zawierającego ceny na podstawie projekcji filmowych (wydarzenia nie są uwzględniane)
+	if(!$brak_projekcji){
+	// jeśli znaleziono jakieś projekcje danego dnia - wypełniany jest dopisek pod tabelą filmów
+	
+		$dzienTygodnia = pobieczCzescDaty('w',$dzien); //pobranie dnia tygodnia dla aktualnie przetwarzanej daty $dzien (gdzie 0 to Niedziela)
+		
+		$params = array( 	'limit' => 1,
+							'where'   => 'dzien_tygodnia.meta_value = '.$dzienTygodnia);
+
+		$pods = pods( 'cennik_dni_tygodnia', $params );
+		if(!empty($pods)){
+
+			// ROZWOJOWE
+
+			$nazwa_dnia_tygodnia = $pods->display('title');
+			consoleLog('title '.$nazwa_dnia_tygodnia);
+
+			$etykieta_dnia_tygodnia = $pods->display('etykieta');
+			consoleLog($etykieta_dnia_tygodnia);
+
+			$bilet_normalny = $pods->display('cennik.normalny2d');
+			consoleLog("Normalny 2d".$bilet_normalny);
+		}//if(!empty($pods))
+	}//if(!$brak_projekcji)
+	else{
+	// jeśli nie znaleziono żadnych projekcji danego dnia - dopisek pod tabelą jest czyszczony (ustawiany na pusty)
+
+		//DODAĆ CZYSZCZENIE DOPISKA
+
+	}//else - if(!$brak_projekcji)
 
 }//generujDzien
 

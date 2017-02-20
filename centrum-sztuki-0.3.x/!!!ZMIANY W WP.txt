@@ -11,3 +11,4 @@
 9. Dodać pods "cennik_ceny" (jak w laboratorium)
 10. Wypełnienie "cennik_ceny" cenami
 11. Usunięcie starego pods "cennik"
+12. Dodanie pods "cennik_dni_tygodnia" i "cennik_dni_kalendarz" (jak w laboratorium)
