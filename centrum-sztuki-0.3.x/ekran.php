@@ -73,6 +73,11 @@ function generujDzien($dzien = NULL){
 	// Można by pominąć zapisywanie do tablicy i od razu dodawać do pods ekran_kasa, ale jeśli później będę chciał dodać np. sortowanie to taka tablica może się przydać
 
 	// POBIERANIE PROJEKCJI FILMOWYCH DANEGO DNIA
+
+	$brak_projekcji = true; //funkcja przechowująca informację o tym, czy nie ma znalezionych projekcji filmowych danego dnia
+	$czy_jest_projekcja2d = false;
+	$czy_jest_projekcja3d = false; //dwie zmienne stwierdzające, czy danego dnia jest jakaś projekcja 2d i 3d (w zależności od tego wyświetlane są określone ceny w dopisku)
+
 						
 	$params = array( 	'limit' => -1,
 						'where' => 'DATE( termin_projekcji.meta_value ) = "'.$dzien_szukany.'"',
@@ -84,6 +89,8 @@ function generujDzien($dzien = NULL){
 	if ( $pods->total() > 0 ) {
 	// jeżeli znaleziono jakieś projekcje danego dnia
 
+		$brak_projekcji = false; //znaleziono projekcje kinowe danego dnia, więc zmienna ustawiana na fałsz
+
 		while ( $pods->fetch() ) {
 
 			$tytul_filmu =  $pods->display('film');
@@ -94,7 +101,14 @@ function generujDzien($dzien = NULL){
 
 
 			// Dodawanie "dodatków" związanych z wersją (3d, język) do tytułu filmu
-			if($q2d3d){ $tytul_filmu.=' 3D';	} //jeśli projekcja jest 3d (czyli TRUE) dodaje taki dopisek do tytułu
+			if($q2d3d){ 
+				$tytul_filmu.=' 3D'; //jeśli projekcja jest 3d (czyli TRUE) dodaje taki dopisek do tytułu
+				$czy_jest_projekcja3d = true; //ustawia na true zmienną informującą o istnieniu projekcji 3d danego dnia
+			} 
+			else{
+			// jeśli jest to projekcja 2d
+				$czy_jest_projekcja2d = true; //ustawia na true zmienną informującą o istnieniu projekcji 3d danego dnia
+			}
             if(!empty($projekcja_wersja_jezykowa)){ 
             //jeśli wybrano wersję językową dla projekcji to jest ona wyświetlana w tytule
                 $tytul_filmu.= " /$projekcja_wersja_jezykowa"; 
@@ -113,10 +127,6 @@ function generujDzien($dzien = NULL){
 	    }//while ( $pods->fetch() )
 
 	}//if ( $pods->total() > 0 )
-	else{
-	// jeśli nie znaleziono żadnych projekcji kinowych danego dnia
-		$brak_projekcji = true;
-	}
 
 
 	// POBIERANIE WYDARZEŃ W SALI WIDOWISKOWEJ OWE DANEGO DNIA
@@ -177,36 +187,95 @@ function generujDzien($dzien = NULL){
 		}
 	}
 
-	// GENEROWANIE DOPISKU POD TABELĄ REPERTUARU - zawierającego ceny na podstawie projekcji filmowych (wydarzenia nie są uwzględniane)
+	// GENEROWANIE DOPISKU POD TABELĄ REPERTUARU - zawierającego ceny na podstawie projekcji filmowych danego dnia (wydarzenia nie są uwzględniane)
+
+	$dopisek_do_zapisania = ""; //standardowo wartość do zapisania jako dopisek jest pusta, jeśli nie znaleziona zostanie żadna projekcja, to tak wartość to zostanie zapisana
+	// i tak wyświetlana (a właściwie nie, bo to pusty string) będzie na ekran
+
 	if(!$brak_projekcji){
 	// jeśli znaleziono jakieś projekcje danego dnia - wypełniany jest dopisek pod tabelą filmów
-	
-		$dzienTygodnia = pobieczCzescDaty('w',$dzien); //pobranie dnia tygodnia dla aktualnie przetwarzanej daty $dzien (gdzie 0 to Niedziela)
-		
+
+
+		// sprawdzenie, czy dzień tygodnia nie jest uwzględniony w pods cennik_dni_kalendarz (jest to pods wyjątków cen - np. w jakąś środę jest cennik weekendowy)
 		$params = array( 	'limit' => 1,
-							'where'   => 'dzien_tygodnia.meta_value = '.$dzienTygodnia);
+							'where'   => 'DATE(data.meta_value) = "'.$dzien.'"');
 
-		$pods = pods( 'cennik_dni_tygodnia', $params );
-		if(!empty($pods)){
+		$pods = pods( 'cennik_dni_kalendarz', $params );
 
-			// ROZWOJOWE
+		function cennik_pods_do_tablicy($pods){
+			
+			// tablica cen dla danego dnia - funkcja wczytuje z pods ceny dla rodzajów biletów zdefiniowanych w $tablicaRodzajowCen i przypisuje je do $tablica cen
+			// która wygląda w efekcie np. $tablicaCen["normalny2d"] == 10, $tablicaCen["normalny3d"] == 15
+			// ta tablica jest zwracana jako funkcja wynikowa
+			// gdy dla danego rodzaju ceny jest ona w pods zdefiniowana jako ujemna (taki rodzaj biletu nie istnieje), to rodzaj ten nie jest zwracany w tablicy wynikowej
 
-			$nazwa_dnia_tygodnia = $pods->display('title');
-			consoleLog('title '.$nazwa_dnia_tygodnia);
+			$tablicaCen = array(); 
+			// tablica rodzajów biletów
+			$tablicaRodzajowCen = array("normalny2d", "ulgowy2d", "rodzinny2d", "grupowy2d", "normalny3d", "ulgowy3d", "rodzinny3d", "grupowy3d");
+			foreach ($tablicaRodzajowCen as $rodzajCeny){
+				$cena = $pods->display('cennik.'.$rodzajCeny);
+				if($cena >= 0){
+					$tablicaCen[$rodzajCeny] = $cena;
+				}
+			}
 
-			$etykieta_dnia_tygodnia = $pods->display('etykieta');
-			consoleLog($etykieta_dnia_tygodnia);
+			return $tablicaCen;
+		}//function cennik_pods_do_tablicy($pods)
 
-			$bilet_normalny = $pods->display('cennik.normalny2d');
-			consoleLog("Normalny 2d".$bilet_normalny);
-		}//if(!empty($pods))
+		if ( $pods->total() > 0 ) {
+		// jeśli w pods cennik_dni_kalendarz znaleziono wpis z cennikiem niestandardowym dla danego dnia - zostaje użyty cennik zdefiniowany w pods cennik_dni_tygodnia
+            while ( $pods->fetch() ) {
+				$nazwa_cennika = $pods->display('name');
+				$bilet_normalny = $pods->display('cennik.normalny2d');
+				consoleLog("Użyty cennik niestandardowy ".$nazwa_cennika);
+				$cennik_dla_dnia = cennik_pods_do_tablicy($pods);
+
+			}//while ( $pods->fetch() )
+
+		}//if ( $pods->total() > 0 )
+		else{
+		// jeśli w pods cennik_dni_kalendarz nie znaleziono wpisu z cennikiem niestandardowym dla danego dnia - zostaje użyty cennik zdefiniowany dla dnia tygodnia w pods cennik_dni_tygodnia
+	
+			$dzienTygodnia = pobieczCzescDaty('w',$dzien); //pobranie dnia tygodnia dla aktualnie przetwarzanej daty $dzien (gdzie 0 to Niedziela)
+			
+			$params = array( 	'limit' => 1,
+								'where'   => 'dzien_tygodnia.meta_value = '.$dzienTygodnia);
+
+			$pods = pods( 'cennik_dni_tygodnia', $params );
+			if(!empty($pods)){
+
+				// TESTOWE
+
+				$title = $pods->display('title');
+				// consoleLog('title '.$nazwa_dnia_tygodnia);
+
+				$etykieta_dnia_tygodnia = $pods->display('etykieta');
+				// consoleLog($etykieta_dnia_tygodnia);
+
+				$bilet_normalny = $pods->display('cennik.normalny2d');
+				consoleLog("Użyto cennik standardowy ".$title);
+				// consoleLog("Bilet normalny: ".$bilet_normalny);
+				$cennik_dla_dnia = cennik_pods_do_tablicy($pods);
+			}//if(!empty($pods))
+
+		}//else - if ( $pods->total() > 0 )
+
+		consoleLog("2d? ". $czy_jest_projekcja2d);
+		consoleLog("3d? ".$czy_jest_projekcja3d);
+		print_r($cennik_dla_dnia);
+
+		// DOPISAĆ tutaj generowanie dopiska!!!
+
 	}//if(!$brak_projekcji)
-	else{
-	// jeśli nie znaleziono żadnych projekcji danego dnia - dopisek pod tabelą jest czyszczony (ustawiany na pusty)
 
-		//DODAĆ CZYSZCZENIE DOPISKA
-
-	}//else - if(!$brak_projekcji)
+	// Zapisanie treści dopiska do pods, z którego będzie wyświetlał ekran
+	// Jeśli nie znaleziono wyżej projekcji dopisek ten będzie zapisany jako pusty
+	
+	$params = array( 'limit' => -1);
+	$pods = pods( 'ekran_kasa_ustawienia', $params );
+	if(!empty($pods)){
+		$pods->save( 'dopisek', $dopisek_do_zapisania);
+	}//if(!empty($pods))
 
 }//generujDzien
 
