@@ -32,6 +32,8 @@ jQuery(document).ready(function(){
 	}
 	else if($('.post-type-cennik_dni_kalendarz').length > 0){
 	// jeżeli jesteśmy na stronie dodawania/edycji pods cennik_dni_kalendarz
+	// ukrywamy tytuł (pole input na niego) i podczas zapisywania wpisu jako tytuł podstawiamy wybraną datę i etykietę ceny
+	// np.: 2017-02-02 - dkf
 		$('#title').hide();
 
 		$('#publish').click(function(evt){
