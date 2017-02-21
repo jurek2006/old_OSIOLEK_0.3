@@ -209,13 +209,42 @@ function generujDzien($dzien = NULL){
 			// ta tablica jest zwracana jako funkcja wynikowa
 			// gdy dla danego rodzaju ceny jest ona w pods zdefiniowana jako ujemna (taki rodzaj biletu nie istnieje), to rodzaj ten nie jest zwracany w tablicy wynikowej
 
+			function zamien_zaokraglij_cene($cena){
+			// na razie TESTOWE
+				if(!is_string($cena)){
+				// sprawdzenie czy cena jest podana jako string (tak powinno być)
+				// jeśli nie jest, cała funkcja zwraca Błąd
+					return 'Błąd';	
+				}
+				// Znalezienie kropki lub przecinka oddzielających część złotych od groszy
+				// $pos przyjmuje pozycję kropki/przecinka w stringu
+				// jeśli nie znaleziono . to zwraca False i szukany jest przecinek
+				$pos = strpos($cena, '.');
+				if($pos == false){
+					$pos = strpos($cena, ',');
+				}
+				// jeśli $pos nie jest false tzn. że znaleziono kropkę lub przecinek
+				if($pos != false)
+				{
+					// na podstawie znalezionej kropki/przecinka kwota rozdzielana jest na część zł i gr
+					$zl = substr($cena, 0, $pos);
+					$gr = substr($cena, $pos+1, 2);
+					if($gr == '00'){
+					//jeśli część groszowa jest równa '00' tzn., że można zaokrąglić kwotę do zł i zwrócić jako wynik funkcji
+						return $zl;
+					}
+				}
+				// jeśli kwota nie została zaokrąglona, zwracana jest dokładnie taka sama "wartość" (bo to powinien być strong)
+				return $cena;
+			}
+
 			$tablicaCen = array(); 
 			// tablica rodzajów biletów
 			$tablicaRodzajowCen = array("normalny2d", "ulgowy2d", "rodzinny2d", "grupowy2d", "normalny3d", "ulgowy3d", "rodzinny3d", "grupowy3d");
 			foreach ($tablicaRodzajowCen as $rodzajCeny){
 				$cena = $pods->display('cennik.'.$rodzajCeny);
 				if($cena >= 0){
-					$tablicaCen[$rodzajCeny] = $cena;
+					$tablicaCen[$rodzajCeny] = zamien_zaokraglij_cene($cena);
 				}
 			}
 
@@ -225,9 +254,9 @@ function generujDzien($dzien = NULL){
 		if ( $pods->total() > 0 ) {
 		// jeśli w pods cennik_dni_kalendarz znaleziono wpis z cennikiem niestandardowym dla danego dnia - zostaje użyty cennik zdefiniowany w pods cennik_dni_tygodnia
             while ( $pods->fetch() ) {
-				$nazwa_cennika = $pods->display('name');
-				$bilet_normalny = $pods->display('cennik.normalny2d');
-				consoleLog("Użyty cennik niestandardowy ".$nazwa_cennika);
+				$nazwa_cennika = $pods->display('name'); //TESTOWE
+				$bilet_normalny = $pods->display('cennik.normalny2d'); //TESTOWE
+				consoleLog("Użyty cennik niestandardowy ".$nazwa_cennika); //TESTOWE
 				$cennik_dla_dnia = cennik_pods_do_tablicy($pods);
 
 			}//while ( $pods->fetch() )
@@ -260,17 +289,57 @@ function generujDzien($dzien = NULL){
 
 		}//else - if ( $pods->total() > 0 )
 
-		consoleLog("2d? ". $czy_jest_projekcja2d);
-		consoleLog("3d? ".$czy_jest_projekcja3d);
-		print_r($cennik_dla_dnia);
+		// consoleLog("2d? ". $czy_jest_projekcja2d); 	//TESTOWE
+		// consoleLog("3d? ".$czy_jest_projekcja3d); 	//TESTOWE
+		// print_r($cennik_dla_dnia);					//TESTOWE
 
-		// DOPISAĆ tutaj generowanie dopiska!!!
+		// generowanie dopiska
+		$dod_2d = ""; //dopisek do nazwy biletów 2d (standardowo to pusty string) - tylko gdy jest jakaś projekcje 3d danego dnia dla rozróżnienia dodawana jest wartość " 2D"
+
+		if($czy_jest_projekcja3d){
+		// jeśli jest znaleziona przynajmniej jedna projekcja 3d danego dnia ($czy_jest_projekcja3d == true) do dopisku pobierane są i dodawane informacje o biletach 3d
+		// brane są pod uwagę tylko bilety normalne i ulgowe (jeśli są)
+
+			$dod_2d = " 2D"; // dopisanie do nazwy biletów 2d dodatku 2D dla rozróżnienia od 3d
+
+			if(array_key_exists('normalny2d', $cennik_dla_dnia)){
+
+				$dopisek_do_zapisania .= "bilet normalny 3D ".$cennik_dla_dnia['normalny3d']." zł, "; //wygenerowanie /dodanie do $dopisek_do_zapisania/ tekstu np. "bilet normalny 3D 11.00 zł, "
+
+			}
+			if(array_key_exists('ulgowy2d', $cennik_dla_dnia)){
+
+				$dopisek_do_zapisania .= "bilet ulgowy 3D ".$cennik_dla_dnia['ulgowy3d']." zł, "; //wygenerowanie /dodanie do $dopisek_do_zapisania/ tekstu np. "bilet ulgowy 3D 11.00 zł, "
+
+			}
+
+		}//if($czy_jest_projekcja3d)
+		if($czy_jest_projekcja2d){
+		// jeśli jest znaleziona przynajmniej jedna projekcja 2d danego dnia ($czy_jest_projekcja2d == true) do dopisku pobierane są i dodawane informacje o biletach 2d
+		// jeśli wystąpiły także bilety 3d tego dnia, to 2d będą wyróżnione w sposób: bilet normalny 2D, bilet ulgowy 2D (standardowo tylko jako bilet normalny, bilet ulgowy)
+			$dopisek2d = ""; //dopisek tymczasowy
+			
+			if(array_key_exists('normalny2d', $cennik_dla_dnia)){
+
+				$dopisek2d .= "bilet normalny".$dod_2d." ".$cennik_dla_dnia['normalny2d']." zł, "; //wygenerowanie /dodanie/ tekstu np. "bilet normalny 2D 11.00" lub "bilet normalny 11.00 zł, "
+
+			}
+			if(array_key_exists('ulgowy2d', $cennik_dla_dnia)){
+
+				$dopisek2d .= "bilet ulgowy".$dod_2d." ".$cennik_dla_dnia['ulgowy2d']." zł, "; //wygenerowanie /dodanie/ tekstu np. "bilet ulgowy 2D 11.00" lub "bilet ulgowy 11.00 zł, "
+
+			}
+
+			// Dodanie do $dopisek_do_zapisania dopisku dla biletów 2d(na początku, bo może już tam być treśc o biletach 3d)
+			$dopisek_do_zapisania = $dopisek2d.$dopisek_do_zapisania;
+
+		}// if($czy_jest_projekcja2d)
 
 	}//if(!$brak_projekcji)
 
 	// Zapisanie treści dopiska do pods, z którego będzie wyświetlał ekran
 	// Jeśli nie znaleziono wyżej projekcji dopisek ten będzie zapisany jako pusty
-	
+
 	$params = array( 'limit' => -1);
 	$pods = pods( 'ekran_kasa_ustawienia', $params );
 	if(!empty($pods)){
