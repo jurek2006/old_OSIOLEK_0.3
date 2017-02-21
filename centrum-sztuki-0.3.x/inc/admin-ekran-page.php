@@ -69,13 +69,14 @@
 		// zapisanie (tabeli wpisów filmów) danych w pods
 		$zmienioneDaneDoPods->saveAllElementsToPods();
 
-		// ----- USTAWIENIA - czyli dopisek i wielkości czcionki
+		// ----- USTAWIENIA - czyli dopisek, dopisek2 i wielkości czcionki
 
 
 		$params = array( 'limit' => -1);
 		$pods = pods( 'ekran_kasa_ustawienia', $params );
 		if(!empty($pods)){
 			$pods->save( 'dopisek', $_POST["dopisek"] );
+			$pods->save( 'dopisek2', $_POST["dopisek2"] );
 			$pods->save( 'filmy_font_size', $_POST["filmy_font_size"] );
 			$pods->save( 'dopisek_font_size', $_POST["dopisek_font_size"] );
 		}//if(!empty($pods))
@@ -114,16 +115,21 @@
 
 	}//if ( $pods->total() > 0 )
 
-	// POBIERANIE DOPISKU POD WPISAMI [aktualnie na ceny biletów] (z pods ekran_kasa_ustawienia) - później także ustawień "stylów" na ekran
+	// POBIERANIE DOPISKÓW POD WPISAMI [aktualnie na ceny biletów] (z pods ekran_kasa_ustawienia) - później także ustawień "stylów" na ekran
 	$params = array( 'limit' => -1);
 	$pods = pods( 'ekran_kasa_ustawienia', $params );
 	if(!empty($pods)){
 		$dopisek = $pods->display('dopisek');
+		$dopisek2 = $pods->display('dopisek2');
 		$filmy_font_size = $pods->display('filmy_font_size');
 		$dopisek_font_size = $pods->display('dopisek_font_size'); 
 
 		printf('<tr><td colspan="2">');
-		printf('Dopisek: <input type="text" name="dopisek" id="dopisek" size="40" value="%s">',esc_attr($dopisek));
+		printf('Dopisek1: <input type="text" name="dopisek" id="dopisek" size="40" value="%s">',esc_attr($dopisek));
+		printf('</td></tr>');
+
+		printf('<tr><td colspan="2">');
+		printf('Dopisek2: <input type="text" name="dopisek2" id="dopisek2" size="40" value="%s">',esc_attr($dopisek2));
 		printf('</td></tr>');
 
 		// pole formularza odpowiadające za wielkość czcionki w tabeli filmów - z użyciem slidera jQueryUI (jego obsługa w skrypcie obslugaSlidera)

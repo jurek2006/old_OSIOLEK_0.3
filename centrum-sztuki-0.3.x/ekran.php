@@ -457,15 +457,18 @@ function wyswietlajRepertuarDnia(){
 		</table><!-- koniec tabeli repertuaru -->
 		
 	<?php
-		// POBIERANIE I WYŚWIETLANIE DOPISKU POD TABELĄ z pods
+		// POBIERANIE I WYŚWIETLANIE DOPISKU (i dopisek2) POD TABELĄ z pods
 		$params = array( 'limit' => -1);
 		$pods = pods( 'ekran_kasa_ustawienia', $params );
 		if(!empty($pods)){
 			$dopisek = $pods->display('dopisek');
-				if(!empty($dopisek)){
-				// Jeśli jest wpisana jakaś zawartość w dopisek, to jest on wyświetlany pod tabelą repertuaru
-					echo '<p class="dopisek">'.strip_tags($dopisek).'</p>';
-				}
+			$dopisek2 = $pods->display('dopisek2');
+
+			if(!empty($dopisek)){
+			// Jeśli jest wpisana jakaś zawartość w dopisek, to jest on wyświetlany pod tabelą repertuaru
+				echo '<p class="dopisek">'.strip_tags($dopisek).'</p>';
+				echo '<p class="dopisek">'.strip_tags($dopisek2).'</p>';
+			}
 			
 		}//if(!empty($pods))
 
