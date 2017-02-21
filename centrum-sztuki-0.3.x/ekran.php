@@ -191,6 +191,7 @@ function generujDzien($dzien = NULL){
 
 	$dopisek_do_zapisania = ""; //standardowo wartość do zapisania jako dopisek jest pusta, jeśli nie znaleziona zostanie żadna projekcja, to tak wartość to zostanie zapisana
 	// i tak wyświetlana (a właściwie nie, bo to pusty string) będzie na ekran
+	$dopisek_do_zapisania2 = ""; //j.w. - druga linia dopisku
 
 	if(!$brak_projekcji){
 	// jeśli znaleziono jakieś projekcje danego dnia - wypełniany jest dopisek pod tabelą filmów
@@ -210,7 +211,11 @@ function generujDzien($dzien = NULL){
 			// gdy dla danego rodzaju ceny jest ona w pods zdefiniowana jako ujemna (taki rodzaj biletu nie istnieje), to rodzaj ten nie jest zwracany w tablicy wynikowej
 
 			function zamien_zaokraglij_cene($cena){
-			// na razie TESTOWE
+			// funkcja pobierająca cenę (która jest wyciągana z pods) - w typie string, standardowo np. 10.00
+			// funkcja sprawdza, czy można zaokrąglić kwotę (rozdzielać zł od gr mogą . lub ,)
+			// jeśli tak - to zwraca zaokrągląną, np 10
+			// jeśli nie, to zwraca to samo co otrzymała w zmiennej $cena
+
 				if(!is_string($cena)){
 				// sprawdzenie czy cena jest podana jako string (tak powinno być)
 				// jeśli nie jest, cała funkcja zwraca Błąd
@@ -299,6 +304,7 @@ function generujDzien($dzien = NULL){
 		if($czy_jest_projekcja3d){
 		// jeśli jest znaleziona przynajmniej jedna projekcja 3d danego dnia ($czy_jest_projekcja3d == true) do dopisku pobierane są i dodawane informacje o biletach 3d
 		// brane są pod uwagę tylko bilety normalne i ulgowe (jeśli są)
+		// zapisuje informacje o biletach w $dopisek_do_zapisania (który jest zapisywany w pods w podstawowym polu dopisek, ale jeśli w dalszym kroku znalezione zostaną inf. o biletach 2d dla danego dnia, to 3d zostaną przekazane do $dopisek_do_zapisania2 - zapisywanego w dopisek2)
 
 			$dod_2d = " 2D"; // dopisanie do nazwy biletów 2d dodatku 2D dla rozróżnienia od 3d
 
@@ -330,20 +336,44 @@ function generujDzien($dzien = NULL){
 
 			}
 
-			// Dodanie do $dopisek_do_zapisania dopisku dla biletów 2d(na początku, bo może już tam być treśc o biletach 3d)
-			$dopisek_do_zapisania = $dopisek2d.$dopisek_do_zapisania;
+			// Dodanie do $dopisek_do_zapisania dopisku dla biletów 2d
+			// (informacja o biletach 3d, jeśli jest, znajdująca się w $dopisek_do_zapisania zostaje najpierw przeniesiona do $dopisek_do_zapisania2)
+			$dopisek_do_zapisania2 = $dopisek_do_zapisania;
+			$dopisek_do_zapisania = $dopisek2d;
 
 		}// if($czy_jest_projekcja2d)
 
 	}//if(!$brak_projekcji)
 
-	// Zapisanie treści dopiska do pods, z którego będzie wyświetlał ekran
-	// Jeśli nie znaleziono wyżej projekcji dopisek ten będzie zapisany jako pusty
+	// sprawdzenie, czy ostatni w treści w linii $dopisek_do_zapisania i $dopisek_do_zapisania2 jest przecinek, jeśli tak, to usunięcie go
+	function obetnij_ostatni_przecinek($string){
+	// funkcja sprawdzająca, czy ciąg $string kończy się przecinkiem, jeśli tak, to jest on usuwany i zwracany bez tego przecinka
+	// jeśli nie kończy się przecinkiem, to $string jest zwracany bez zmian (nie licząc przycięcia białych spacji)
+
+		// wycięcie białych spacji na początku i na końcu
+		$string = trim($string);
+
+		consoleLog("Wleciał string: >".$string."<"); //TESTOWE
+		if($string[strlen($string) - 1] == ','){
+		consoleLog("Zmieniony na string: ".substr($string, 0, -1)); //TESTOWE
+			return substr($string, 0, -1);
+		}
+		else{
+			consoleLog("ostatni znak to: ".$string[strlen($string) - 1]); //TESTOWE
+			return $string;
+		}
+	}
+	$dopisek_do_zapisania = obetnij_ostatni_przecinek($dopisek_do_zapisania);
+	$dopisek_do_zapisania2 = obetnij_ostatni_przecinek($dopisek_do_zapisania2);
+
+	// Zapisanie treści dopiska i dopiska2 do pods, z którego będzie wyświetlał ekran
+	// Jeśli nie znaleziono wyżej projekcji dopisek (i dopisek2) ten będzie zapisany jako pusty
 
 	$params = array( 'limit' => -1);
 	$pods = pods( 'ekran_kasa_ustawienia', $params );
 	if(!empty($pods)){
 		$pods->save( 'dopisek', $dopisek_do_zapisania);
+		$pods->save( 'dopisek2', $dopisek_do_zapisania2);
 	}//if(!empty($pods))
 
 }//generujDzien
