@@ -109,19 +109,20 @@ function generujDzien($dzien = NULL){
 				$czy_jest_projekcja2d = true; //ustawia na true zmienną informującą o istnieniu projekcji 3d danego dnia
 			}
             if(!empty($projekcja_wersja_jezykowa)){ 
-            //jeśli wybrano wersję językową dla projekcji to jest ona wyświetlana w tytule
-                $tytul_filmu.= " /$projekcja_wersja_jezykowa"; 
+            //jeśli wybrano wersję językową dla projekcji to jest ona zapisywana w polu komentarz
+                $komentarz = "/$projekcja_wersja_jezykowa"; 
             }
             else if(!empty($standardowa_wersja_jezykowa)){
                 //jeśli wybrano wersję językową dla filmu (i nie jest ona nadpisana przez wersję projekcji
-                //to jest ona wyświetlana w tytule
-                $tytul_filmu.= " /$standardowa_wersja_jezykowa"; 
+                //to jest ona wyświetlana w polu komentarza
+                $komentarz = "/$standardowa_wersja_jezykowa"; 
             }
 
 			// Wypełnienie tablicy ekran_kasa projekcjami pobranymi dla danego dnia
 			$ekran_kasa[] = array(	'title' => pobieczCzescDaty('G',$termin_projekcji).':'.pobieczCzescDaty('i',$termin_projekcji).' - '.$tytul_filmu,
 									'godzina' => pobieczCzescDaty('G',$termin_projekcji).':'.pobieczCzescDaty('i',$termin_projekcji), 
-									'nazwa_wydarzenia' => $tytul_filmu);
+									'nazwa_wydarzenia' => $tytul_filmu,
+									'komentarz' => $komentarz);
 
 	    }//while ( $pods->fetch() )
 
@@ -339,7 +340,7 @@ function generujDzien($dzien = NULL){
 		// wycięcie białych spacji na początku i na końcu
 		$string = trim($string);
 
-		if($string[strlen($string) - 1] == ','){
+		if(strlen($string) > 0 && $string[strlen($string) - 1] == ','){
 
 			return substr($string, 0, -1);
 		}
@@ -375,6 +376,12 @@ function wyswietlajRepertuarDnia(){
 		$dzien_wygenerowany = $pods->display('dzien_wygenerowany');
 		$filmy_font_size = $pods->display('filmy_font_size');
 		$dopisek_font_size = $pods->display('dopisek_font_size');
+		$komentarze_font_size = $pods->display('komentarze_font_size'); 
+		$wyswietlaj_komentarze = $pods->field('wyswietlaj_komentarze');
+		// pobieranie dopisków (dodawanych dalej pod tabelą projekcji)
+		$dopisek = $pods->display('dopisek');
+		$dopisek2 = $pods->display('dopisek2');
+
 
 		if(empty($dzien_wygenerowany)){
 		// Jeśli nie ma wartości dnia wygenerowanego - nastąpił jakiś błąd
@@ -384,9 +391,12 @@ function wyswietlajRepertuarDnia(){
 		if(!empty($filmy_font_size)){
 		// Jeśli w pods ekran_kasa_ustawienia zdefiniowano wielkość czcionki (a jest to pole *require) to dodawany jest odpowiedni styl
 		// Wielkość czcionki jest w procentach
+		// wielkości czcionek w dopisku i w komentarzach jest w procentach względem czcionki głównej
+		// więc jeśli będą ustawione na 100[%] to będą takiej samej wielkości jak czcionka projekcji
 			echo '	<style type="text/css">
 						table{font-size: '.$filmy_font_size.'%;}
-						p.dopisek{font-size: '.$dopisek_font_size.'%;}
+						p.dopisek{font-size: '.($filmy_font_size * $dopisek_font_size / 100).'%;}
+						span.komentarz{font-size: '.$komentarze_font_size.'%;} 
 					</style>'; 
 
 		}
@@ -422,9 +432,16 @@ function wyswietlajRepertuarDnia(){
 
 			$nazwa_wydarzenia =  $pods->display('nazwa_wydarzenia');
 			$godzina = $pods->display('godzina' );
-
+			$komentarz = $pods->display('komentarz');
 			?>
-			<tr><td><?php echo $godzina.'&nbsp'?></td><td><?php echo strip_tags($nazwa_wydarzenia)?></td></tr>
+			<tr><td>
+			<?php echo strip_tags($godzina).'&nbsp'?></td><td><?php echo strip_tags($nazwa_wydarzenia);
+			if($wyswietlaj_komentarze){
+			// jeśli zaznaczono checkbox wyswietlaj_komentarze wyświetla komentarz przy każdej projekcji
+				echo '<span class="komentarz">'.strip_tags($komentarz).'</span>';
+			}
+			?>
+			</td></tr>
 			<?php
 
 	    }//while ( $pods->fetch() )
@@ -434,7 +451,7 @@ function wyswietlajRepertuarDnia(){
 	}//if ( $pods->total() > 0 )
 	else{
 		?>
-		<tr><td colspan="2"><h1>Brak wydarzeń</td></tr>
+		<tr><td colspan="3"><h1>Brak wydarzeń</td></tr>
 		<?php
 	}
 
@@ -442,20 +459,9 @@ function wyswietlajRepertuarDnia(){
 		</table><!-- koniec tabeli repertuaru -->
 		
 	<?php
-		// POBIERANIE I WYŚWIETLANIE DOPISKU (i dopisek2) POD TABELĄ z pods
-		$params = array( 'limit' => -1);
-		$pods = pods( 'ekran_kasa_ustawienia', $params );
-		if(!empty($pods)){
-			$dopisek = $pods->display('dopisek');
-			$dopisek2 = $pods->display('dopisek2');
-
-			if(!empty($dopisek)){
-			// Jeśli jest wpisana jakaś zawartość w dopisek, to jest on wyświetlany pod tabelą repertuaru
-				echo '<p class="dopisek">'.strip_tags($dopisek).'</p>';
-				echo '<p class="dopisek">'.strip_tags($dopisek2).'</p>';
-			}
-			
-		}//if(!empty($pods))
+		// WYŚWIETLANIE DOPISKU (i dopisek2) POD TABELĄ z pods
+			echo '<p class="dopisek">'.strip_tags($dopisek).'</p>';
+			echo '<p class="dopisek">'.strip_tags($dopisek2).'</p>';
 
 }//wyswietlajRepertuarDnia
 

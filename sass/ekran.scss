@@ -32,7 +32,6 @@ table{
 }
 
 p{
-	// border: 1px solid red;
 	margin: 0;
 	padding: 0;
 	text-align: center;
@@ -46,4 +45,10 @@ p{
 		// font-size: $font-size-dopisku; definiowane w pods ekran_kasa_ustawienia
 		color: darken($tekst, 20%);
 	}
+}
+
+span.komentarz{
+	color: darken($tekst, 20%);
+	line-height: 100%;
+	margin-left: 0.25em;
 }

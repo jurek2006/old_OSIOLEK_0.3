@@ -1,12 +1,5 @@
 <h1>Ustawienia ekranu repertuaru w kasie</h1>
 
-<form action="<?php echo esc_url( $_SERVER['REQUEST_URI'] )?>" method="post">
-<!-- formularz edycji wpisów na stronę ekranu repertuaru w kasie -->
-<table><!-- początek tabeli repertuaru -->
-		<colgroup>
-		    <col class="godziny" />
-		    <col/>
-		</colgroup>
 <?php
 	
 	if(isset( $_POST["zapisz"])){
@@ -20,20 +13,21 @@
 			private $_id = null;
 			private $_count = null;
 
-			public function __construct($nazwa_pods, $godzina, $nazwa_wydarzenia, $id){
+			public function __construct($nazwa_pods, $godzina, $nazwa_wydarzenia, $id, $komentarz){
 				// paramatry:
 				// - $nazwa_pods - definiuję nazwę pods do której zapisywane są dane (standardowo tutaj ekran_kasa)
-				// - $godzina, $nazwa_wydarzenia, $id - to tablice "ściągające" dane z formularza po zatwierdzeniu 
+				// - $godzina, $nazwa_wydarzenia, $id, $komentarz - to tablice "ściągające" dane z formularza po zatwierdzeniu 
 
 				// Standardowe użycie klasy wygląda następująco: 
-				// $zmienioneDaneDoPods = new ZmienioneDaneDoPods('ekran_kasa',$_POST["godzina"],$_POST["nazwa_wydarzenia"],$_POST["id"]);
+				// $zmienioneDaneDoPods = new ZmienioneDaneDoPods('ekran_kasa',$_POST["godzina"],$_POST["nazwa_wydarzenia"],$_POST["id"], $_POST["komentarz"]);
 
-				if(count($godzina) == count($nazwa_wydarzenia) AND count($godzina) == count($id)){
-				// jeśli ilość elementów we wszystkich trzech tablicach $godzina, $nazwa_wydarzenia, $id jest jednakowa (co powinno być formalnością) tworzona jest instancja klasy
+				if(count($godzina) == count($nazwa_wydarzenia) AND count($godzina) == count($id) AND count($godzina) == count($komentarz)){
+				// jeśli ilość elementów we wszystkich czterech tablicach $godzina, $nazwa_wydarzenia, $id, $komentarz jest jednakowa (co powinno być formalnością) tworzona jest instancja klasy
 					$this -> _nazwa_pods = $nazwa_pods; 
 					$this -> _godzina = $godzina;
 					$this -> _nazwa_wydarzenia = $nazwa_wydarzenia;
 					$this -> _id = $id;
+					$this -> _komentarz = $komentarz;
 					$this -> _count = count($godzina);
 				}
 				else{
@@ -52,7 +46,8 @@
 
 					$data = array(
 					    'godzina' 			=> esc_attr($this->_godzina[$i]),
-					    'nazwa_wydarzenia' 	=> esc_attr($this->_nazwa_wydarzenia[$i])
+					    'nazwa_wydarzenia' 	=> esc_attr($this->_nazwa_wydarzenia[$i]),
+					    'komentarz' 	=> esc_attr($this->_komentarz[$i])
 					);
 
 					$pod->save( $data ); 
@@ -65,7 +60,7 @@
 
 		// ------ WPISY FILMÓW -------
 		// pobranie danych (tabeli wpisów filmów) z formularza do zmiennej $zmienioneDaneDoPods
-		$zmienioneDaneDoPods = new ZmienioneDaneDoPods('ekran_kasa',$_POST["godzina"],$_POST["nazwa_wydarzenia"],$_POST["id"]);
+		$zmienioneDaneDoPods = new ZmienioneDaneDoPods('ekran_kasa', $_POST["godzina"], $_POST["nazwa_wydarzenia"], $_POST["id"], $_POST["komentarz"]);
 		// zapisanie (tabeli wpisów filmów) danych w pods
 		$zmienioneDaneDoPods->saveAllElementsToPods();
 
@@ -79,9 +74,26 @@
 			$pods->save( 'dopisek2', $_POST["dopisek2"] );
 			$pods->save( 'filmy_font_size', $_POST["filmy_font_size"] );
 			$pods->save( 'dopisek_font_size', $_POST["dopisek_font_size"] );
+			$pods->save( 'komentarze_font_size', $_POST["komentarze_font_size"] );
 		}//if(!empty($pods))
 
 	}//if(isset( $_POST["zapisz"]))
+
+	echo '	<style type="text/css">
+						table td{padding: 1em;}
+					</style>'; 
+
+	?>
+	<form action="<?php echo esc_url( $_SERVER['REQUEST_URI'] )?>" method="post">
+	<!-- formularz edycji wpisów na stronę ekranu repertuaru w kasie -->
+		<table class="tabela"><!-- początek tabeli repertuaru -->
+				<colgroup>
+				    <col class="godziny" />
+				    <col/>
+				    <col/>
+				</colgroup>
+
+	<?php
 
 	// POBIERANIE WPISÓW WYGENEROWANYCH NA EKRAN (z pods ekran_kasa)
 	// Sortowanie odbywa się na podstawie wartośc pola kolejnosc!!!
@@ -99,6 +111,7 @@
 			$nazwa_wydarzenia =  $pods->display('nazwa_wydarzenia');
 			$godzina = $pods->display('godzina');
 			$id = $pods->display('id');
+			$komentarz = $pods->display('komentarz');
 
 			?>
 			<tr>
@@ -108,6 +121,8 @@
 				<td><?php printf('<input type="text" name="nazwa_wydarzenia[]" id="nazwa_wydarzenia" value="%s">',esc_attr($nazwa_wydarzenia))?>
 				<!-- ukryte pole id (niezbędne do zidentyfikowania, które elementy pods należy zapisać) -->
 				<?php printf('<input type="hidden" name="id[]" id="id" value="%s">',esc_attr($id)); ?></td>
+				<!-- pole komentarza: -->
+				<td><?php printf('<input type="text" name="komentarz[]" id="komentarz" value="%s">',esc_attr($komentarz))?></td>
 			</tr>
 			<?php
 
@@ -123,6 +138,7 @@
 		$dopisek2 = $pods->display('dopisek2');
 		$filmy_font_size = $pods->display('filmy_font_size');
 		$dopisek_font_size = $pods->display('dopisek_font_size'); 
+		$komentarze_font_size = $pods->display('komentarze_font_size'); 
 
 		printf('<tr><td colspan="2">');
 		printf('Dopisek1: <input type="text" name="dopisek" id="dopisek" size="40" value="%s">',esc_attr($dopisek));
@@ -132,8 +148,32 @@
 		printf('Dopisek2: <input type="text" name="dopisek2" id="dopisek2" size="40" value="%s">',esc_attr($dopisek2));
 		printf('</td></tr>');
 
-		// pole formularza odpowiadające za wielkość czcionki w tabeli filmów - z użyciem slidera jQueryUI (jego obsługa w skrypcie obslugaSlidera)
+		// pole formularza odpowiadające za wielkość czcionki dopisku pod tabelą - z użyciem slidera jQueryUI (jego obsługa w skrypcie obslugaSlidera) 
+		// określane w % względem wielkości czcionki filmów
 		printf('<tr><td colspan="2">');
+		printf('Wielkość czcionki dopisku: <input type="text" id="input_dopisek_font_size" name="dopisek_font_size" size="4" value="%s">%%',esc_attr($dopisek_font_size)); 
+		printf('<div id="slider_dopisek_font_size"></div>');
+		printf('</td></tr>');
+		?>
+			<script type="text/javascript">
+				obslugaSlidera("#slider_dopisek_font_size", "#input_dopisek_font_size", 1, 100, 1);
+			</script>
+		<?php
+
+		// pole formularza odpowiadające za wielkość czcionki komentarzy projekcji w tabeli - z użyciem slidera jQueryUI (jego obsługa w skrypcie obslugaSlidera) 
+		// określane w % względem wielkości czcionki filmów
+		printf('<tr><td colspan="2">');
+		printf('Wielkość czcionki komentarzy: <input type="text" id="input_komentarze_font_size" name="komentarze_font_size" size="4" value="%s">%%',esc_attr($komentarze_font_size)); 
+		printf('<div id="slider_komentarze_font_size"></div>');
+		printf('</td></tr>');
+		?>
+			<script type="text/javascript">
+				obslugaSlidera("#slider_komentarze_font_size", "#input_komentarze_font_size", 1, 100, 1);
+			</script>
+		<?php
+		
+		// pole formularza odpowiadające za wielkość czcionki w tabeli filmów - z użyciem slidera jQueryUI (jego obsługa w skrypcie obslugaSlidera)
+		printf('<tr><td colspan="2" style="background-color: #CCFFCC  ">');
 		printf('Wielkość czcionki filmów: <input type="text" id="input_filmy_font_size" name="filmy_font_size" size="4" value="%s">',esc_attr($filmy_font_size)); 
 		printf('<div id="slider_filmy_font_size"></div>');
 		printf('</td></tr>');
@@ -142,18 +182,6 @@
 				obslugaSlidera("#slider_filmy_font_size", "#input_filmy_font_size", 100, 1000, 10);
 			</script>
 		<?php
-
-		// pole formularza odpowiadające za wielkość czcionki dopisku pod tabelą - z użyciem slidera jQueryUI (jego obsługa w skrypcie obslugaSlidera)
-		printf('<tr><td colspan="2">');
-		printf('Wielkość czcionki dopisku: <input type="text" id="input_dopisek_font_size" name="dopisek_font_size" size="4" value="%s">',esc_attr($dopisek_font_size)); 
-		printf('<div id="slider_dopisek_font_size"></div>');
-		printf('</td></tr>');
-		?>
-			<script type="text/javascript">
-				obslugaSlidera("#slider_dopisek_font_size", "#input_dopisek_font_size", 100, 1000, 10);
-			</script>
-		<?php
-		
 
 	}//if(!empty($pods))
 

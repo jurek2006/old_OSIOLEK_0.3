@@ -32,13 +32,20 @@ p {
   padding: 0;
   text-align: center;
 }
-/* line 39, ../../sass/ekran.scss */
+/* line 38, ../../sass/ekran.scss */
 p.naglowekDnia {
   border-bottom: 1px solid gray;
   font-size: 400%;
   color: #EE4724;
 }
-/* line 45, ../../sass/ekran.scss */
+/* line 44, ../../sass/ekran.scss */
 p.dopisek {
   color: #cccccc;
+}
+
+/* line 50, ../../sass/ekran.scss */
+span.komentarz {
+  color: #cccccc;
+  line-height: 100%;
+  margin-left: 0.25em;
 }
