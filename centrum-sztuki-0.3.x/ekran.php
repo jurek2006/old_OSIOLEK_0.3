@@ -50,7 +50,6 @@ else{
 
 // WYŚWIETLANIE EKRANU --------------------------------------------------------------------------------------------------------------------------------
 
-// wyswietlajRepertuaryConsole('2017-01-15',30); //TESTOWE
 wyswietlajRepertuarDnia();
 // ----------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -259,9 +258,8 @@ function generujDzien($dzien = NULL){
 		if ( $pods->total() > 0 ) {
 		// jeśli w pods cennik_dni_kalendarz znaleziono wpis z cennikiem niestandardowym dla danego dnia - zostaje użyty cennik zdefiniowany w pods cennik_dni_tygodnia
             while ( $pods->fetch() ) {
-				$nazwa_cennika = $pods->display('name'); //TESTOWE
-				$bilet_normalny = $pods->display('cennik.normalny2d'); //TESTOWE
-				consoleLog("Użyty cennik niestandardowy ".$nazwa_cennika); //TESTOWE
+				$nazwa_cennika = $pods->display('name'); //Pobranie nazwy używanego cennika w celach diagnostycznych - wyświetlenia tej 
+				consoleLog("Użyty cennik niestandardowy ".$nazwa_cennika); 
 				$cennik_dla_dnia = cennik_pods_do_tablicy($pods);
 
 			}//while ( $pods->fetch() )
@@ -278,25 +276,13 @@ function generujDzien($dzien = NULL){
 			$pods = pods( 'cennik_dni_tygodnia', $params );
 			if(!empty($pods)){
 
-				// TESTOWE
-
-				$title = $pods->display('title');
-				// consoleLog('title '.$nazwa_dnia_tygodnia);
-
-				$etykieta_dnia_tygodnia = $pods->display('etykieta');
-				// consoleLog($etykieta_dnia_tygodnia);
-
-				$bilet_normalny = $pods->display('cennik.normalny2d');
+				$title = $pods->display('title'); //Pobranie nazwy używanego cennika w celach diagnostycznych - wyświetlenia tej 
 				consoleLog("Użyto cennik standardowy ".$title);
-				// consoleLog("Bilet normalny: ".$bilet_normalny);
+
 				$cennik_dla_dnia = cennik_pods_do_tablicy($pods);
 			}//if(!empty($pods))
 
 		}//else - if ( $pods->total() > 0 )
-
-		// consoleLog("2d? ". $czy_jest_projekcja2d); 	//TESTOWE
-		// consoleLog("3d? ".$czy_jest_projekcja3d); 	//TESTOWE
-		// print_r($cennik_dla_dnia);					//TESTOWE
 
 		// generowanie dopiska
 		$dod_2d = ""; //dopisek do nazwy biletów 2d (standardowo to pusty string) - tylko gdy jest jakaś projekcje 3d danego dnia dla rozróżnienia dodawana jest wartość " 2D"
@@ -353,13 +339,12 @@ function generujDzien($dzien = NULL){
 		// wycięcie białych spacji na początku i na końcu
 		$string = trim($string);
 
-		consoleLog("Wleciał string: >".$string."<"); //TESTOWE
 		if($string[strlen($string) - 1] == ','){
-		consoleLog("Zmieniony na string: ".substr($string, 0, -1)); //TESTOWE
+
 			return substr($string, 0, -1);
 		}
 		else{
-			consoleLog("ostatni znak to: ".$string[strlen($string) - 1]); //TESTOWE
+
 			return $string;
 		}
 	}
@@ -474,7 +459,7 @@ function wyswietlajRepertuarDnia(){
 
 }//wyswietlajRepertuarDnia
 
-// TESTOWE
+// TESTOWE:
 
 function wyswietlajRepertuarDniaConsole($dzien = NULL){
 	//Funkcja wyświetlająca testowo repertuar kina danego dnia - WERSJA PRÓBNA - pobierająca "na żywo" z projekcji i wydarzeń
