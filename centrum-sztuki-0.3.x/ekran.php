@@ -354,12 +354,14 @@ function generujDzien($dzien = NULL){
 
 	// Zapisanie treści dopiska i dopiska2 do pods, z którego będzie wyświetlał ekran
 	// Jeśli nie znaleziono wyżej projekcji dopisek (i dopisek2) ten będzie zapisany jako pusty
+	// zapisanie też wyswietlaj_komentarze jako 'tak' (domyślnie zawsze dodawane są komentarze do projekcji)
 
 	$params = array( 'limit' => -1);
 	$pods = pods( 'ekran_kasa_ustawienia', $params );
 	if(!empty($pods)){
 		$pods->save( 'dopisek', $dopisek_do_zapisania);
 		$pods->save( 'dopisek2', $dopisek_do_zapisania2);
+		$pods->save( 'wyswietlaj_komentarze', 'tak');
 	}//if(!empty($pods))
 
 }//generujDzien

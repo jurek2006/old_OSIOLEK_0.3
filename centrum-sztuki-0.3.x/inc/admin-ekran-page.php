@@ -131,7 +131,7 @@
 				<!-- ukryte pole id (niezbędne do zidentyfikowania, które elementy pods należy zapisać) -->
 				<?php printf('<input type="hidden" name="id[]" id="id" value="%s">',esc_attr($id)); ?></td>
 				<!-- pole komentarza: -->
-				<td><?php printf('<input type="text" name="komentarz[]" id="komentarz" value="%s">',esc_attr($komentarz))?></td>
+				<td><?php printf('<input type="text" name="komentarz[]" class="komentarz" id="komentarz" value="%s">',esc_attr($komentarz))?></td>
 			</tr>
 			<?php
 
@@ -150,13 +150,40 @@
 		$dopisek_font_size = $pods->display('dopisek_font_size'); 
 		$komentarze_font_size = $pods->display('komentarze_font_size'); 
 
+		// wyświetlanie checkboxa
 		printf('<tr><td colspan="2">Wyświetlaj komentarze filmów:</td>');
 		echo '<td><input name="wyswietlaj_komentarze" id="wyswietlaj_komentarze" type="checkbox" value="1"';
 		if($wyswietlaj_komentarze){
 				echo ' checked';
 			}
-		// <input type="checkbox" id="cbox2" value="second_checkbox" checked> <label for="cbox2">This is the second checkbox</label>
 		printf('></td></tr>');
+
+		?>
+		<script type="text/javascript">
+			// skrypt obsługi dodatkowej checkbox
+			function wlacz_wylacz_komentarz(){
+
+				if($("#wyswietlaj_komentarze").is(':checked')){
+					console.log("Ready checked");
+
+					$(".komentarz").prop('readonly', false).focus(function(){
+						$(this).blur();
+					});
+				}
+				else{
+					$(".komentarz").prop('readonly', true).focus(function(){
+						$(this).blur();
+					});	
+				}
+			}
+			// powyższa funkcja obsługi zdarzenia przypisana jest do zdarzenia zmiany wartości chechbox
+			// oraz do wczytania strony
+			// jeśli checkbox wyswietlaj_komentarze jest zaznaczony (a jest gdy pole wyswietlaj_komentarze jest true) to blokowane są pola komentarz
+			$(document).ready(wlacz_wylacz_komentarz);
+			$("#wyswietlaj_komentarze").change(wlacz_wylacz_komentarz);
+
+		</script>
+		<?php
 
 		printf('<tr><td>Dopisek1:</td>');
 		printf('<td colspan="2"><input style="width: 100%%" type="text" name="dopisek" id="dopisek" size="40" value="%s">',esc_attr($dopisek));
