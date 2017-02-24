@@ -13,4 +13,4 @@
 11. Usunięcie starego pods "cennik"
 12. Dodanie pods "cennik_dni_tygodnia" i "cennik_dni_kalendarz" (jak w laboratorium)
 13. Edycja ekran_kasa_ustawienia (jak w laboratorium) - dodanie drugiego pola na dopisek i pola bool wyswietlaj_komentarze oraz pola komentarze_font_size
-14. W pods ekran_kasa do danie pola komentarz
+14. W pods ekran_kasa dodanie pola komentarz
