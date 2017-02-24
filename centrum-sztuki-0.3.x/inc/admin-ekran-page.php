@@ -241,11 +241,17 @@
 				</script>
 			</div>
 			<div>
-			<!-- przycisk "Zapisz" -->
-			<input type="submit" name="zapisz" value="Zapisz" id="zapiszButton" title="" />
-			<input type="button" name="szczegoly" value="Pokaż/ukryj szczegóły" id="szczegolyButton" title="" />
+			<!-- przycisk "Zapisz" i "Pokaż/ukryj szczegóły"-->
+			<style type="text/css">
+				.button{
+					margin-left: 1em !important;
+				}
+			</style>
+			<input type="submit" name="zapisz" value="Zapisz" id="zapiszButton" title="" class="button" style="width: 200px; height: 3em" />
+			<input type="button" name="szczegoly" value="Pokaż/ukryj szczegóły" id="szczegolyButton" title="" class="button" />
 			<script type="text/javascript">
 				obslugaButtonToggle("#szczegolyButton",'.tabela',"Ukryj szczegóły", "Pokaż szczegóły");
+				$(".button").button();
 			</script>
 			</div>
 		</div>

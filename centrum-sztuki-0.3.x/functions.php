@@ -28,7 +28,7 @@
 		wp_enqueue_script( 'jquery-ui-datepicker' );
 //		wp_enqueue_script( 'jquery-ui-resize' );
 		wp_enqueue_script( 'jquery-ui-dialog' );
-		//wp_enqueue_script( 'jquery-ui-button' );
+		wp_enqueue_script( 'jquery-ui-button' );
 		wp_enqueue_script( 'jquery-ui-tooltip' );
 	}
 	add_action( 'wp_enqueue_scripts', 'add_jquery_ui' );
