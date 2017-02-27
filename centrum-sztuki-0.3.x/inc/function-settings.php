@@ -37,4 +37,7 @@
 
 	// uprawnienia potrzebne do wyświetlania w dashboard menu zarządzania ekranem repertuaru w kasie
 	define("UPR_DSH_MENU_KASA_EKRAN", 'edit_ekran_kasa_biletowa');
+
+	// uprawnienia potrzebne do wyświetlania w dashboard strony export - import pods
+	define("UPR_DSH_MENU_EXP_IMP_PODS", 'import');
 ?>

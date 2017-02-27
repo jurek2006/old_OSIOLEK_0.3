@@ -3,7 +3,9 @@
 
 	//PLIKI WŁĄCZANE
 	require get_template_directory(). '/inc/function-settings.php';		//PLIK USTAWIEŃ (razem z uprawieniami)!!!!!!!!
-	require get_template_directory(). '/inc/function-admin-ekran.php';  //plik funkcji potrzebnych do obsłigi ekranu repertuaru kasowego
+	require get_template_directory(). '/inc/function-admin-ekran.php';  //plik funkcji potrzebnych do strony obsługi ekranu repertuaru kasowego (w dashboardzie)
+	require get_template_directory(). '/inc/function-admin-pods-export-import.php';  //plik funkcji potrzebnych do strony exportu - importu (w dashboardzie)
+	
 	// koniec PLIKI WŁĄCZANE
 
 	//-----------FUNKCJE DODANE W 0.3.3.2
