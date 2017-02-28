@@ -19,7 +19,17 @@
 
 	// ADRES SYSTEMU BILETOWEGO VISUALTICKET DLA CSO
 	define("ADRES_VISUALTICKET", "https://s7.systembiletowy.pl/cso/");
-	
+
+	// USTAWIENIA EKSPORTU i IMPORTU danych PODS (używane w inc/admin-import-pods.php i inc/admin-export-pods.php)
+	// ------
+
+	// BLOKOWANIE OPCJI IMPORTU PODS (w inc/admin-import-pods.php) na wersji produkcyjnej (czyli na www.kultura.olawa.pl)
+	define("BLOKUJ_IMPORT_PODS", true);
+
+	// alias home_url przy eksportowaniu danych do tekstu (json) i później importowaniu
+	define("HOME_URL_ALIAS", "{home_url}");
+
+	define("PODS_FILMY","filmy"); //nazwa pods służącego do zapisywania filmów (używana na razie tylko przy import/export)
 	// ------------------------------------------------------------------------------------------------------------------------
 
 	// UPRAWNIENIA
