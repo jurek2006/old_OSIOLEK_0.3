@@ -6,7 +6,7 @@
 
     if(isset( $_POST["exp_filmy"])){
     //Jeśli kliknięto przycisk "Eksportuj filmy"
-    //Pobierane są wszystkie filmy (z pods PODS_FILMY), których ostatnia modyfikacja nastąpiła później niż dzień określony datą $datetime
+    //Pobierane są wszystkie filmy (z pods PODS_FILMY), których ostatnia modyfikacja nastąpiła najpóźniej w dniu określonym datą $datetime
     //Są one encodowane do JSON, a ścieżka home_url jest zamieniana na string określony w HOME_URL_ALIAS
     //Na końcu ten JSON wyświetlany jest w textarea
 
@@ -16,7 +16,7 @@
 
         $params = array(
             'limit' => -1,
-            'where' => 'DATE( post_modified ) > "'.$termin_poczatek.'"'
+            'where' => 'DATE( post_modified ) >= "'.$termin_poczatek.'"'
         );
         $pods = pods( PODS_FILMY , $params );
 
@@ -44,7 +44,7 @@
 
         }//$pods = pods( PODS_FILMY , $params )
         else{
-            echo 'Nie znaleziono żadnych filmów spełniających kryterium eksportu.'
+            echo 'Nie znaleziono żadnych filmów spełniających kryterium eksportu.';
         }
 
     }//if(isset( $_POST["exp_filmy"]))
