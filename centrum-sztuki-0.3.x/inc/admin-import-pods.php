@@ -28,17 +28,58 @@
 					unset($import['rodzaj_danych']); //usunięcie dodanego przeze mnie pola tablicy opisującego rodzaj danych
 					echo '<br><br>';
 
-					print_r($import);	 //TESTOWE
+					// Get the API
+					$api = pods_api(PODS_FILMY);
 
-					foreach ($import as $key => $value) {
-		             	echo "<h2>\$import[$key]</h2>";
-		             	// print_r($value); //TESTOWE
+					// Setup the data to import
+					$data = array(
+					    4801 => array(
+					    	'post_title' => "Sztuka kochania",
+					    	'post_name' => "sztuka-kochania"
+					    ),
+					    4827 => array(
+					        'post_title' => "Sing",
+					    	'post_name' => "sing"
+					    ),
+					    4829 => array(
+					        'post_title' => "Konwój",
+					    	'post_name' => "konwoj"
+					    )
+					);
 
-		                // $podsIMP = pods(PODS_FILMY);
-		                // $ids = $podsIMP->import($value);
-		                // printf("Dodano: ");
-		                // print_r($ids);
-		            }
+					// Run the import
+					$api->import( $data ); 
+
+					// print_r($import);	 //TESTOWE
+
+					// foreach ($import as $key => $value) {
+		             	
+		   //           	$id = $key;
+
+					// 	$test_pod = pods( PODS_FILMY, $id );
+
+					// 	if ( $test_pod->exists() ) {
+					// 	    echo sprintf("<br>%s - %s: film istnieje", $key, $value['post_title']); 
+					// 	}
+					// 	else {
+					// 	    echo sprintf("<br>%s - %s: film nie istnieje", $key, $value['post_title']); 
+
+					// 	    print_r($value);
+					// 	    $api = pods_api(PODS_FILMY); 
+					// 	    $api->import($value, true, 'php'); 
+
+					// 	    // $podsIMP = pods(PODS_FILMY); 
+					// 	    // $ids = $podsIMP->import($value, true );
+			  //      //          printf("Dodano: ");
+			  //      //          print_r($ids);
+					// 	}
+		   //           	// print_r($value); //TESTOWE
+
+		   //              // $podsIMP = pods(PODS_FILMY);
+		   //              // $ids = $podsIMP->import($value);
+		   //              // printf("Dodano: ");
+		   //              // print_r($ids);
+		   //          }
 				}
 			}
 			

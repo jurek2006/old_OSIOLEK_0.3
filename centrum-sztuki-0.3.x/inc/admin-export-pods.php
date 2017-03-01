@@ -11,7 +11,7 @@
     //Na końcu ten JSON wyświetlany jest w textarea
 
         // ustawienia daty - filtru które filmy mają być wyeksportowane (brana pod uwagę jest ostatnia modyfikacja)
-        $datetime = new DateTime('2017-02-01');
+        $datetime = new DateTime('2017-01-01');
         $termin_poczatek = $datetime->format('Y-m-d');
 
         $params = array(
