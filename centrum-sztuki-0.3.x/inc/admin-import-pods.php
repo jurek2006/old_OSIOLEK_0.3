@@ -28,15 +28,16 @@
 					unset($import['rodzaj_danych']); //usunięcie dodanego przeze mnie pola tablicy opisującego rodzaj danych
 					echo '<br><br>';
 
-					print_r($import);	
+					print_r($import);	 //TESTOWE
 
 					foreach ($import as $key => $value) {
 		             	echo "<h2>\$import[$key]</h2>";
-		             	print_r($value);
+		             	// print_r($value); //TESTOWE
 
-		                $podsIMP = pods(PODS_FILMY);
-		                $ids = $podsIMP->import($value);
-		                printf("Dodano: ".$ids);
+		                // $podsIMP = pods(PODS_FILMY);
+		                // $ids = $podsIMP->import($value);
+		                // printf("Dodano: ");
+		                // print_r($ids);
 		            }
 				}
 			}

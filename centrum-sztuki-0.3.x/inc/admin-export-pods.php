@@ -18,6 +18,14 @@
         }
         else {
         // jeśli znaleziono filmy i są w tablicy $all_data
+            foreach ($all_data as $key => $value) {
+                printf($key.': ');
+                // print_r($value);
+                $value['projekcje'] = '';
+                print_r($value['post_title']);
+                print_r($value['projekcje']);
+                echo '<br><br>';
+            }
 
             $all_data['rodzaj_danych'] = 'filmy'; //dodanie pola na rodzaj danych, żeby przy imporcie można było sprawdzić czy to są te dane, które powinny być
 
