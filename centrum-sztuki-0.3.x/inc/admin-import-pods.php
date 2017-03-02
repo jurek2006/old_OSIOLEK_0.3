@@ -28,8 +28,10 @@
 					unset($import['rodzaj_danych']); //usunięcie dodanego przeze mnie pola tablicy opisującego rodzaj danych
 					echo '<br><br>';
 
+					// DZIAŁAJĄCY IMPORT TESTOWY
 					// Get the API
 					$api = pods_api(PODS_FILMY);
+					$data_do_importu = array();
 
 					// Setup the data to import
 					$data = array(
@@ -47,39 +49,45 @@
 					    )
 					);
 
-					// Run the import
-					$api->import( $data ); 
+					// // Run the import
+					// $api->import( $data ); 
 
 					// print_r($import);	 //TESTOWE
 
-					// foreach ($import as $key => $value) {
+					foreach ($import as $key => $value) {
 		             	
-		   //           	$id = $key;
+		             	$id = $key;
 
-					// 	$test_pod = pods( PODS_FILMY, $id );
+						$test_pod = pods( PODS_FILMY, $id );
 
-					// 	if ( $test_pod->exists() ) {
-					// 	    echo sprintf("<br>%s - %s: film istnieje", $key, $value['post_title']); 
-					// 	}
-					// 	else {
-					// 	    echo sprintf("<br>%s - %s: film nie istnieje", $key, $value['post_title']); 
+						if ( $test_pod->exists() ) {
+						    echo sprintf("<br>%s - %s: film istnieje", $key, $value['post_title']); 
+						}
+						else {
+						    echo sprintf("<br>%s - %s: film nie istnieje", $key, $value['post_title']); 
 
-					// 	    print_r($value);
-					// 	    $api = pods_api(PODS_FILMY); 
-					// 	    $api->import($value, true, 'php'); 
+						    // print_r($value);
+						    $data_do_importu[$key] = $value;
+						    // $api = pods_api(PODS_FILMY); 
+						    // $api->import($value, true, 'php'); 
 
-					// 	    // $podsIMP = pods(PODS_FILMY); 
-					// 	    // $ids = $podsIMP->import($value, true );
-			  //      //          printf("Dodano: ");
-			  //      //          print_r($ids);
-					// 	}
-		   //           	// print_r($value); //TESTOWE
+						    // $podsIMP = pods(PODS_FILMY); 
+						    // $ids = $podsIMP->import($value, true );
+			       //          printf("Dodano: ");
+			       //          print_r($ids);
+						}
+		             	// print_r($value); //TESTOWE
 
-		   //              // $podsIMP = pods(PODS_FILMY);
-		   //              // $ids = $podsIMP->import($value);
-		   //              // printf("Dodano: ");
-		   //              // print_r($ids);
-		   //          }
+		                // $podsIMP = pods(PODS_FILMY);
+		                // $ids = $podsIMP->import($value);
+		                // printf("Dodano: ");
+		                // print_r($ids);
+		            }//foreach ($import as $key => $value)
+		            print_r($data_do_importu);
+		            echo '<br><br>';
+		            print_r($data);
+		            // Run the import
+					// $api->import( $data_do_importu ); 
 				}
 			}
 			
