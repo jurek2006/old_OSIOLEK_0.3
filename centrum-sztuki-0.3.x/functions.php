@@ -7,9 +7,8 @@
 	
 	// koniec PLIKI WŁĄCZANE
 
-	//-----------FUNKCJE DODANE W 0.3.3.2
-
-	//---------------------------------------------------------------------------------------------------------
+	// USTAWIENIE STREFY CZASOWEJ
+	date_default_timezone_set('Europe/Warsaw');
 
 
 	$tlumaczenieStatusuPostow = Array("publish" => "Opublikowane", "draft" => "Szkic", "pending" => "Oczekuje na przeglad", "future" => "Zaplanowana publikacja");
@@ -253,6 +252,32 @@
 		if(TRYB_TESTOWY){
 			consoleLog($tresc);
 		}
+	}
+
+	function logToFile($komunikat, $kategoria = 'bez-kategorii'){
+	// funkcja zapisująca logi do pliku tekstowego, położonego w folderze /log folderu motywu
+	// tworzy plik (jeśli nie istnieje) z nazwą w formacie log 2017-03-08.log
+	// zapisuje nazwę szablonu w którym wywołano funkcję (np. ekran php)
+	// działa TYLKO GDY W FUNCTIONS WŁĄCZONY JEST TRYB TESTOWY
+
+		if(TRYB_TESTOWY){
+			$filename = dirname(__FILE__).'/log/' . date("Y-m-d") .'.log';
+
+		    // uchwyt pliku:
+			$fp = fopen($filename, "a");
+
+			// blokada pliku do zapisu
+			flock($fp, 2);
+			// zapisanie danych do pliku
+			$tekst = basename(get_page_template()) . "\t" . date("Y-m-d H:i:s"). "\t" . $kategoria . "\t" . $komunikat . PHP_EOL;
+			fwrite($fp, $tekst);
+
+			// odblokowanie pliku
+			flock($fp, 3);
+
+			// zamknięcie pliku
+			fclose($fp);
+		}//if(TRYB_TESTOWY)
 	}
 	
 	function returnZawartoscTabeli($tabela, $separator=', '){

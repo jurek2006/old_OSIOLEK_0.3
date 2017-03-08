@@ -11,6 +11,10 @@ get_header("ekran"); ?>
 // ukrycie paska admina
 show_admin_bar( false );
 
+logToFile("Uruchomienie strony ekran",'ekran_kasa');
+
+
+
 // $dzisiaj to data dzisiejsza (Może być jednak modyfikowana poniżej, w celach testowych za pomocą pods ekran_kasa_ustawienia)
 // na jej podstawie generowany i wyświetlany jest repertuar na ekran
 $dzisiaj = date("Y-m-d");
@@ -64,6 +68,8 @@ function generujDzien($dzien = NULL){
 	//korzysta z funkcji walidujDatę z functions.php
 		$dzien = date("Y-m-d");
 	}
+
+	logToFile("Rozpoczęcie generowania repertuaru dnia dla daty: " . $dzien,'ekran_kasa');
 
 	$datetime = new DateTime($dzien);
 	$dzien_szukany = $datetime->format('Y-m-d');
@@ -163,6 +169,7 @@ function generujDzien($dzien = NULL){
 	$pods = pods( 'ekran_kasa', $params );
 	//loop through records
 	if ( $pods->total() > 0 ) {
+		logToFile("Usunięcie wszystkich wygenerowanych wcześniej wpisów w pods ekran_kasa",'ekran_kasa');
 
 		while ( $pods->fetch() ) {
 			$pods->delete(); 
@@ -184,6 +191,7 @@ function generujDzien($dzien = NULL){
 		foreach ($ekran_kasa as $element_ekran_kasa) {
 			$element_ekran_kasa['kolejnosc'] = $licznik++;
 		    $new_id = pods('ekran_kasa')->add($element_ekran_kasa);
+		    logToFile(sprintf("Dodanie do ekran_kasa id %s %s", $new_id, $element_ekran_kasa['title'], $new_id),'ekran_kasa');
 		}
 	}
 
