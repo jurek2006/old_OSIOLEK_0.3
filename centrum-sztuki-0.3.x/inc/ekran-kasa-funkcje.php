@@ -63,7 +63,7 @@ function generujEkranKasa(){
 	else{
 	// wykonanie faktycznego generowania
 
-		logToFile("Rozpoczęcie generowania repertuaru dnia dla daty: " . $dzien, 'ekran-kasa-funkcje');
+		logToFile("Rozpoczęcie generowania repertuaru dnia dla daty: " . $dzien, 'ekran-kasa-funkcje'); //DIAGNOSTYCZNE
 
 		$datetime = new DateTime($dzien);
 		$dzien_szukany = $datetime->format('Y-m-d');

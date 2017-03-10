@@ -173,11 +173,8 @@
 			function wlacz_wylacz_komentarz(){
 
 				if($("#wyswietlaj_komentarze").is(':checked')){
-					console.log("Ready checked");
 
-					$(".komentarz").prop('readonly', false).focus(function(){
-						$(this).blur();
-					});
+					$(".komentarz").prop('readonly', false).off('focus');
 				}
 				else{
 					$(".komentarz").prop('readonly', true).focus(function(){
@@ -260,7 +257,7 @@
 			<input type="button" name="szczegoly" value="Pokaż/ukryj szczegóły" id="szczegolyButton" title="" class="button" />
 			<script type="text/javascript">
 				obslugaButtonToggle("#szczegolyButton",'.tabela',"Ukryj szczegóły", "Pokaż szczegóły");
-				$(".button").button();
+				// $(".button").button();
 			</script>
 			</div>
 		</div>
