@@ -93,6 +93,9 @@
 
 	}//if(isset( $_POST["zapisz"]))
 
+	// WYMUSZENIE WYGENEROWANIA WPISÓW DNIA (JEŚLI JEST TO POTRZEBNE) - żeby nie było tak, że w formularz wstawiane są wpisy z dnia wcześniejszego i później sztucznie duplikowane
+	generujEkranKasa();
+
 	?>
 	<form action="<?php echo esc_url( $_SERVER['REQUEST_URI'] )?>" method="post">
 	<!-- formularz edycji wpisów na stronę ekranu repertuaru w kasie -->
