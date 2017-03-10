@@ -37,4 +37,13 @@
 
 	// uprawnienia potrzebne do wyświetlania w dashboard menu zarządzania ekranem repertuaru w kasie
 	define("UPR_DSH_MENU_KASA_EKRAN", 'edit_ekran_kasa_biletowa');
+
+	// ------------------------------------------------------------------------------------------------------------------------
+
+	// NAZWY PODS
+	// -----------
+
+	define("POD_EKRAN_KASA_USTAWIENIA", 'ekran_kasa_ustawienia');
+
+	define("POD_EKRAN_KASA", 'ekran_kasa');
 ?>

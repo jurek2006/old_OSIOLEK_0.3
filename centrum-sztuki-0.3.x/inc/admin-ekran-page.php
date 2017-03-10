@@ -1,6 +1,12 @@
 <h1>Ustawienia ekranu repertuaru w kasie</h1>
 
 <?php
+	// wczytanie funkcji przydatnych przy obsłudze (i ustawieniach) ekranu w kasie z pliku
+	require get_template_directory(). '/inc/ekran-kasa-funkcje.php';
+	// ---------------------------------------------------------------------------------------------------------------------------
+
+
+	logToFile("Uruchomienie strony admin-ekran-page",'admin-ekran-page');
 	
 	if(isset( $_POST["zapisz"])){
 	//Jeśli kliknięto przycisk "Zapisz" - czyli przesłano formularz projekcji do zapisania
@@ -15,11 +21,11 @@
 
 			public function __construct($nazwa_pods, $godzina, $nazwa_wydarzenia, $id, $komentarz){
 				// paramatry:
-				// - $nazwa_pods - definiuję nazwę pods do której zapisywane są dane (standardowo tutaj ekran_kasa)
+				// - $nazwa_pods - definiuję nazwę pods do której zapisywane są dane (standardowo tutaj POD_EKRAN_KASA)
 				// - $godzina, $nazwa_wydarzenia, $id, $komentarz - to tablice "ściągające" dane z formularza po zatwierdzeniu 
 
 				// Standardowe użycie klasy wygląda następująco: 
-				// $zmienioneDaneDoPods = new ZmienioneDaneDoPods('ekran_kasa',$_POST["godzina"],$_POST["nazwa_wydarzenia"],$_POST["id"], $_POST["komentarz"]);
+				// $zmienioneDaneDoPods = new ZmienioneDaneDoPods(POD_EKRAN_KASA,$_POST["godzina"],$_POST["nazwa_wydarzenia"],$_POST["id"], $_POST["komentarz"]);
 
 				if(count($godzina) == count($nazwa_wydarzenia) AND count($godzina) == count($id) AND count($godzina) == count($komentarz)){
 				// jeśli ilość elementów we wszystkich czterech tablicach $godzina, $nazwa_wydarzenia, $id, $komentarz jest jednakowa (co powinno być formalnością) tworzona jest instancja klasy
@@ -49,7 +55,7 @@
 					    'nazwa_wydarzenia' 	=> esc_attr($this->_nazwa_wydarzenia[$i]),
 					    'komentarz' 	=> esc_attr($this->_komentarz[$i])
 					);
-
+					logToFile(sprintf("Zapis pods %s godzina: %s nazwa_wydarzenia: %s komentarz: %s",$this->_id[$i], $data['godzina'], $data['nazwa_wydarzenia'], $data['komentarz']),'admin-ekran-page');
 					$pod->save( $data ); 
 
 				}
@@ -60,7 +66,7 @@
 
 		// ------ WPISY FILMÓW -------
 		// pobranie danych (tabeli wpisów filmów) z formularza do zmiennej $zmienioneDaneDoPods
-		$zmienioneDaneDoPods = new ZmienioneDaneDoPods('ekran_kasa', $_POST["godzina"], $_POST["nazwa_wydarzenia"], $_POST["id"], $_POST["komentarz"]);
+		$zmienioneDaneDoPods = new ZmienioneDaneDoPods(POD_EKRAN_KASA, $_POST["godzina"], $_POST["nazwa_wydarzenia"], $_POST["id"], $_POST["komentarz"]);
 		// zapisanie (tabeli wpisów filmów) danych w pods
 		$zmienioneDaneDoPods->saveAllElementsToPods();
 
@@ -68,7 +74,7 @@
 
 
 		$params = array( 'limit' => -1);
-		$pods = pods( 'ekran_kasa_ustawienia', $params );
+		$pods = pods( POD_EKRAN_KASA_USTAWIENIA, $params );
 
 		if(!empty($pods)){
 			$pods->save( 'dopisek', $_POST["dopisek"] );
@@ -104,13 +110,13 @@
 
 	<?php
 
-	// POBIERANIE WPISÓW WYGENEROWANYCH NA EKRAN (z pods ekran_kasa)
+	// POBIERANIE WPISÓW WYGENEROWANYCH NA EKRAN (z pods POD_EKRAN_KASA)
 	// Sortowanie odbywa się na podstawie wartośc pola kolejnosc!!!
 							
 	$params = array( 	'limit' => -1,
 						'orderby'  => 'kolejnosc.meta_value');
 	
-	$pods = pods( 'ekran_kasa', $params );
+	$pods = pods( POD_EKRAN_KASA, $params );
 
 	if ( $pods->total() > 0 ) {
 
@@ -139,9 +145,9 @@
 
 	}//if ( $pods->total() > 0 )
 
-	// POBIERANIE DOPISKÓW POD WPISAMI [aktualnie na ceny biletów] (z pods ekran_kasa_ustawienia) - później także ustawień "stylów" na ekran
+	// POBIERANIE DOPISKÓW POD WPISAMI [aktualnie na ceny biletów] (z pods POD_EKRAN_KASA_USTAWIENIA) - później także ustawień "stylów" na ekran
 	$params = array( 'limit' => -1);
-	$pods = pods( 'ekran_kasa_ustawienia', $params );
+	$pods = pods( POD_EKRAN_KASA_USTAWIENIA, $params );
 	if(!empty($pods)){
 		$wyswietlaj_komentarze = $pods->field('wyswietlaj_komentarze');
 		$dopisek = $pods->display('dopisek');

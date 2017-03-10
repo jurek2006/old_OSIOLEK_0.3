@@ -8,10 +8,16 @@ Description: Obsługuje podstronę do wyświetlania tabeli z repertuarem na ekra
 get_header("ekran"); ?>
 
 <?php
+
+// wczytanie funkcji przydatnych przy obsłudze (i ustawieniach) ekranu w kasie z pliku
+require get_template_directory(). '/inc/ekran-kasa-funkcje.php';
+// ---------------------------------------------------------------------------------------------------------------------------
+
+
 // ukrycie paska admina
 show_admin_bar( false );
 
-logToFile("Uruchomienie strony ekran",'ekran_kasa');
+logToFile("Uruchomienie strony ekran",POD_EKRAN_KASA);
 
 
 
@@ -21,7 +27,7 @@ $dzisiaj = date("Y-m-d");
 
 // Pobieranie danych z pods ustawień ekran_kasa_ustawienia
 $params = array( 'limit' => -1);
-$pods = pods( 'ekran_kasa_ustawienia', $params );
+$pods = pods( POD_EKRAN_KASA_USTAWIENIA, $params );
 if(!empty($pods)){
 	$dzisiaj_testowe = $pods->display('dzisiaj_testowe');
 	$dzien_wygenerowany = $pods->display('dzien_wygenerowany');
@@ -69,7 +75,7 @@ function generujDzien($dzien = NULL){
 		$dzien = date("Y-m-d");
 	}
 
-	logToFile("Rozpoczęcie generowania repertuaru dnia dla daty: " . $dzien,'ekran_kasa');
+	logToFile("Rozpoczęcie generowania repertuaru dnia dla daty: " . $dzien,POD_EKRAN_KASA);
 
 	$datetime = new DateTime($dzien);
 	$dzien_szukany = $datetime->format('Y-m-d');
@@ -166,10 +172,10 @@ function generujDzien($dzien = NULL){
 	// USUNIĘCIE wszystkich wygenerowanych wcześniej wpisów w pods ekran_kasa
 	$params = array( 'limit' => -1);
 	
-	$pods = pods( 'ekran_kasa', $params );
+	$pods = pods( POD_EKRAN_KASA, $params );
 	//loop through records
 	if ( $pods->total() > 0 ) {
-		logToFile("Usunięcie wszystkich wygenerowanych wcześniej wpisów w pods ekran_kasa",'ekran_kasa');
+		logToFile("Usunięcie wszystkich wygenerowanych wcześniej wpisów w pods ekran_kasa",POD_EKRAN_KASA);
 
 		while ( $pods->fetch() ) {
 			$pods->delete(); 
@@ -190,8 +196,8 @@ function generujDzien($dzien = NULL){
 		$licznik = 1;
 		foreach ($ekran_kasa as $element_ekran_kasa) {
 			$element_ekran_kasa['kolejnosc'] = $licznik++;
-		    $new_id = pods('ekran_kasa')->add($element_ekran_kasa);
-		    logToFile(sprintf("Dodanie do ekran_kasa id %s %s", $new_id, $element_ekran_kasa['title'], $new_id),'ekran_kasa');
+		    $new_id = pods(POD_EKRAN_KASA)->add($element_ekran_kasa);
+		    logToFile(sprintf("Dodanie do ekran_kasa id %s %s", $new_id, $element_ekran_kasa['title'], $new_id),POD_EKRAN_KASA);
 		}
 	}
 
@@ -365,7 +371,7 @@ function generujDzien($dzien = NULL){
 	// zapisanie też wyswietlaj_komentarze jako 'tak' (domyślnie zawsze dodawane są komentarze do projekcji)
 
 	$params = array( 'limit' => -1);
-	$pods = pods( 'ekran_kasa_ustawienia', $params );
+	$pods = pods( POD_EKRAN_KASA_USTAWIENIA, $params );
 	if(!empty($pods)){
 		$pods->save( 'dopisek', $dopisek_do_zapisania);
 		$pods->save( 'dopisek2', $dopisek_do_zapisania2);
@@ -381,7 +387,7 @@ function wyswietlajRepertuarDnia(){
 	// Pobieranie z pods ustawień ekran_kasa_ustawienia dnia dla którego jest wygenerowana zawartośc ekranu 
 	// oraz pobieranie zdefiniowanych w tym samym pods wielkości czcione
 	$params = array( 'limit' => -1);
-	$pods = pods( 'ekran_kasa_ustawienia', $params );
+	$pods = pods( POD_EKRAN_KASA_USTAWIENIA, $params );
 	if(!empty($pods)){
 		$dzien_wygenerowany = $pods->display('dzien_wygenerowany');
 		$filmy_font_size = $pods->display('filmy_font_size');
@@ -433,7 +439,7 @@ function wyswietlajRepertuarDnia(){
 	$params = array( 	'limit' => -1,
 						'orderby'  => 'kolejnosc.meta_value');
 	
-	$pods = pods( 'ekran_kasa', $params );
+	$pods = pods( POD_EKRAN_KASA, $params );
 
 	if ( $pods->total() > 0 ) {
 
