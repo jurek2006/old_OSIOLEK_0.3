@@ -7,7 +7,7 @@
 	// TESTOWE
 	// -------
 	// tryb testowy - jeśli ustawiony na true wyświetlane są dodatkowe komunikaty (używane za pomocą funkcji testoweConsoleLog)
-	define("TRYB_TESTOWY", true);
+	define("TRYB_TESTOWY", false);
 	// ------------------------------------------------------------------------------------------------------------------------
 	
 	// SETTINGS
