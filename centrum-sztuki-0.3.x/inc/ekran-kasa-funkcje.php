@@ -43,6 +43,7 @@ function czyGenerowacEkranKasa(){
 	else{
 	// jeśli nie udało się dostać do ustawień w POD_EKRAN_KASA_USTAWIENIA zwraca null (wcześniej wyświetla komunikat)
 		echo "<b>Błąd pobierania ustawień ekran_kasa_ustawienia</b>";
+		consoleLog("Błąd pobierania ustawień ekran_kasa_ustawienia"); //DIAGNOSTYCZNE
 		logToFile('Błąd pobierania ustawień ekran_kasa_ustawienia', 'ekran-kasa-funkcje'); //DIAGNOSTYCZNE
 		return NULL;
 	}
@@ -62,7 +63,7 @@ function generujEkranKasa(){
 	}
 	else{
 	// wykonanie faktycznego generowania
-
+		consoleLog("Rozpoczęcie generowania repertuaru dnia dla daty: " . $dzien); //DIAGNOSTYCZNE
 		logToFile("Rozpoczęcie generowania repertuaru dnia dla daty: " . $dzien, 'ekran-kasa-funkcje'); //DIAGNOSTYCZNE
 
 		$datetime = new DateTime($dzien);
