@@ -3,3 +3,15 @@
 3. Dodanie pods - 'ekran_kasa' (jak w laboratorium) DODANE
 4. Dodanie pola w pods 'wydarzenia' - dodanie pola 'wylacz_z_ekran_kasa' (to pole będzie używane do niewyświetlania na ekranie repertuaru w kasie, jeśli wydarzenie jest dublem projekcji) DODANE
 5. UWAGA! - po zmianie w 4. trzeba wszystkie aktualne wydarzenia w sali widowiskowej OWE otworzyć i zapisać ponownie, żeby miały ustawioną wartośc tego pola ZROBIONE
+------
+6. Dodanie pól w pods ekran_kasa_ustawienia (tak jak w laboratorium) ZROBIONE
+7. Dodanie w użytkownikach Roles "Kasa_biletowa" i capability "edit_ekran_kasa_biletowa" (przypisanie jej do roli "Kasa biletowa" i "Administrator"), zostawienie tej roli jeszcze tylko ustawień read ZROBIONE
+8. Dodanie nowego użytkownika Kasa o roli "Kasa_biletowa" ZROBIONE
+------
+9. Dodać pods "cennik_ceny" (jak w laboratorium) ZROBIONE
+10. Wypełnienie "cennik_ceny" cenami ZROBIONE
+11. Usunięcie starego pods "cennik" ZROBIONE
+12. Dodanie pods "cennik_dni_tygodnia" i "cennik_dni_kalendarz" (jak w laboratorium) ZROBIONE
+13. Edycja ekran_kasa_ustawienia (jak w laboratorium) - dodanie drugiego pola na dopisek i pola bool wyswietlaj_komentarze oraz pola komentarze_font_size ZROBIONE
+14. W pods ekran_kasa dodanie pola komentarz ZROBIONE
+------

@@ -1,14 +1,24 @@
 @charset "utf-8";
 /*
-Theme Name: Centrum Sztuki 0.3.x
+Theme Name: Centrum Sztuki 0.3.8
 Author: Jurek Skowron
 Author URI: http://jurekskowron.pl
-Version: 0.3.x
+Version: 0.3.8
 
 
-Description: Motyw dla strony Centrum Sztuki kultura.olawa.pl na wordpressie. Wersja 0.3.x - rozwojowa. 
+Description: Motyw dla strony Centrum Sztuki kultura.olawa.pl na wordpressie. Wersja 0.3.8
 
-Zmiany w wersji 0.3.x (rozwojowa)
+Zmiany w wersji 0.3.8
+- Naprawiono pobieranie wersji językowej przy generowaniu ekran-kasa, problem "niechcianych dubli" oraz nie do końca działający checkbox "Wyświetlaj komentarze"
+- Trochę uporządkowana funkcja generowania zawartości ekranu 
+
+Zmiany w wersji 0.3.7
+- ekran (repertuaru w kasie) pobiera automatycznie wydarzenia, projekcje filmów i ceny biletów w zależności od dnia
+	(nie są brane pod uwagę ceny wydarzeń, a także "ceny specjalne" jak np. DKF, Kino Seniora czy MET - wszystkie te należy dopisać "z ręki"), jest możliwość niewyświetlania pobranych komentarzy (inf. o wer. językowej projekcji)
+- dodanie strony zarządzania ekranem repertuaru w kasie 
+- przerobienie szablonu cennik, który teraz korzysta z pods cennik_ceny (ten zawiera ceny regularne, jak wt-czw, tania środa itd. oraz specjalne jak DKF, MET, Kino Seniora)
+- dodanie cennik_dni_tygodnia (zawierający dni tygodnia od ndz do sob i przyporządkowane im standardowe ceny, jak np. wt-czw, tania środa itd.)
+- cennik_dni_kalendarz (jest to kalendarz wyjątków w powyższym, można za jego pomocą ustawić, że np. jakaś środa nie jest tanią środą, a cennikiwm świąteczno-weekenowym)
 
 Zmiany w wersji 0.3.6:
 - POdstawowa obsługa ekranu repertuaru w kasie (wymaga odpowiednich zmian w pods i strukturze WP)

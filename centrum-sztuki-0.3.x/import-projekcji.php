@@ -329,7 +329,8 @@ get_header();
 					//Pobierane są tylko projekcje przyszłe
 
 					$datetime = new DateTime();
-					$dzisiajDate = $datetime->format('Y-m-d');		
+					$dzisiajDate = $datetime->format('Y-m-d');	
+					$projekcjeWWW = Array(); //utworzenie pustej tabeli na projekcje (tu był problem, gdy nie znaleziono żadnej projekcji)	
 
 					$params = array( 	'limit' => -1,
 											'where' => 'DATE( termin_projekcji.meta_value ) >= "'.$dzisiajDate.'" 

@@ -1,32 +1,14 @@
 <?php
-	// TESTOWE
-	// tryb testowy - jeśli ustawiony na true wyświetlane są dodatkowe komunikaty (używane za pomocą funkcji testoweConsoleLog)
-	define("TRYB_TESTOWY", true);
 	
-	//SETTINGS
-	
-	//PRZESUNIECIE_CZASU określa różnicę pomiędzy czasem serwera a czasem rzeczywistym
-	//np. serwer ma czas 8:30 a jest rzeczywiście 10:30 więc stała ma wartość "+2 hour"
-	//(stała używana jest w funkcji pobierzDateTeraz() wywoływanej przy każdym pobieraniu aktualnego czasu
-	define("PRZESUNIECIE_CZASU", "+1 hour");
 
-	// ADRES SYSTEMU BILETOWEGO VISUALTICKET DLA CSO
-	define("ADRES_VISUALTICKET", "https://s7.systembiletowy.pl/cso/");
+	//PLIKI WŁĄCZANE
+	require get_template_directory(). '/inc/function-settings.php';		//PLIK USTAWIEŃ (razem z uprawieniami)!!!!!!!!
+	require get_template_directory(). '/inc/function-admin-ekran.php';  //plik funkcji potrzebnych do strony obsługi ekranu repertuaru kasowego (w dashboardzie)
 	
-	//koniec SETTINGS
+	// koniec PLIKI WŁĄCZANE
 
-	//-----------FUNKCJE DODANE W 0.3.3.2
-
-	//---------------------------------------------------------------------------------------------------------
-	//stała określa, jakie uprawnienia musi mieć użytkownik do strony importu projekcji
-	//(używane przy wyświetlaniu treści strony w szablonie ale także do dołączania skryptu .js)
-	define("UPR_IMPORT_PROJEKCJI", "publish_posts");
-	
-	//stała określająca uprawnienia potrzebne do dostępu do strony kino-zarządzanie (kino-zarzadzanie.php)
-	define("UPR_KINO_ZARZADZANIE", "publish_posts"); 
-	
-	//uprawnienia potrzebne do wyświetlania menu top-user-navigation zamiast top-navigation
-	define("UPR_MENU_USER", "publish_posts"); 
+	// USTAWIENIE STREFY CZASOWEJ
+	date_default_timezone_set('Europe/Warsaw');
 
 
 	$tlumaczenieStatusuPostow = Array("publish" => "Opublikowane", "draft" => "Szkic", "pending" => "Oczekuje na przeglad", "future" => "Zaplanowana publikacja");
@@ -38,7 +20,7 @@
 //		wp_enqueue_script( 'jquery-ui-mouse' );
 //		wp_enqueue_script( 'jquery-ui-accordion' );
 		wp_enqueue_script( 'jquery-ui-autocomplete' );
-//		wp_enqueue_script( 'jquery-ui-slider' );
+		wp_enqueue_script( 'jquery-ui-slider' );
 //		wp_enqueue_script( 'jquery-ui-tabs' );
 //		wp_enqueue_script( 'jquery-ui-sortable' );
 //		wp_enqueue_script( 'jquery-ui-draggable' );
@@ -46,10 +28,12 @@
 		wp_enqueue_script( 'jquery-ui-datepicker' );
 //		wp_enqueue_script( 'jquery-ui-resize' );
 		wp_enqueue_script( 'jquery-ui-dialog' );
-		//wp_enqueue_script( 'jquery-ui-button' );
+		wp_enqueue_script( 'jquery-ui-button' );
 		wp_enqueue_script( 'jquery-ui-tooltip' );
 	}
 	add_action( 'wp_enqueue_scripts', 'add_jquery_ui' );
+	// dodanie  jQueryUI także do stron dashboardu
+	add_action( 'admin_enqueue_scripts', 'add_jquery_ui' );
 	
 	//dodanie plików stylu jQueryUI z serwerów Google
 	function jquery_ui_enqueue_style(){
@@ -60,6 +44,8 @@
 						false);
 	}
 	add_action( 'wp_enqueue_scripts', 'jquery_ui_enqueue_style' );
+	// dodanie  css jQueryUI także do stron dashboardu
+	add_action( 'admin_enqueue_scripts', 'jquery_ui_enqueue_style' );
 
 	
 	//dołączenie skryptu visualticket_import.js jeśli uzytkownik ma uprawnienia na poziomie
@@ -84,13 +70,22 @@
 	}  
 	add_action( 'wp_enqueue_scripts', 'add_my_script' );
 
+	function add_my_admin_script(){
+	// Dołączanie skryptu skrypty-admin.js dla stron z dashboardu (zapewnia to is_admin())
+		if(is_admin()){
+			wp_register_script('skrypty-admin', get_stylesheet_directory_uri().'/js/skrypty-admin.js', array( 'jquery', 'jquery-ui-core', 'jquery-ui-slider'));
+			wp_enqueue_script('skrypty-admin');
+		}
+	}
+	add_action( 'admin_enqueue_scripts', 'add_my_admin_script' );
+
 	function my_enqueue($hook) {
 	// dodanie skryptu w menu admin, jeśli jest to strona post-new.php lub post.php (czyli strona dodawania noweg lub edycji dowolnego typu postu)
 	    if (( 'post-new.php' != $hook )&&( 'post.php' != $hook )) {
 	        return;
 	    }
 
-	    wp_enqueue_script( 'my_custom_script', get_stylesheet_directory_uri(). '/admin_js/post_dodawanie_edycja.js' );
+	    wp_enqueue_script( 'my_custom_script', get_stylesheet_directory_uri(). '/js/admin_post_dodawanie_edycja.js' );
 	}
 	add_action( 'admin_enqueue_scripts', 'my_enqueue' );
 
@@ -257,6 +252,32 @@
 		if(TRYB_TESTOWY){
 			consoleLog($tresc);
 		}
+	}
+
+	function logToFile($komunikat, $kategoria = 'bez-kategorii'){
+	// funkcja zapisująca logi do pliku tekstowego, położonego w folderze /log folderu motywu
+	// tworzy plik (jeśli nie istnieje) z nazwą w formacie log 2017-03-08.log
+	// zapisuje nazwę szablonu w którym wywołano funkcję (np. ekran php)
+	// działa TYLKO GDY W FUNCTIONS WŁĄCZONY JEST TRYB TESTOWY
+
+		if(TRYB_TESTOWY){
+			$filename = dirname(__FILE__).'/log/' . date("Y-m-d") .'.log';
+
+		    // uchwyt pliku:
+			$fp = fopen($filename, "a");
+
+			// blokada pliku do zapisu
+			flock($fp, 2);
+			// zapisanie danych do pliku
+			$tekst = basename(get_page_template()) . "\t" . date("Y-m-d H:i:s"). "\t" . $kategoria . "\t" . $komunikat . PHP_EOL;
+			fwrite($fp, $tekst);
+
+			// odblokowanie pliku
+			flock($fp, 3);
+
+			// zamknięcie pliku
+			fclose($fp);
+		}//if(TRYB_TESTOWY)
 	}
 	
 	function returnZawartoscTabeli($tabela, $separator=', '){
@@ -549,7 +570,7 @@ function zamienDateNaTekst($data, $bez_roku=FALSE){
  
  function pobieczCzescDaty($czescDaty,$dataGodz)
  //konwertuje string w formacie daty na datę i pobiera jej część
- //część do pobrania definiuje $czescDaty (zgodnie z formatem DateType funkcji date
+ //część do pobrania definiuje $czescDaty (zgodnie z formatem DateTime funkcji date)
  {
 	 if (gettype($dataGodz)=='string')
 	 //jeśli $dataGodz jest stringiem dokonuje konwersji i pobrania

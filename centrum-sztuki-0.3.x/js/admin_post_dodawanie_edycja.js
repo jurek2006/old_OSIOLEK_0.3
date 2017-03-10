@@ -18,6 +18,7 @@ jQuery(document).ready(function(){
 	//do etykiety pola "Data i godzina wydarzenia" dopisywana jest informacja, że pole wymagane
 	//jeśli przy kliknięciu Opublikuj/Zaktualizuj nie jest wypełnione "Data i godzina wydarzenia"
 	//następuje zablokowanie "wyzwolenia" przycisku i komunikat o niewypełnionym polu
+	// właściwie jest to już niepotrzebne bo wordpress też już potrafi sprawdzać to "po ludzku" na żywo
 		$('#publish').click(function(evt){
 			if($('#pods-form-ui-pods-meta-data-i-godzina-wydarzenia').val() == ''){
 				alert('Aby zapisać musi być wypełnione pole "Data i godzina wydarzenia"');
@@ -28,6 +29,18 @@ jQuery(document).ready(function(){
 		var labelHtml = $('.pods-form-ui-label-pods-meta-data-i-godzina-wydarzenia').html();
 		labelHtml += '* (pole wymagane)';
 		$('.pods-form-ui-label-pods-meta-data-i-godzina-wydarzenia').html(labelHtml);
+	}
+	else if($('.post-type-cennik_dni_kalendarz').length > 0){
+	// jeżeli jesteśmy na stronie dodawania/edycji pods cennik_dni_kalendarz
+	// ukrywamy tytuł (pole input na niego) i podczas zapisywania wpisu jako tytuł podstawiamy wybraną datę i etykietę ceny
+	// np.: 2017-02-02 - dkf
+		$('#title').hide();
+
+		$('#publish').click(function(evt){
+
+			$('#title').val($('#pods-form-ui-pods-meta-data').val() + ' - ' +  $('#pods-form-ui-pods-meta-cennik option:selected').text());
+
+		});
 	}
 
 	// post-new-php - dodawanie nowego postu
