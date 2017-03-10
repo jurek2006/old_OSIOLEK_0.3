@@ -19,44 +19,49 @@ show_admin_bar( false );
 
 logToFile("Uruchomienie strony ekran",POD_EKRAN_KASA);
 
-
-
-// $dzisiaj to data dzisiejsza (Może być jednak modyfikowana poniżej, w celach testowych za pomocą pods ekran_kasa_ustawienia)
-// na jej podstawie generowany i wyświetlany jest repertuar na ekran
-$dzisiaj = date("Y-m-d");
-
-// Pobieranie danych z pods ustawień ekran_kasa_ustawienia
-$params = array( 'limit' => -1);
-$pods = pods( POD_EKRAN_KASA_USTAWIENIA, $params );
-if(!empty($pods)){
-	$dzisiaj_testowe = $pods->display('dzisiaj_testowe');
-	$dzien_wygenerowany = $pods->display('dzien_wygenerowany');
-
-	if(!empty($dzisiaj_testowe)){
-	// Jeśli ustawiono wartość pola pods dzisiaj_testowe to ekran traktuje dalej ustawioną tam datę jako dzisiejszą
-		$dzisiaj = $dzisiaj_testowe;
-	}	
-
-	// Sprawdzenie, czy należy wygenerować nową zawartość ekranu
-	// Jeśli data $dzisiaj jest różna od $dzien_wygenerowany to generuje się nową zawartość i ustawia w pods jako dzien_wygenerowany datę $dzisiaj
-	if($dzien_wygenerowany != $dzisiaj){
-		consoleLog("generowanie dla daty ".$dzisiaj);
-
-		// wygenerowanie nowej zawartości ekranu
-		generujDzien($dzisiaj);
-
-		// zapisanie $dzisiaj jako wartości pola dzien_wygenerowany 
-		$pods->save( 'dzien_wygenerowany', $dzisiaj ); 
-
-	}
-	else{
-		consoleLog("Dzień ".$dzisiaj." już był generowany");
-	}
-
-}//if(!empty($pods))
-else{
-	echo "<b>Błąd pobierania ustawień ekran_kasa_ustawienia</b>";
+$data_generowania = czyGenerowacEkranKasa(); //czyGenerowacEkranKasa() sprawdza czy generować dla danego dnia, jeśli tak, zwraca datę
+if(!$data_generowania){
+// jeśli $data_generowania nie jest ani false ani NULL
+	// wygenerowanie nowej zawartości ekranu
+	generujDzien($data_generowania);
 }
+
+// // $dzisiaj to data dzisiejsza (Może być jednak modyfikowana poniżej, w celach testowych za pomocą pods ekran_kasa_ustawienia)
+// // na jej podstawie generowany i wyświetlany jest repertuar na ekran
+// $dzisiaj = date("Y-m-d");
+
+// // Pobieranie danych z pods ustawień ekran_kasa_ustawienia
+// $params = array( 'limit' => -1);
+// $pods = pods( POD_EKRAN_KASA_USTAWIENIA, $params );
+// if(!empty($pods)){
+// 	$dzisiaj_testowe = $pods->display('dzisiaj_testowe');
+// 	$dzien_wygenerowany = $pods->display('dzien_wygenerowany');
+
+// 	if(!empty($dzisiaj_testowe)){
+// 	// Jeśli ustawiono wartość pola pods dzisiaj_testowe to ekran traktuje dalej ustawioną tam datę jako dzisiejszą
+// 		$dzisiaj = $dzisiaj_testowe;
+// 	}	
+
+// 	// Sprawdzenie, czy należy wygenerować nową zawartość ekranu
+// 	// Jeśli data $dzisiaj jest różna od $dzien_wygenerowany to generuje się nową zawartość i ustawia w pods jako dzien_wygenerowany datę $dzisiaj
+// 	if($dzien_wygenerowany != $dzisiaj){
+// 		consoleLog("generowanie dla daty ".$dzisiaj);
+
+// 		// wygenerowanie nowej zawartości ekranu
+// 		generujDzien($dzisiaj);
+
+// 		// zapisanie $dzisiaj jako wartości pola dzien_wygenerowany 
+// 		$pods->save( 'dzien_wygenerowany', $dzisiaj ); 
+
+// 	}
+// 	else{
+// 		consoleLog("Dzień ".$dzisiaj." już był generowany");
+// 	}
+
+// }//if(!empty($pods))
+// else{
+// 	echo "<b>Błąd pobierania ustawień ekran_kasa_ustawienia</b>";
+// }
 
 // WYŚWIETLANIE EKRANU --------------------------------------------------------------------------------------------------------------------------------
 
@@ -125,9 +130,13 @@ function generujDzien($dzien = NULL){
                 $komentarz = "/$projekcja_wersja_jezykowa"; 
             }
             else if(!empty($standardowa_wersja_jezykowa)){
-                //jeśli wybrano wersję językową dla filmu (i nie jest ona nadpisana przez wersję projekcji
-                //to jest ona wyświetlana w polu komentarza
+            //jeśli wybrano wersję językową dla filmu (i nie jest ona nadpisana przez wersję projekcji
+            //to jest ona wyświetlana w polu komentarza
                 $komentarz = "/$standardowa_wersja_jezykowa"; 
+            }
+            else{
+            // jeśli także nie zdefiniowano wersji językowej dla filmu to komentarz zostaje pusty
+            	$komentarz = '';
             }
 
 			// Wypełnienie tablicy ekran_kasa projekcjami pobranymi dla danego dnia
