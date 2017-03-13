@@ -53,14 +53,19 @@
 	//a więc szablon aktualnej strony to 
 	// dołączanie pliku ze skryptami (np. ze skryptem antyspamowym dla adresów email) - dla dowolnej strony i 
 	function add_my_script() {
-		//spolszczenie datepicker z jQueryUI
-		//wp_register_script('datepicker_pl', get_stylesheet_directory_uri().'/visualticket_import/datepicker-pl.js', array( 'jquery' ));
 
 		//mój skrypt importu terminów-projekcji z VisualTicket
 		wp_register_script('visualticket_import', get_stylesheet_directory_uri().'/visualticket_import/visualticket_import.js', array( 'jquery' ));
 		if (current_user_can( UPR_IMPORT_PROJEKCJI ) && is_page_template('import-projekcji.php')){
-			//wp_enqueue_script('datepicker_pl');
+
 			wp_enqueue_script('visualticket_import');
+		}
+
+		// skrypty dołączane do szablonu ekran.php (obsługi ekranu repertuaru w kasie)
+		wp_register_script('skrypty-ekran', get_stylesheet_directory_uri().'/js/ekran.js', array( 'jquery' ));
+		if(is_page_template('ekran.php')){
+
+			wp_enqueue_script('skrypty-ekran');
 		}
 
 		// dołączanie skryptu ze skryptami (js/skrypty.js) zawierającego m.in. skryptu antyspamowe dla adresów email
