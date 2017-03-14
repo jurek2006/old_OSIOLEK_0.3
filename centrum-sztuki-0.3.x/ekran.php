@@ -72,7 +72,7 @@ function wyswietlajRepertuarDnia(){
 
 	?>
 		<p class="naglowekDnia"><?php echo zamienDzienTygodniaLiczbowyNaSlowny(pobieczCzescDaty('w',$dzien_wygenerowany)).', '.zamienDateNaTekst($dzien_wygenerowany, $bez_roku=FALSE);  ?>
-			<span class="godz">00</span>:<span class="min">00</span>:<span class="sec">00</span>
+			<span class="godz">00</span><span class="srednik">:</span><span class="min">00</span><span class="srednik">:</span><span class="sec">00</span>
 		</p>
 
 		<table><!-- początek tabeli repertuaru -->
@@ -100,7 +100,7 @@ function wyswietlajRepertuarDnia(){
 			$godzina = $pods->display('godzina' );
 			$komentarz = $pods->display('komentarz');
 			?>
-			<tr><td>
+			<tr class="<?php echo str_replace(":","-", strip_tags($godzina)) /* dodanie do tr klasy z godziną */?>"><td> 
 			<?php echo strip_tags($godzina).'&nbsp'?></td><td><?php echo strip_tags($nazwa_wydarzenia);
 			if($wyswietlaj_komentarze){
 			// jeśli zaznaczono checkbox wyswietlaj_komentarze wyświetla komentarz przy każdej projekcji
