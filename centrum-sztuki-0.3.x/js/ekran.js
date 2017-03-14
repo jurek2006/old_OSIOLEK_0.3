@@ -5,7 +5,7 @@
 // =======================================================================================================
 
 // KONFIGURACYJNE:
-var zadanyCzasTestowy = '18:14'; //zmienna określająca godzinę wyświetlaną na ekranie (godz. startu) 
+var zadanyCzasTestowy = false; //zmienna określająca godzinę wyświetlaną na ekranie (godz. startu) 
 // jeśli przypisane 0 lub false to żadnych zmian - godzina taka, jak w systemie 
 // (przykładowo zadanyCzasTestowy = "18:00";)
 
@@ -23,7 +23,7 @@ jQuery(document).ready(function(){
 	
 });
 
-function ukryjMinione(zadanyCzasTestowy, czasDoZnikniecia = 0){
+function ukryjMinione(zadanyCzasTestowy, czasDoZnikniecia){
 // funkcja ukrywająca na ekranie repertuaru wydarzenia, które już się odbyły
 
 	var czasyProjekcji = [];
