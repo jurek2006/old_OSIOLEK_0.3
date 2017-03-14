@@ -39,6 +39,10 @@ p{
 		border-bottom: 1px solid darken($tekst, 50%);
 		font-size: $font-size-naglowka; 
 		color: $kolor-naglowka;
+
+		.godz, .min, .sec, .srednik{
+			color: $tekst;
+		}
 	}
 
 	&.dopisek{

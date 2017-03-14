@@ -72,7 +72,9 @@ function wyswietlajRepertuarDnia(){
 
 	?>
 		<p class="naglowekDnia"><?php echo zamienDzienTygodniaLiczbowyNaSlowny(pobieczCzescDaty('w',$dzien_wygenerowany)).', '.zamienDateNaTekst($dzien_wygenerowany, $bez_roku=FALSE);  ?>
-			<span class="godz">00</span><span class="srednik">:</span><span class="min">00</span><span class="srednik">:</span><span class="sec">00</span>
+			<!-- trochę odstępu -->	&nbsp; 
+			<span class="godz">00</span><span class="srednik">:</span><span class="min">00</span>
+			<!-- <span class="srednik">:</span><span class="sec">00</span> część odpowiadająca za wyświetlanie sekund, wystarczy ją odkomentować, żeby działała -->
 		</p>
 
 		<table><!-- początek tabeli repertuaru -->

@@ -5,9 +5,11 @@
 // =======================================================================================================
 
 // KONFIGURACYJNE:
-var zadanyCzasTestowy = false; //zmienna określająca godzinę wyświetlaną na ekranie (godz. startu) 
+var zadanyCzasTestowy = '18:14'; //zmienna określająca godzinę wyświetlaną na ekranie (godz. startu) 
 // jeśli przypisane 0 lub false to żadnych zmian - godzina taka, jak w systemie 
 // (przykładowo zadanyCzasTestowy = "18:00";)
+
+var czasDoZnikniecia = 15; //czas (w minutach) do zniknięcia wydarzenia/projekcji (czyli np. jeśli wynosi 15 to wydarzenie na 18:00 zniknie o 18:15)
 
 // jeśli zadanyCzasTestowy nie jest poprawnym stringiem opisującym godzinę, to przyjmuje wartość false
 if(sprawdzPoprawnoscGodziny(zadanyCzasTestowy) == false){ zadanyCzasTestowy = false; }
@@ -17,11 +19,11 @@ var $ = jQuery.noConflict();
 
 jQuery(document).ready(function(){
 	zegarek(zadanyCzasTestowy); 	//włączenie działania zegarka
-	ukryjMinione(zadanyCzasTestowy);//włączenie ukrywania wydarzeń/projekcji minionych
+	ukryjMinione(zadanyCzasTestowy, czasDoZnikniecia);//włączenie ukrywania wydarzeń/projekcji minionych
 	
 });
 
-function ukryjMinione(zadanyCzasTestowy){
+function ukryjMinione(zadanyCzasTestowy, czasDoZnikniecia = 0){
 // funkcja ukrywająca na ekranie repertuaru wydarzenia, które już się odbyły
 
 	var czasyProjekcji = [];
@@ -41,13 +43,13 @@ function ukryjMinione(zadanyCzasTestowy){
 
 	setInterval(function(){
 		// czasAktualny to czas testowy (czas systemu skorygowany o różnicę)
-		var czasAktualny = new Date(Date.now() + roznica);
+		var czasAktualny = new Date(Date.now() + roznica - czasDoZnikniecia*60*1000);
 
 		for (var item in czasyProjekcji) {
 		// sprawdzenie dla każdego wydarzenia/projekcji czy nie minęła już jego godzina
 
 		    if(czasyProjekcji[item] < czasAktualny){
-		    	// jeśli minęła już godzina wydarzenia, to jest ono ukrywane (cały tr) w tabeli
+		    	// jeśli minęła już godzina wydarzenia (+ czasDoZnikniecia przeliczony na milisekundy), to jest ono ukrywane (cały tr) w tabeli
 		    	$('table .'+item).slideUp('slow');
 		    }
 		}	
