@@ -98,7 +98,13 @@ function generujEkranKasa(){
 				$q2d3d = $pods->field('2d3d');
 				$projekcja_wersja_jezykowa = $pods->display('wersja_jezykowa');
 				$standardowa_wersja_jezykowa = $pods->display('film.standardowa_wersja_jezykowa');
+				$tytul_skrocony_ekran = $pods->display('film.tytul_skrocony_ekran');
 
+
+				if(!empty($tytul_skrocony_ekran)){ 
+				// jeśli pole tytul_skrocony_ekran dla filmu nie jest puste to używany jest ten tytuł skrócony zamiast tytułu filmu
+					$tytul_filmu = $tytul_skrocony_ekran;
+				}
 
 				// Dodawanie "dodatków" związanych z wersją (3d, język) do tytułu filmu
 				if($q2d3d){ 
@@ -152,6 +158,12 @@ function generujEkranKasa(){
 				$data_i_godzina_wydarzenia = $pods->display('data_i_godzina_wydarzenia');
 				$lokalizacje = $pods->field('lokalizacje.slug');
 				$lokalizacje = $lokalizacje[0];
+				$tytul_skrocony_ekran = $pods->display('tytul_skrocony_ekran');
+
+				if(!empty($tytul_skrocony_ekran)){ 
+				// jeśli pole tytul_skrocony_ekran dla filmu nie jest puste to używany jest ten tytuł skrócony zamiast tytułu filmu
+					$title = $tytul_skrocony_ekran;
+				}
 
 				// Wypełnienie tablicy ekran_kasa wydarzeniami pobranymi dla danego dnia
 				testoweConsoleLog('Pobieranie wydarzenia '.pobieczCzescDaty('G',$data_i_godzina_wydarzenia).':'.pobieczCzescDaty('i',$data_i_godzina_wydarzenia).' - '.$title);
