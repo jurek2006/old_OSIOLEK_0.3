@@ -94,6 +94,7 @@ function generujEkranKasa(){
 			while ( $pods->fetch() ) {
 
 				$tytul_filmu =  $pods->display('film');
+				$filmId =  $pods->display('film.ID'); 
 				$termin_projekcji = $pods->field('termin_projekcji' );
 				$q2d3d = $pods->field('2d3d');
 				$projekcja_wersja_jezykowa = $pods->display('wersja_jezykowa');
@@ -133,7 +134,8 @@ function generujEkranKasa(){
 				$ekran_kasa[] = array(	'title' => pobieczCzescDaty('G',$termin_projekcji).':'.pobieczCzescDaty('i',$termin_projekcji).' - '.$tytul_filmu,
 										'godzina' => pobieczCzescDaty('G',$termin_projekcji).':'.pobieczCzescDaty('i',$termin_projekcji), 
 										'nazwa_wydarzenia' => $tytul_filmu,
-										'komentarz' => $komentarz);
+										'komentarz' => $komentarz,
+										'event_id' => $filmId);
 
 		    }//while ( $pods->fetch() )
 
@@ -155,6 +157,7 @@ function generujEkranKasa(){
 		    while ( $pods->fetch() ) {
 		        //Put field values into variables
 		        $title = $pods->display('name');
+		        $wydarzenieId =  $pods->display('ID');
 				$data_i_godzina_wydarzenia = $pods->display('data_i_godzina_wydarzenia');
 				$lokalizacje = $pods->field('lokalizacje.slug');
 				$lokalizacje = $lokalizacje[0];
@@ -169,8 +172,8 @@ function generujEkranKasa(){
 				testoweConsoleLog('Pobieranie wydarzenia '.pobieczCzescDaty('G',$data_i_godzina_wydarzenia).':'.pobieczCzescDaty('i',$data_i_godzina_wydarzenia).' - '.$title);
 				$ekran_kasa[] = array(	'title' => pobieczCzescDaty('G',$data_i_godzina_wydarzenia).':'.pobieczCzescDaty('i',$data_i_godzina_wydarzenia).' - '.$title,
 										'godzina' => pobieczCzescDaty('G',$data_i_godzina_wydarzenia).':'.pobieczCzescDaty('i',$data_i_godzina_wydarzenia), 
-										'nazwa_wydarzenia' => $title
-										);
+										'nazwa_wydarzenia' => $title,
+										'event_id' => $wydarzenieId	);
 			}//while ( $pods->fetch() )
 		}//if ( $pods->total() > 0 )
 
