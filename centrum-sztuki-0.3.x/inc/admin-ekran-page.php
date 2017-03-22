@@ -130,6 +130,7 @@
 			$godzina = $pods->display('godzina');
 			$id = $pods->display('id');
 			$komentarz = $pods->display('komentarz');
+			$event_id = $pods->display('event_id');
 
 			?>
 			<tr>
@@ -141,7 +142,7 @@
 				<?php printf('<input type="hidden" name="id[]" id="id" value="%s">',esc_attr($id)); ?></td>
 				<!-- pole komentarza: -->
 				<td><?php printf('<input type="text" name="komentarz[]" class="komentarz" id="komentarz" value="%s">',esc_attr($komentarz))?></td>
-				<td><?php printf('<a href="%s">Edytuj tytuł</a>', $_SERVER['REQUEST_URI'] );?></td>
+				<td><?php printf('<a href="%s">Edytuj tytuł</a>', admin_url( 'admin.php?page=admin_ekran_change_title&event_id=' . $event_id) );?></td>
 			</tr>
 			<?php
 
@@ -273,14 +274,6 @@
 
     
 </form>
-
-Test:
-<?php 
-// TESTOWE
-// echo $url = admin_url();
-// generate url path to admin's "Categories", and force https
-echo admin_url( 'admin.php?page=admin_ekran_change_title');
-?>
 
 <!-- Podgląd ekranu o odpowiadającej rozdzielczości -->
 <iframe style="overflow:hidden; margin-top: 1em" scrolling="no" src="<?php echo home_url()?>/ekran/" width="1280" height="646" style="margin-left:0px"> <p>Podgląd ekranu</p> </iframe>

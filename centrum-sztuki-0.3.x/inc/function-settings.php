@@ -46,4 +46,15 @@
 	define("POD_EKRAN_KASA_USTAWIENIA", 'ekran_kasa_ustawienia');
 
 	define("POD_EKRAN_KASA", 'ekran_kasa');
+
+	// UWAGA!!! Poniższe stałe na razie używane są tylko w części realizującej funkcjonalność ekran_kasa (obsługi ekranu repertuaru w kasie)
+	define("POD_WYDARZENIA", 'wydarzenia');
+
+	define("POD_FILMY", 'filmy');
+
+	define("POD_PROJEKCJE", 'projekcje');
+
+	define("POD_CENNIK_DNI_KALENDARZ", 'cennik_dni_kalendarz');
+
+	define("POD_CENNIK_DNI_TYGODNIA", 'cennik_dni_tygodnia');
 ?>

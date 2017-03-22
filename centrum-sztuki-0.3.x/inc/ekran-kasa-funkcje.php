@@ -84,7 +84,7 @@ function generujEkranKasa(){
 							'orderby'  => 'termin_projekcji.meta_value');
 		
 
-		$pods = pods( 'projekcje', $params );
+		$pods = pods( POD_PROJEKCJE, $params );
 		//loop through records
 		if ( $pods->total() > 0 ) {
 		// jeżeli znaleziono jakieś projekcje danego dnia
@@ -151,7 +151,7 @@ function generujEkranKasa(){
 			'where'   => 'DATE(data_i_godzina_wydarzenia.meta_value) = "'.$dzien_szukany.'" AND lokalizacje.slug LIKE "%sala-widowiskowa-owe-odra%" AND wylacz_z_ekran_kasa.meta_value = FALSE',
 			'orderby'  => 'data_i_godzina_wydarzenia.meta_value');
 
-		$pods = pods( 'wydarzenia', $params );
+		$pods = pods( POD_WYDARZENIA, $params );
 		if ( $pods->total() > 0 ) {
 			//jeśli znaleziono wydarzenia spełniające określone kryteria - następuje wyświetlenie ich listy
 		    while ( $pods->fetch() ) {
@@ -223,7 +223,7 @@ function generujEkranKasa(){
 			$params = array( 	'limit' => 1,
 								'where'   => 'DATE(data.meta_value) = "'.$dzien.'"');
 
-			$pods = pods( 'cennik_dni_kalendarz', $params );
+			$pods = pods( POD_CENNIK_DNI_KALENDARZ, $params );
 
 			function cennik_pods_do_tablicy($pods){
 				
@@ -296,7 +296,7 @@ function generujEkranKasa(){
 				$params = array( 	'limit' => 1,
 									'where'   => 'dzien_tygodnia.meta_value = '.$dzienTygodnia);
 
-				$pods = pods( 'cennik_dni_tygodnia', $params );
+				$pods = pods( POD_CENNIK_DNI_TYGODNIA, $params );
 				if(!empty($pods)){
 
 					$title = $pods->display('title'); //Pobranie nazwy używanego cennika w celach diagnostycznych - wyświetlenia tej 
