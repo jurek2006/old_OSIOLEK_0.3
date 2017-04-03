@@ -7,9 +7,12 @@ Description: Obsługuje stronę listy projekcji filmowych stylu Centrum Sztuki w
 
 $ilosc_dni_repertuaru = 31; //parametr określający na ile dni do przodu wyświetlany jest repertuar
 
-get_header(); ?>
+get_header(); 
 
+// wczytanie funkcji przydatnych przy wyświetlaniu repertuaru
+require get_template_directory(). '/inc/kino-funkcje.php';
 
+?>
 	
 
 <div id="main-wrap">
@@ -45,19 +48,9 @@ get_header(); ?>
 					//loop through records
 					if ( $pods->total() > 0 ) {
 						//jeśli znaleziono wydarzenia spełniające określone kryteria - następuje wyświetlenie ich listy
-						
-						//zawiera prowizoryczne rozwiązanie problemu, że 6.1.2016 nie jest tanią środą (chociaż środą) ale Świętem Trzech Króli
-						
-						if(pobieczCzescDaty('w',$dzien_szukany) == 3 && pobieczCzescDaty('d-m-Y',$dzien_szukany) != '06-01-2016'){
-							//jeśli wyświetlany w repertuarze dzień tygodnia to środa
-							$dzien_wyswietlany = 'TANIA ŚRODA';
-						}
-						elseif(pobieczCzescDaty('d-m-Y',$dzien_szukany) == '06-01-2016'){
-							$dzien_wyswietlany = 'Święto Trzech Króli';
-						}
-						else{
-							$dzien_wyswietlany = zamienDzienTygodniaLiczbowyNaSlowny(pobieczCzescDaty('w',$dzien_szukany), FALSE);
-						}
+
+						// GENEROWANIE ETYKIETY DNIA np. Wtorek, 28 lutego 2017, TANIA ŚRODA, 29 lutego 2017, ŚWIĘTO KONSTYTUCJI 3 MAJA, 3 maja 2017
+						$dzien_wyswietlany = generuj_etykiete_dnia($dzien_szukany);
 						
 						echo '<h1>'.$dzien_wyswietlany.', '.zamienDateGodzinePodsNaTekst($dzien_szukany).'</h1>';
 						

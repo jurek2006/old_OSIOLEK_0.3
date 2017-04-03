@@ -5,9 +5,7 @@ Description: Obsługuje podstronę do wyświetlania tabeli z repertuarem na ekra
 
 */
 
-get_header("ekran"); ?>
-
-<?php
+get_header("ekran"); 
 
 // wczytanie funkcji przydatnych przy obsłudze (i ustawieniach) ekranu w kasie z pliku
 require get_template_directory(). '/inc/ekran-kasa-funkcje.php';

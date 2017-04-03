@@ -51,7 +51,7 @@
 	//dołączenie skryptu visualticket_import.js jeśli uzytkownik ma uprawnienia na poziomie
 	//wystarczającym do wyświetlenia strony Import projekcji i jeśli jest na tej stronie
 	//a więc szablon aktualnej strony to 
-	// dołączanie pliku ze skryptami (np. ze skryptem antyspamowym dla adresów email) - dla dowolnej strony i 
+	// dołączanie pliku ze skryptami (np. ze skryptem antyspamowym dla adresów email) - dla dowolnej strony
 	function add_my_script() {
 
 		//mój skrypt importu terminów-projekcji z VisualTicket
