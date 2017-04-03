@@ -142,7 +142,7 @@
 				<?php printf('<input type="hidden" name="id[]" id="id" value="%s">',esc_attr($id)); ?></td>
 				<!-- pole komentarza: -->
 				<td><?php printf('<input type="text" name="komentarz[]" class="komentarz" id="komentarz" value="%s">',esc_attr($komentarz))?></td>
-				<td><?php printf('<a href="%s">Edytuj tytuł</a>', admin_url( 'admin.php?page=admin_ekran_change_title&event_id=' . $event_id) );?></td>
+				<td><?php printf('<a href="%s">Edytuj tytuł dla wszystkich projekcji</a>', admin_url( 'admin.php?page=admin_ekran_change_title&event_id=' . $event_id) );?></td>
 			</tr>
 			<?php
 
