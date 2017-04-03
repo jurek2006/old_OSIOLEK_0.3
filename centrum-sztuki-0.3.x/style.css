@@ -1,16 +1,17 @@
 @charset "utf-8";
 /*
-Theme Name: Centrum Sztuki 0.3.x
+Theme Name: Centrum Sztuki 0.3.9
 Author: Jurek Skowron
 Author URI: http://jurekskowron.pl
-Version: 0.3.x
+Version: 0.3.9
 
 
-Description: Motyw dla strony Centrum Sztuki kultura.olawa.pl na wordpressie. Wersja 0.3.x (rozwojowa)
+Description: Motyw dla strony Centrum Sztuki kultura.olawa.pl na wordpressie. Wersja 0.3.9
 
-Zmiany w wersji 0.3.x
+Zmiany w wersji 0.3.9
 - Dodanie w ekranie repertuaru w kasie zegarka oraz znikania wydarzeń po zadaniej ilości minut od rozpoczęcia
-- 
+- Dodanie możliwości edytowania skrótu nazwy dla filmu/wydarzenia ze strony zarządzania ekranem kasowym
+- Dodanie wyświetlania etykiet dni w repertuarze kinowym na podstawie dni cennika i kalendarza wyjątków
 
 Zmiany w wersji 0.3.8
 - Naprawiono pobieranie wersji językowej przy generowaniu ekran-kasa, problem "niechcianych dubli" oraz nie do końca działający checkbox "Wyświetlaj komentarze"
