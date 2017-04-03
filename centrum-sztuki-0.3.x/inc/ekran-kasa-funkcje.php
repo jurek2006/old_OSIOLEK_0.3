@@ -84,7 +84,7 @@ function generujEkranKasa(){
 							'orderby'  => 'termin_projekcji.meta_value');
 		
 
-		$pods = pods( 'projekcje', $params );
+		$pods = pods( POD_PROJEKCJE, $params );
 		//loop through records
 		if ( $pods->total() > 0 ) {
 		// jeżeli znaleziono jakieś projekcje danego dnia
@@ -94,11 +94,18 @@ function generujEkranKasa(){
 			while ( $pods->fetch() ) {
 
 				$tytul_filmu =  $pods->display('film');
+				$filmId =  $pods->display('film.ID'); 
 				$termin_projekcji = $pods->field('termin_projekcji' );
 				$q2d3d = $pods->field('2d3d');
 				$projekcja_wersja_jezykowa = $pods->display('wersja_jezykowa');
 				$standardowa_wersja_jezykowa = $pods->display('film.standardowa_wersja_jezykowa');
+				$tytul_skrocony_ekran = $pods->display('film.tytul_skrocony_ekran');
 
+
+				if(!empty($tytul_skrocony_ekran)){ 
+				// jeśli pole tytul_skrocony_ekran dla filmu nie jest puste to używany jest ten tytuł skrócony zamiast tytułu filmu
+					$tytul_filmu = $tytul_skrocony_ekran;
+				}
 
 				// Dodawanie "dodatków" związanych z wersją (3d, język) do tytułu filmu
 				if($q2d3d){ 
@@ -127,7 +134,8 @@ function generujEkranKasa(){
 				$ekran_kasa[] = array(	'title' => pobieczCzescDaty('G',$termin_projekcji).':'.pobieczCzescDaty('i',$termin_projekcji).' - '.$tytul_filmu,
 										'godzina' => pobieczCzescDaty('G',$termin_projekcji).':'.pobieczCzescDaty('i',$termin_projekcji), 
 										'nazwa_wydarzenia' => $tytul_filmu,
-										'komentarz' => $komentarz);
+										'komentarz' => $komentarz,
+										'event_id' => $filmId);
 
 		    }//while ( $pods->fetch() )
 
@@ -143,22 +151,29 @@ function generujEkranKasa(){
 			'where'   => 'DATE(data_i_godzina_wydarzenia.meta_value) = "'.$dzien_szukany.'" AND lokalizacje.slug LIKE "%sala-widowiskowa-owe-odra%" AND wylacz_z_ekran_kasa.meta_value = FALSE',
 			'orderby'  => 'data_i_godzina_wydarzenia.meta_value');
 
-		$pods = pods( 'wydarzenia', $params );
+		$pods = pods( POD_WYDARZENIA, $params );
 		if ( $pods->total() > 0 ) {
 			//jeśli znaleziono wydarzenia spełniające określone kryteria - następuje wyświetlenie ich listy
 		    while ( $pods->fetch() ) {
 		        //Put field values into variables
 		        $title = $pods->display('name');
+		        $wydarzenieId =  $pods->display('ID');
 				$data_i_godzina_wydarzenia = $pods->display('data_i_godzina_wydarzenia');
 				$lokalizacje = $pods->field('lokalizacje.slug');
 				$lokalizacje = $lokalizacje[0];
+				$tytul_skrocony_ekran = $pods->display('tytul_skrocony_ekran');
+
+				if(!empty($tytul_skrocony_ekran)){ 
+				// jeśli pole tytul_skrocony_ekran dla filmu nie jest puste to używany jest ten tytuł skrócony zamiast tytułu filmu
+					$title = $tytul_skrocony_ekran;
+				}
 
 				// Wypełnienie tablicy ekran_kasa wydarzeniami pobranymi dla danego dnia
 				testoweConsoleLog('Pobieranie wydarzenia '.pobieczCzescDaty('G',$data_i_godzina_wydarzenia).':'.pobieczCzescDaty('i',$data_i_godzina_wydarzenia).' - '.$title);
 				$ekran_kasa[] = array(	'title' => pobieczCzescDaty('G',$data_i_godzina_wydarzenia).':'.pobieczCzescDaty('i',$data_i_godzina_wydarzenia).' - '.$title,
 										'godzina' => pobieczCzescDaty('G',$data_i_godzina_wydarzenia).':'.pobieczCzescDaty('i',$data_i_godzina_wydarzenia), 
-										'nazwa_wydarzenia' => $title
-										);
+										'nazwa_wydarzenia' => $title,
+										'event_id' => $wydarzenieId	);
 			}//while ( $pods->fetch() )
 		}//if ( $pods->total() > 0 )
 
@@ -208,7 +223,7 @@ function generujEkranKasa(){
 			$params = array( 	'limit' => 1,
 								'where'   => 'DATE(data.meta_value) = "'.$dzien.'"');
 
-			$pods = pods( 'cennik_dni_kalendarz', $params );
+			$pods = pods( POD_CENNIK_DNI_KALENDARZ, $params );
 
 			function cennik_pods_do_tablicy($pods){
 				
@@ -281,7 +296,7 @@ function generujEkranKasa(){
 				$params = array( 	'limit' => 1,
 									'where'   => 'dzien_tygodnia.meta_value = '.$dzienTygodnia);
 
-				$pods = pods( 'cennik_dni_tygodnia', $params );
+				$pods = pods( POD_CENNIK_DNI_TYGODNIA, $params );
 				if(!empty($pods)){
 
 					$title = $pods->display('title'); //Pobranie nazwy używanego cennika w celach diagnostycznych - wyświetlenia tej 

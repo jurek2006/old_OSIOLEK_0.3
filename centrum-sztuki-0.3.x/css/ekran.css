@@ -38,12 +38,16 @@ p.naglowekDnia {
   font-size: 400%;
   color: #EE4724;
 }
-/* line 44, ../../sass/ekran.scss */
+/* line 43, ../../sass/ekran.scss */
+p.naglowekDnia .godz, p.naglowekDnia .min, p.naglowekDnia .sec, p.naglowekDnia .srednik {
+  color: #FFF;
+}
+/* line 48, ../../sass/ekran.scss */
 p.dopisek {
   color: #cccccc;
 }
 
-/* line 50, ../../sass/ekran.scss */
+/* line 54, ../../sass/ekran.scss */
 span.komentarz {
   color: #cccccc;
   line-height: 100%;

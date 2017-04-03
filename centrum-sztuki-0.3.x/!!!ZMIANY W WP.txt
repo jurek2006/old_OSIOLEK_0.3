@@ -15,3 +15,6 @@
 13. Edycja ekran_kasa_ustawienia (jak w laboratorium) - dodanie drugiego pola na dopisek i pola bool wyswietlaj_komentarze oraz pola komentarze_font_size ZROBIONE
 14. W pods ekran_kasa dodanie pola komentarz ZROBIONE
 ------
+15. Dodanie pola 'tytul_skrocony_ekran' w pods 'wydarzenia' i 'filmy' (jak w laboratorium)
+16. Dodanie pola 'event_id' w pods 'ekran-kasa' (jak w laboratorium)
+17. Dodanie pola 'etykieta' w pods "cennik_dni_kalendarz" 

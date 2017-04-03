@@ -5,9 +5,7 @@ Description: Obsługuje podstronę do wyświetlania tabeli z repertuarem na ekra
 
 */
 
-get_header("ekran"); ?>
-
-<?php
+get_header("ekran"); 
 
 // wczytanie funkcji przydatnych przy obsłudze (i ustawieniach) ekranu w kasie z pliku
 require get_template_directory(). '/inc/ekran-kasa-funkcje.php';
@@ -71,7 +69,12 @@ function wyswietlajRepertuarDnia(){
 	}
 
 	?>
-		<p class="naglowekDnia"><?php echo zamienDzienTygodniaLiczbowyNaSlowny(pobieczCzescDaty('w',$dzien_wygenerowany)).', '.zamienDateNaTekst($dzien_wygenerowany, $bez_roku=FALSE);  ?></p>
+		<p class="naglowekDnia"><?php echo zamienDzienTygodniaLiczbowyNaSlowny(pobieczCzescDaty('w',$dzien_wygenerowany)).', '.zamienDateNaTekst($dzien_wygenerowany, $bez_roku=FALSE);  ?>
+			<!-- trochę odstępu -->	&nbsp; 
+			<span class="godz">00</span><span class="srednik">:</span><span class="min">00</span>
+			<!-- <span class="srednik">:</span><span class="sec">00</span> część odpowiadająca za wyświetlanie sekund, wystarczy ją odkomentować, żeby działała -->
+		</p>
+
 		<table><!-- początek tabeli repertuaru -->
 		<colgroup>
 		    <col class="godziny" />
@@ -97,7 +100,7 @@ function wyswietlajRepertuarDnia(){
 			$godzina = $pods->display('godzina' );
 			$komentarz = $pods->display('komentarz');
 			?>
-			<tr><td>
+			<tr class="<?php echo str_replace(":","-", strip_tags($godzina)) /* dodanie do tr klasy z godziną */?>"><td> 
 			<?php echo strip_tags($godzina).'&nbsp'?></td><td><?php echo strip_tags($nazwa_wydarzenia);
 			if($wyswietlaj_komentarze){
 			// jeśli zaznaczono checkbox wyswietlaj_komentarze wyświetla komentarz przy każdej projekcji
