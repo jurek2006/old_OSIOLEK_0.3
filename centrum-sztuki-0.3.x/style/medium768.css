@@ -484,6 +484,11 @@ table.tabela_kursow td{
 		text-align:center;
 		margin-bottom: 1em;
 	}
+
+	/*wyróżnienie nr telefonu*/
+	footer div#kontakt div.fullWidth{
+		width: 100%;
+	}
 	
 	/*--- LISTA WYDARZEŃ i KINO --*/
 	

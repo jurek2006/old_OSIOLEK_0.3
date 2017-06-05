@@ -17,10 +17,14 @@
 
             <div id="kontakt" class="clearfix">
                 <h1>Centrum Sztuki w Oławie</h1>
+                <div class="fullWidth">
+                    <h2>Kasa biletowa - telefon: 71 735 15 70</h2>
+                    <p>ul. Młyńska 3, 55-200 Oława, <span class="mail">bilety(małpka)kultura.olawa.pl</span></p>
+                </div>
                 <div>
                     <h2>OWE Odra - Kino Odra</h2>
-                    <p>ul. Młyńska 3, 55-200 Oława</p>
-                    <p>tel. 71 735 15 75 , fax. 71 735 19 58</p> 
+                    <p>ul. Młyńska 3, 55-200 Oława</p> 
+                    <p>tel. (biura) 71 735 15 75 , fax. 71 735 19 58</p> 
                     <p><span class="mail">sekretariat(małpka)kultura.olawa.pl</span></p>
                 </div>
                 <div>         	

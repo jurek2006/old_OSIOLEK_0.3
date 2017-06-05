@@ -17,4 +17,5 @@
 ------
 15. Dodanie pola 'tytul_skrocony_ekran' w pods 'wydarzenia' i 'filmy' (jak w laboratorium) ZROBIONE
 16. Dodanie pola 'event_id' w pods 'ekran-kasa' (jak w laboratorium) ZROBIONE
-17. Dodanie pola 'etykieta' w pods "cennik_dni_kalendarz" 
+17. Dodanie pola 'etykieta' w pods "cennik_dni_kalendarz" ZROBIONE
+------

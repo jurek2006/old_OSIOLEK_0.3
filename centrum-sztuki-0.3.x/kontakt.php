@@ -18,6 +18,11 @@ get_header(); ?>
                 <p><strong>ul. Młyńska 3, 55 - 200 Oława<br />
 				tel. 71 735 15 75<br />fax. 71 735 19 58</strong></p>
                 <p><strong><span class="mail">sekretariat(małpka)kultura.olawa.pl</span></strong></p>
+                
+                <h1>Kasa biletowa</h1>
+                <p><strong>ul. Młyńska 3, 55 - 200 Oława<br />
+                tel. 71 735 15 70</strong></p>
+                <p><strong><span class="mail">bilety(małpka)kultura.olawa.pl</span></strong></p>
             </div><!--//div.pasekKontakt pasekKontaktLewy-->
             
             <div class="pasekKontaktSrodkowy column-4 ">
