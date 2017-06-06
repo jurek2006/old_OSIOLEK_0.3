@@ -103,6 +103,18 @@ if (wp_is_mobile() ) {
 
 <!-- BANNER - koniec -->
 
+<!-- BANNER - nowy numer telefonu -->
+<div id="banner-wrap">
+	<div class="bannerHtml">
+		<img src="<?php echo get_template_directory_uri() ?>/style/tel100px.jpg"/>
+		<div>
+			<h3>Nowy numer telefonu do kasy biletowej</h3>
+			<h3 class="numer">71 735 15 70</h3>
+		</div>
+	</div>
+</div>
+<!-- BANNER - koniec - nowy numer telefonu -->
+
 <div id="header-wrap">
         	<header class="clearfix">
             	<a href="<?php echo home_url() ?>"><img src="<?php echo get_template_directory_uri() ?>/style/logo_pegaz_header.png" alt="Centrum Sztuki w Oławie" /></a> 
