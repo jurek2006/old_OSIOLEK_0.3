@@ -96,7 +96,7 @@ if (wp_is_mobile() ) {
 <!-- BANNER - początek -->
 
 <!-- <div id="banner-wrap">
-	<a href="http://www.forumwokolkina.kultura.olawa.pl" target="_blank">
+	<a class="banner" href="http://www.forumwokolkina.kultura.olawa.pl" target="_blank">
 	<?php //USUNĄĆ KOMMMENT echo '<img src="'.get_stylesheet_directory_uri().'/img/banner-fwk-kultura.jpg" />'; ?>
 	</a>
 </div>  -->
@@ -108,8 +108,8 @@ if (wp_is_mobile() ) {
 	<div class="bannerHtml">
 		<img src="<?php echo get_template_directory_uri() ?>/style/tel100px.jpg"/>
 		<div>
-			<h3>Nowy numer telefonu do kasy biletowej</h3>
-			<h3 class="numer">71 735 15 70</h3>
+			<p>Kasa biletowa: </p>
+			<a class="numer" href="tel:+48717351570"> 71 735 15 70</a>
 		</div>
 	</div>
 </div>

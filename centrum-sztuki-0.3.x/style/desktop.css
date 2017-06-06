@@ -9,11 +9,7 @@
 		width: 1140px; /*RESPONSIVE-WIDTH*/
 	}
 
-	/*Banner w wersji HTML*/
-	div#banner-wrap div.bannerHtml{
-		width: 1100px; /*RESPONSIVE*/
-	}
-	
+
 	/*----NAGŁÓWEK STRONY---*/
 	
 	div#header-wrap{

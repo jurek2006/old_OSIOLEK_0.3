@@ -1692,7 +1692,7 @@ div#banner-wrap{
 
 /*Banner w wersji "obrazkowej"*/
 
-div#banner-wrap a{
+div#banner-wrap a.banner{
 	margin-left: auto;
 	margin-right: auto;
 	display: block;
@@ -1705,11 +1705,11 @@ div#banner-wrap a{
 	overflow:hidden;
 }
 
-div#banner-wrap a img{
+div#banner-wrap a.banner img{
 	display: none;
 }
 
-div#banner-wrap a:hover{
+div#banner-wrap a.banner:hover{
 	background: url(banner-fwk-kultura.jpg) no-repeat 0 -100px;
 }
 
@@ -1730,19 +1730,28 @@ div.bannerHtml img{
 }
 
 div.bannerHtml div{
-	float: left;
+	/*float: left;*/
 	margin: 10px;
 	text-align: center;
-	/*border: 1px solid red;*/
 }
 
-div.bannerHtml h3.numer{
+div.bannerHtml p{
+	font-size: 250%;
+	float: left;
+	margin-top: 10px;
+	margin-left: 0.5em;
+}
+
+div.bannerHtml a{
+	float: left;
+	font-weight: 700;
+	font-size: 450%;
 	color: red;
-	font-size: 400%;
-	margin-top: -5px;
-	
-
+	text-decoration: none;
+	margin-left: 0.25em;
+	margin-top: -10px;
 }
+
 
 
 /*-------------e-mail-antyspam-----------------*/
