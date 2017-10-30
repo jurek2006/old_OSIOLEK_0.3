@@ -5,7 +5,7 @@ Description: Obsługuje stronę listy projekcji filmowych stylu Centrum Sztuki w
 
 */
 
-$ilosc_dni_repertuaru = 31; //parametr określający na ile dni do przodu wyświetlany jest repertuar
+$ilosc_dni_repertuaru = 70; //parametr określający na ile dni do przodu wyświetlany jest repertuar
 
 get_header(); 
 

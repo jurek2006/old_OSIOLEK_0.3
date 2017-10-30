@@ -174,14 +174,31 @@ Posiadaczom Oławskiej Karty Dużej Rodziny przysługuje 20% zniżki na bilety n
                                 <li><strong>Bilety grupowe</strong> przysługują wyłącznie grupom zorganizowanym, min. 15 osób (ze szkół, zakładów pracy, stowarzyszeń, fundacji) dotyczy wybranych seansów i obowiązuje tylko przy wcześniej telefonicznie zgłoszonej rezerwacji</li>
                                 <li><strong>Bilety rodzinne</strong> przysługują min. 3-osobowym rodzinom, z co najmniej jednym dzieckiem do lat 12 i co najmniej jedną osobą dorosłą</li>
                                 <li><strong>Oławska Karta Dużej Rodziny</strong> uprawnia do 20 procent zniżki na bilety normalne i ulgowe oraz seanse Poranek z wyłączeniem Taniej Środy. Ulga nie dotyczy sprzedaży okularów 3D.</li>
-                                <li><strong>Bilet otwarty</strong> – idealna propozycja pracodawcy dla pracowników. Zakup BILETU OTWARTEGO do kina Odra prowadzonego przez Centrum Sztuki w Oławiena  na filmy 2D i 3D z terminem ważności maksymalnie 3 miesiące od daty nabycia. 
+                                <!-- <li><strong>Bilet otwarty</strong> – idealna propozycja pracodawcy dla pracowników. Zakup BILETU OTWARTEGO do kina Odra prowadzonego przez Centrum Sztuki w Oławiena  na filmy 2D i 3D z terminem ważności maksymalnie 3 miesiące od daty nabycia. 
 <p>BILET OTWARTY może nabyć firma lub osoba prywatna przy zakupie min. 50 sztuk biletów.</p>
 <p>BILET OTWARTY honoruje się  przez cały tydzień w kinie ODRA w Oławie, zgodnie z wytycznymi cenowymi. Jeden BILET OTWARTY wymienia się w kasie kina na jeden bilet na wybrany film.</p> 
 <p>BILET OTWARTY nie upoważnia do pierwszeństwa w obsłudze przy kasie, ani nie gwarantuje miejsca na sali, zachęcamy do wcześniejszej rezerwacji biletu na odpowiedni seans. </p>
 <p>BILET OTWARTY nie może być opłacane kartami płatniczymi, kredytowymi czy też za pomocą kuponów handlowych. </p>
 <p>BILET OTWARTY obowiązuje także na premiery i pokazy przedpremierowe, nie obowiązuje natomiast na pokazy specjalne (kino zastrzega sobie prawo do zdefiniowania co jest wydarzenie specjalnym) oraz maratony filmowe. </p>
 <p>BILET OTWARTY nie podlega zwrotom.</p>
-</li>
+</li> -->
+								<li>
+									
+    <strong>Bilet otwarty</strong> – idealna propozycja pracodawcy dla pracowników. Zakup BILETU OTWARTEGO do kina Odra prowadzonego przez Centrum Sztuki w Oławie na na filmy 2D i 3D z terminem ważności maksymalnie 6 miesiące od daty nabycia.
+
+    <p>BILET OTWARTY może nabyć firma lub osoba prywatna przy zakupie min. 50 sztuk biletów w cenie: 2D - 15 zł. , 3D - 18 zł.</p>
+
+    <p>BILET OTWARTY honoruje się przez cały tydzień w kinie ODRA w Oławie, zgodnie z wytycznymi cenowymi. Jeden BILET OTWARTY wymienia się w kasie kina na jeden bilet na wybrany film.</p>
+
+    <p>BILET OTWARTY nie upoważnia do pierwszeństwa w obsłudze przy kasie, ani nie gwarantuje miejsca na sali, zachęcamy do wcześniejszej rezerwacji biletu na odpowiedni seans.</p>
+
+    <p>BILET OTWARTY nie może być opłacane kartami płatniczymi, kredytowymi czy też za pomocą kuponów handlowych.</p>
+
+    <p>BILET OTWARTY obowiązuje także na premiery i pokazy przedpremierowe, nie obowiązuje natomiast na pokazy specjalne (kino zastrzega sobie prawo do zdefiniowania co jest wydarzenie specjalnym) oraz maratony filmowe.</p>
+
+    <p>BILET OTWARTY nie podlega zwrotom.</p>
+
+								</li>
                         </ul>
                                       
 
